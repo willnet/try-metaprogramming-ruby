@@ -1,0 +1,160 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+h2 {
+  margin-bottom: 10px;
+  color: #3498db;
+}
+
+/* 問題選択部分のスタイル */
+.problem-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+}
+
+.selector-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.selector-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #495057;
+}
+
+.selector-group select {
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* 問題説明部分のスタイル */
+.problem-description {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f0f7ff;
+  border-radius: 6px;
+  border: 1px solid #cce5ff;
+}
+
+#description-text {
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.code-container, .result-container {
+  margin-bottom: 20px;
+}
+
+#code-editor {
+  width: 100%;
+  padding: 10px;
+  font-family: monospace;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#run-button, #reset-button {
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+#run-button {
+  background-color: #3498db;
+}
+
+#run-button:hover {
+  background-color: #2980b9;
+}
+
+#reset-button {
+  background-color: #e74c3c;
+}
+
+#reset-button:hover {
+  background-color: #c0392b;
+}
+
+#run-button:disabled, #reset-button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+.loading {
+  margin-left: 15px;
+  font-style: italic;
+  color: #7f8c8d;
+}
+
+.hidden {
+  display: none;
+}
+
+#test-result {
+  width: 100%;
+  min-height: 200px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: monospace;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+.success {
+  color: #27ae60;
+}
+
+.failure {
+  color: #e74c3c;
+}
