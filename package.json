@@ -6,5 +6,12 @@
   "devDependencies": {
     "esbuild": "^0.25.3",
     "glob": "^11.0.2"
+  },
+  "scripts": {
+    "build": "node esbuild.config.js",
+    "dev": "bin/dev",
+    "setup": "bin/setup",
+    "test:answers": "ruby test/test_answers_comprehensive.rb",
+    "test:answer": "ruby test/test_answers_comprehensive.rb"
   }
 }

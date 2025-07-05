@@ -1,3 +1,6 @@
 dist/*
 !dist/.keep
 node_modules/**/*
+
+# Test results
+test/test_results*.json
