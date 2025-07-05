@@ -1,12 +1,16 @@
 # Try Metaprogramming Ruby
 
-## setup
+## development
+### setup
 
 ```sh
-npm install
-node esbuild.config.js
-cd dist
-ruby -run -e httpd . -p 8000
+bin/seutp
+```
+
+### start dev server
+
+```sh
+bin/dev
 open http://localhost:8000
 ```
 
