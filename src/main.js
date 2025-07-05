@@ -249,6 +249,10 @@ document.addEventListener('DOMContentLoaded', () => {
     testResult.className = '';
 
     try {
+      // テスト実行前にRuby VMをリセット
+      await rubyRunner.resetVM();
+      rubyRunner.setTestCode(problemManager.currentProblem.testCode);
+      
       const userCode = codeEditor.value;
       // テストの実行
       const result = await rubyRunner.runTest(userCode);
