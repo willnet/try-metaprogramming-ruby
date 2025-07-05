@@ -88,8 +88,15 @@ class RubyRunner {
     await this.initialize();
   }
 
+  // 問題IDに基づいて実行順序を決定
+  getExecutionOrder(problemId) {
+    // テストフレームワークと同じロジックを適用
+    const testFirstProblems = ['01_block_first_step', '01_class_definition_first_step'];
+    return testFirstProblems.includes(problemId) ? 'test_first' : 'code_first';
+  }
+
   // ユーザーコードとテストコードを実行
-  async runTest(userCode) {
+  async runTest(userCode, problemId = null) {
     if (!this.initialized) {
       await this.initialize();
     }
@@ -102,11 +109,20 @@ class RubyRunner {
       // 出力をクリア
       this.rubyVM.$output.length = 0;
 
-      // ユーザーコードを評価
-      this.rubyVM.eval(userCode);
+      // 実行順序を決定
+      const executionOrder = this.getExecutionOrder(problemId);
 
-      // テストコードを評価（まだ実行はしない）
-      this.rubyVM.eval(this.testCode);
+      if (executionOrder === 'test_first') {
+        // テストコードを先に評価（クラス定義など）
+        this.rubyVM.eval(this.testCode);
+        // ユーザーコードを後で評価
+        this.rubyVM.eval(userCode);
+      } else {
+        // 通常の順序：ユーザーコードを先に評価
+        this.rubyVM.eval(userCode);
+        // テストコードを後で評価
+        this.rubyVM.eval(this.testCode);
+      }
 
       // 明示的にテストを実行
       this.rubyVM.eval("run_tests");
@@ -254,8 +270,8 @@ document.addEventListener('DOMContentLoaded', () => {
       rubyRunner.setTestCode(problemManager.currentProblem.testCode);
       
       const userCode = codeEditor.value;
-      // テストの実行
-      const result = await rubyRunner.runTest(userCode);
+      // テストの実行（問題IDを渡して実行順序を決定）
+      const result = await rubyRunner.runTest(userCode, problemManager.currentProblem.id);
       console.log(result);
       // 結果の表示
       testResult.textContent = result.output.join("\n");
