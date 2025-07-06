@@ -4,7 +4,134 @@ export const problem = {
   "id": "01_class_definition_first_step_q1",
   "title": "Class Definition First Step Q1",
   "description": "Rubyのクラス定義についての基本的な問題。無名クラス、メタプログラミング、スコープゲートなどを学びます。 (Q1)",
-  "problemCode": "# 1. ExClassクラスのオブジェクトが2つあります。これらをJudgement.callに渡しています。\n#    Judement.callはテスト側で定義するので実装は不要です。この状況でe2オブジェクト\"だけ\"helloメソッドを\n#    使えるようにしてください。helloメソッドの中身は何でも良いです。\n\nclass ExClass\nend\n\ne1 = ExClass.new\ne2 = ExClass.new\n\nJudgement.call(e1, e2)\n\n# 2. ExClassを継承したクラスを作成してください。ただし、そのクラスは定数がない無名のクラスだとします。\n#    その無名クラスをそのままJudgement2.call の引数として渡してください(Judgement2.callはテスト側で定義するので実装は不要です)\n\n\n# 3. 下のMetaClassに対し、次のように`meta_`というプレフィックスが属性名に自動でつき、ゲッターの戻り値の文字列にも'meta 'が自動でつく\n#    attr_accessorのようなメソッドであるmeta_attr_accessorを作ってください。セッターに文字列以外の引数がくることは考えないとします。\n#\n#    使用例:\n#\n#    class MetaClass\n#      # meta_attr_accessor自体の定義は省略\n#      meta_attr_accessor :hello\n#    end\n#    meta = MetaClass.new\n#    meta.meta_hello = 'world'\n#    meta.meta_hello #=> 'meta world'\n\nclass MetaClass\nend\n\n# 4. 次のようなExConfigクラスを作成してください。ただし、グローバル変数、クラス変数は使わないものとします。\n#    使用例:\n#    ExConfig.config = 'hello'\n#    ExConfig.config #=> 'hello'\n#    ex = ExConfig.new\n#    ex.config #=> 'hello'\n#    ex.config = 'world'\n#    ExConfig.config #=> 'world'\n\n\nclass ExConfig\nend\n\n# 5.\n# ExOver#helloというメソッドがライブラリとして定義されているとします。ExOver#helloメソッドを実行したとき、\n# helloメソッドの前にExOver#before、helloメソッドの後にExOver#afterを実行させるようにExOverを変更しましょう。\n# ただしExOver#hello, ExOver#before, ExOver#afterの実装はそれぞれテスト側で定義しているので実装不要(変更不可)です。\n#\n\n\nclass ExOver\nend\n\n# 6. 次の toplevellocal ローカル変数の中身を返す MyGreeting#say を実装してみてください。\n#    ただし、下のMyGreetingは編集しないものとします。toplevellocal ローカル変数の定義の下の行から編集してください。\n#    ヒント: スコープゲートを乗り越える方法について書籍にありましたね\n\nclass MyGreeting\nend\n\ntoplevellocal = 'hi'",
-  "answerCode": "# Q1. 問題の解説\n# e2オブジェクトの特異メソッドとしてhelloを定義する練習です。特異メソッドは対象のオブジェクトだけが利用可能なメソッドです。\n#\nclass ExClass\nend\n\ne1 = ExClass.new\ne2 = ExClass.new\n\ndef e2.hello\nend\n\nJudgement.call(e1, e2)",
-  "testCode": "require 'minitest'\n\nclass Judgement\n  def self.call(e1, e2)\n    @e1 = e1\n    @e2 = e2\n  end\nend\n\nclass Judgement2\n  def self.call(klass)\n    @klass = klass\n  end\nend\n\nclass ExOver\n  attr_accessor :result\n\n  def initialize\n    self.result = ''\n  end\n\n  def before\n    result << 'before'\n  end\n\n  def hello\n    result << 'hello'\n  end\n\n  def after\n    result << 'after'\n  end\nend\n\nclass TestClassDefinitionFirstStep < Minitest::Test\ndef test_judgement\n    e1 = Judgement.instance_variable_get(:@e1)\n    e2 = Judgement.instance_variable_get(:@e2)\n    assert e1.is_a?(ExClass)\n    assert e2.is_a?(ExClass)\n    refute e1.respond_to?(:hello)\n    assert e2.respond_to?(:hello)\n  end\nend\n\ndef run_tests\n  parallel_executor = Object.new\n  def parallel_executor.shutdown\n    # nothing\n  end\n  Minitest.parallel_executor = parallel_executor\n  Minitest.run\nend"
+  "problemCode": `# 1. ExClassクラスのオブジェクトが2つあります。これらをJudgement.callに渡しています。
+#    Judement.callはテスト側で定義するので実装は不要です。この状況でe2オブジェクト"だけ"helloメソッドを
+#    使えるようにしてください。helloメソッドの中身は何でも良いです。
+
+class ExClass
+end
+
+e1 = ExClass.new
+e2 = ExClass.new
+
+Judgement.call(e1, e2)
+
+# 2. ExClassを継承したクラスを作成してください。ただし、そのクラスは定数がない無名のクラスだとします。
+#    その無名クラスをそのままJudgement2.call の引数として渡してください(Judgement2.callはテスト側で定義するので実装は不要です)
+
+
+# 3. 下のMetaClassに対し、次のように\`meta_\`というプレフィックスが属性名に自動でつき、ゲッターの戻り値の文字列にも'meta 'が自動でつく
+#    attr_accessorのようなメソッドであるmeta_attr_accessorを作ってください。セッターに文字列以外の引数がくることは考えないとします。
+#
+#    使用例:
+#
+#    class MetaClass
+#      # meta_attr_accessor自体の定義は省略
+#      meta_attr_accessor :hello
+#    end
+#    meta = MetaClass.new
+#    meta.meta_hello = 'world'
+#    meta.meta_hello #=> 'meta world'
+
+class MetaClass
+end
+
+# 4. 次のようなExConfigクラスを作成してください。ただし、グローバル変数、クラス変数は使わないものとします。
+#    使用例:
+#    ExConfig.config = 'hello'
+#    ExConfig.config #=> 'hello'
+#    ex = ExConfig.new
+#    ex.config #=> 'hello'
+#    ex.config = 'world'
+#    ExConfig.config #=> 'world'
+
+
+class ExConfig
+end
+
+# 5.
+# ExOver#helloというメソッドがライブラリとして定義されているとします。ExOver#helloメソッドを実行したとき、
+# helloメソッドの前にExOver#before、helloメソッドの後にExOver#afterを実行させるようにExOverを変更しましょう。
+# ただしExOver#hello, ExOver#before, ExOver#afterの実装はそれぞれテスト側で定義しているので実装不要(変更不可)です。
+#
+
+
+class ExOver
+end
+
+# 6. 次の toplevellocal ローカル変数の中身を返す MyGreeting#say を実装してみてください。
+#    ただし、下のMyGreetingは編集しないものとします。toplevellocal ローカル変数の定義の下の行から編集してください。
+#    ヒント: スコープゲートを乗り越える方法について書籍にありましたね
+
+class MyGreeting
+end
+
+toplevellocal = 'hi'`,
+  "answerCode": `# Q1. 問題の解説
+# e2オブジェクトの特異メソッドとしてhelloを定義する練習です。特異メソッドは対象のオブジェクトだけが利用可能なメソッドです。
+#
+class ExClass
+end
+
+e1 = ExClass.new
+e2 = ExClass.new
+
+def e2.hello
+end
+
+Judgement.call(e1, e2)`,
+  "testCode": `require 'minitest'
+
+class Judgement
+  def self.call(e1, e2)
+    @e1 = e1
+    @e2 = e2
+  end
+end
+
+class Judgement2
+  def self.call(klass)
+    @klass = klass
+  end
+end
+
+class ExOver
+  attr_accessor :result
+
+  def initialize
+    self.result = ''
+  end
+
+  def before
+    result << 'before'
+  end
+
+  def hello
+    result << 'hello'
+  end
+
+  def after
+    result << 'after'
+  end
+end
+
+class TestClassDefinitionFirstStep < Minitest::Test
+def test_judgement
+    e1 = Judgement.instance_variable_get(:@e1)
+    e2 = Judgement.instance_variable_get(:@e2)
+    assert e1.is_a?(ExClass)
+    assert e2.is_a?(ExClass)
+    refute e1.respond_to?(:hello)
+    assert e2.respond_to?(:hello)
+  end
+end
+
+def run_tests
+  parallel_executor = Object.new
+  def parallel_executor.shutdown
+    # nothing
+  end
+  Minitest.parallel_executor = parallel_executor
+  Minitest.run
+end`
 };

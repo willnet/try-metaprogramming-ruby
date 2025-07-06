@@ -4,7 +4,171 @@ export const problem = {
   "id": "02_evil_mailbox",
   "title": "Evil Mailbox",
   "description": "複雑なブロック処理とクロージャキャプチャを使ったメールボックスの実装問題。認証機能や秘密文字列の処理を学びます。",
-  "problemCode": "# 次の仕様を満たすクラス、EvilMailboxを作成してください\n#\n# 基本機能\n# 1. EvilMailboxは、コンストラクタで一つのオブジェクトを受け取る（このオブジェクトは、メールの送受信機能が実装されているが、それが何なのかは気にする必要はない）\n# 2. EvilMailboxは、メールを送るメソッド `send_mail` を持ち、引数として宛先の文字列、本文の文字列を受け取る。結果の如何に関わらず、メソッドはnilをかえす。\n# 3. send_mailメソッドは、内部でメールを送るために、コンストラクタで受け取ったオブジェクトのsend_mailメソッドを呼び出す。このときのシグネチャは同じである。また、このメソッドはメールの送信が成功したか失敗したかをbool値で返す。\n# 4. EvilMailboxは、メールを受信するメソッド `receive_mail` を持つ\n# 5. receive_mailメソッドは、メールを受信するためにコンストラクタで受け取ったオブジェクトのreceive_mailメソッドを呼び出す。このオブジェクトのreceive_mailは、送信者と本文の2つの要素をもつ配列を返す。\n# 6. receive_mailメソッドは、受け取ったメールを送信者と本文の2つの要素をもつ配列として返す\n#\n# 応用機能\n# 1. send_mailメソッドは、ブロックを受けとることができる。ブロックは、送信の成功/失敗の結果をBool値で引数に受け取ることができる\n# 2. コンストラクタは、第2引数として文字列を受け取ることができる（デフォルトはnilである）\n# 3. コンストラクタが第2引数として文字列を受け取った時、第1引数のオブジェクトはその文字列を引数にしてauthメソッドを呼び出す\n# 4. 第2引数の文字列は、秘密の文字列のため、EvilMailboxのオブジェクトの中でいかなる形でも保存してはいけない\n#\n# 邪悪な機能\n# 1. send_mailメソッドは、もしも\"コンストラクタで受け取ったオブジェクトがauthメソッドを呼んだ\"とき、勝手にその認証に使った文字列を、送信するtextの末尾に付け加える\n# 2. つまり、コンストラクタが第2引数に文字列を受け取った時、その文字列はオブジェクト内に保存されないが、send_mailを呼び出したときにこっそりと勝手に送信される",
-  "answerCode": "# 問題の解説\n#\n# 仕様の「邪悪な機能」をクロージャを使って実装することに気付けるかどうかを問う問題です。\n# initializeメソッドの中でdefine_singleton_methodを利用してsend_mailメソッドを定義することで、\n# initializeメソッドのローカル変数として第2引数を扱います。こうすることで、\n# send_mailメソッドの中でしか参照できない変数ができあがります。\n\nclass EvilMailbox\n  def initialize(obj, str = nil)\n    @obj = obj\n    @obj.auth(str) if str\n\n    define_singleton_method(:send_mail) do |to, body, &block|\n      result = obj.send_mail(to, body + str.to_s)\n      block.call(result) if block\n      nil\n    end\n  end\n\n  def receive_mail\n    obj.receive_mail\n  end\n\n  private\n\n  attr_reader :obj\nend",
-  "testCode": "require 'minitest'\n\nclass TestEvilMailbox < Minitest::Test\n  def evil_mailbox(&block)\n    mock = Minitest::Mock.new\n    mock.instance_eval(&block) if block_given?\n    [EvilMailbox.new(mock), mock]\n  end\n\n  def test_send_mail\n    mb, mock = evil_mailbox do\n      expect :send_mail, true, [\"ppyd\", \"hello\"]\n    end\n    mb.send_mail(\"ppyd\", \"hello\")\n    mock.verify\n  end\n\n  def test_send_mail_returns_nil\n    mb, _ = evil_mailbox do\n      expect :send_mail, true, [\"ppyd\", \"hello\"]\n    end\n    assert_nil mb.send_mail(\"ppyd\", \"hello\")\n  end\n\n  def test_receive_mail\n    mb, mock = evil_mailbox do\n      expect :receive_mail, [\"kino\", \"Yo\"]\n    end\n    f, t = mb.receive_mail\n    mock.verify\n    assert_equal \"kino\", f\n    assert_equal \"Yo\", t\n  end\n\n  def test_send_mail_exec_block_with_result_true\n    mb, _ = evil_mailbox do\n      expect :send_mail, true, [\"ppyd\", \"hello\"]\n    end\n    ret = nil\n    mb.send_mail(\"ppyd\", \"hello\") do |res|\n      ret = res\n    end\n    assert_equal true, ret\n  end\n\n  def test_send_mail_exec_block_with_result_false\n    mb, _ = evil_mailbox do\n      expect :send_mail, false, [\"ppyd\", \"hello\"]\n    end\n    ret = nil\n    mb.send_mail(\"ppyd\", \"hello\") do |res|\n      ret = res\n    end\n    assert_equal false, ret\n  end\n\n  def test_mail_object_auth\n    secret_string = SecureRandom.hex\n    mock = Minitest::Mock.new\n    mock.expect :auth, true, [String]\n    EvilMailbox.new(mock, secret_string)\n    mock.verify\n  end\n\n  def test_send_mail_with_secret_string\n    secret_string = SecureRandom.hex\n    mock = Minitest::Mock.new\n    mock.expect :auth, true, [String]\n    mock.expect :send_mail, true, [\"ppyd\", \"hello#{secret_string}\"]\n    mb = EvilMailbox.new(mock, secret_string)\n\n    mb.send_mail(\"ppyd\", \"hello\")\n    mock.verify\n  end\n\n  def test_no_secret_string_in_object\n    secret_string = SecureRandom.hex\n    mock = Minitest::Mock.new\n    mock.expect :auth, true, [String]\n    mb = EvilMailbox.new(mock, secret_string)\n\n    mock.verify\n    mb.class.send(:class_variables).each do |cv|\n      assert_equal false, secret_string == mb.class.get_class_variable(cv)\n    end\n    mb.send(:instance_variables).each do |iv|\n      assert_equal false, secret_string == mb.instance_variable_get(iv)\n    end\n  end\n\n  def evil_mailbox_with_secret_string(secret_string, &block)\n    mock = Minitest::Mock.new\n    mock.instance_eval(&block) if block_given?\n    [EvilMailbox.new(mock, secret_string), mock]\n  end\n\n  def test_send_mail_exec_block_with_result_true_and_secret_string\n    secret_string = SecureRandom.hex\n    mb, mock = evil_mailbox_with_secret_string(secret_string) do\n      expect :auth, true, [String]\n      expect :send_mail, true, [\"ppyd\", \"hello#{secret_string}\"]\n    end\n\n    ret = nil\n    mb.send_mail(\"ppyd\", \"hello\") do |res|\n      ret = res\n    end\n    mock.verify\n    assert_equal true, ret\n  end\nend\n\n# 明示的にテストを実行するためのコード\ndef run_tests\n  parallel_executor = Object.new\n  def parallel_executor.shutdown\n    # nothing\n  end\n  Minitest.parallel_executor = parallel_executor\n  Minitest.run\nend"
+  "problemCode": `# 次の仕様を満たすクラス、EvilMailboxを作成してください
+#
+# 基本機能
+# 1. EvilMailboxは、コンストラクタで一つのオブジェクトを受け取る（このオブジェクトは、メールの送受信機能が実装されているが、それが何なのかは気にする必要はない）
+# 2. EvilMailboxは、メールを送るメソッド \`send_mail\` を持ち、引数として宛先の文字列、本文の文字列を受け取る。結果の如何に関わらず、メソッドはnilをかえす。
+# 3. send_mailメソッドは、内部でメールを送るために、コンストラクタで受け取ったオブジェクトのsend_mailメソッドを呼び出す。このときのシグネチャは同じである。また、このメソッドはメールの送信が成功したか失敗したかをbool値で返す。
+# 4. EvilMailboxは、メールを受信するメソッド \`receive_mail\` を持つ
+# 5. receive_mailメソッドは、メールを受信するためにコンストラクタで受け取ったオブジェクトのreceive_mailメソッドを呼び出す。このオブジェクトのreceive_mailは、送信者と本文の2つの要素をもつ配列を返す。
+# 6. receive_mailメソッドは、受け取ったメールを送信者と本文の2つの要素をもつ配列として返す
+#
+# 応用機能
+# 1. send_mailメソッドは、ブロックを受けとることができる。ブロックは、送信の成功/失敗の結果をBool値で引数に受け取ることができる
+# 2. コンストラクタは、第2引数として文字列を受け取ることができる（デフォルトはnilである）
+# 3. コンストラクタが第2引数として文字列を受け取った時、第1引数のオブジェクトはその文字列を引数にしてauthメソッドを呼び出す
+# 4. 第2引数の文字列は、秘密の文字列のため、EvilMailboxのオブジェクトの中でいかなる形でも保存してはいけない
+#
+# 邪悪な機能
+# 1. send_mailメソッドは、もしも"コンストラクタで受け取ったオブジェクトがauthメソッドを呼んだ"とき、勝手にその認証に使った文字列を、送信するtextの末尾に付け加える
+# 2. つまり、コンストラクタが第2引数に文字列を受け取った時、その文字列はオブジェクト内に保存されないが、send_mailを呼び出したときにこっそりと勝手に送信される`,
+  "answerCode": `# 問題の解説
+#
+# 仕様の「邪悪な機能」をクロージャを使って実装することに気付けるかどうかを問う問題です。
+# initializeメソッドの中でdefine_singleton_methodを利用してsend_mailメソッドを定義することで、
+# initializeメソッドのローカル変数として第2引数を扱います。こうすることで、
+# send_mailメソッドの中でしか参照できない変数ができあがります。
+
+class EvilMailbox
+  def initialize(obj, str = nil)
+    @obj = obj
+    @obj.auth(str) if str
+
+    define_singleton_method(:send_mail) do |to, body, &block|
+      result = obj.send_mail(to, body + str.to_s)
+      block.call(result) if block
+      nil
+    end
+  end
+
+  def receive_mail
+    obj.receive_mail
+  end
+
+  private
+
+  attr_reader :obj
+end`,
+  "testCode": `require 'minitest'
+
+class TestEvilMailbox < Minitest::Test
+  def evil_mailbox(&block)
+    mock = Minitest::Mock.new
+    mock.instance_eval(&block) if block_given?
+    [EvilMailbox.new(mock), mock]
+  end
+
+  def test_send_mail
+    mb, mock = evil_mailbox do
+      expect :send_mail, true, ["ppyd", "hello"]
+    end
+    mb.send_mail("ppyd", "hello")
+    mock.verify
+  end
+
+  def test_send_mail_returns_nil
+    mb, _ = evil_mailbox do
+      expect :send_mail, true, ["ppyd", "hello"]
+    end
+    assert_nil mb.send_mail("ppyd", "hello")
+  end
+
+  def test_receive_mail
+    mb, mock = evil_mailbox do
+      expect :receive_mail, ["kino", "Yo"]
+    end
+    f, t = mb.receive_mail
+    mock.verify
+    assert_equal "kino", f
+    assert_equal "Yo", t
+  end
+
+  def test_send_mail_exec_block_with_result_true
+    mb, _ = evil_mailbox do
+      expect :send_mail, true, ["ppyd", "hello"]
+    end
+    ret = nil
+    mb.send_mail("ppyd", "hello") do |res|
+      ret = res
+    end
+    assert_equal true, ret
+  end
+
+  def test_send_mail_exec_block_with_result_false
+    mb, _ = evil_mailbox do
+      expect :send_mail, false, ["ppyd", "hello"]
+    end
+    ret = nil
+    mb.send_mail("ppyd", "hello") do |res|
+      ret = res
+    end
+    assert_equal false, ret
+  end
+
+  def test_mail_object_auth
+    secret_string = SecureRandom.hex
+    mock = Minitest::Mock.new
+    mock.expect :auth, true, [String]
+    EvilMailbox.new(mock, secret_string)
+    mock.verify
+  end
+
+  def test_send_mail_with_secret_string
+    secret_string = SecureRandom.hex
+    mock = Minitest::Mock.new
+    mock.expect :auth, true, [String]
+    mock.expect :send_mail, true, ["ppyd", "hello#{secret_string}"]
+    mb = EvilMailbox.new(mock, secret_string)
+
+    mb.send_mail("ppyd", "hello")
+    mock.verify
+  end
+
+  def test_no_secret_string_in_object
+    secret_string = SecureRandom.hex
+    mock = Minitest::Mock.new
+    mock.expect :auth, true, [String]
+    mb = EvilMailbox.new(mock, secret_string)
+
+    mock.verify
+    mb.class.send(:class_variables).each do |cv|
+      assert_equal false, secret_string == mb.class.get_class_variable(cv)
+    end
+    mb.send(:instance_variables).each do |iv|
+      assert_equal false, secret_string == mb.instance_variable_get(iv)
+    end
+  end
+
+  def evil_mailbox_with_secret_string(secret_string, &block)
+    mock = Minitest::Mock.new
+    mock.instance_eval(&block) if block_given?
+    [EvilMailbox.new(mock, secret_string), mock]
+  end
+
+  def test_send_mail_exec_block_with_result_true_and_secret_string
+    secret_string = SecureRandom.hex
+    mb, mock = evil_mailbox_with_secret_string(secret_string) do
+      expect :auth, true, [String]
+      expect :send_mail, true, ["ppyd", "hello#{secret_string}"]
+    end
+
+    ret = nil
+    mb.send_mail("ppyd", "hello") do |res|
+      ret = res
+    end
+    mock.verify
+    assert_equal true, ret
+  end
+end
+
+# 明示的にテストを実行するためのコード
+def run_tests
+  parallel_executor = Object.new
+  def parallel_executor.shutdown
+    # nothing
+  end
+  Minitest.parallel_executor = parallel_executor
+  Minitest.run
+end`
 };

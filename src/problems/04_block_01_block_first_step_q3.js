@@ -4,7 +4,44 @@ export const problem = {
   "id": "01_block_first_step_q3",
   "title": "Block First Step Q3",
   "description": "Rubyのブロックについての基本的な問題。ブロックの受け渡しや実行、クロージャについて学びます。 (Q3)",
-  "problemCode": "# Q3.\n# MyBlockクラスにblock_to_procインスタンスメソッドを定義しましょう。block_to_procインスタンスメソッドはブロックを受け取り、\n# そのブロックをProcオブジェクトにしたものを返します\n\nclass MyBlock\nend",
-  "answerCode": "# Q3. 問題の解説\n#\n# Q2と反対に、ブロックからProcオブジェクトの変換をする練習です。仮引数で&を使うとブロックからProcオブジェクトへの変換ができます。\nclass MyBlock\n  def block_to_proc(&block)\n    block\n  end\nend",
-  "testCode": "require 'minitest'\n\nclass AcceptBlock\n  class << self\n    attr_accessor :result\n  end\n\n  def self.call(&block)\n    @result = block == MY_LAMBDA\n  end\nend\n\nclass TestBlockFirstStep < Minitest::Test\ndef test_my_block\n    assert_equal(MY_LAMBDA, MyBlock.new.block_to_proc(&MY_LAMBDA))\n  end\nend\n\ndef run_tests\n  parallel_executor = Object.new\n  def parallel_executor.shutdown\n    # nothing\n  end\n  Minitest.parallel_executor = parallel_executor\n  Minitest.run\nend"
+  "problemCode": `# Q3.
+# MyBlockクラスにblock_to_procインスタンスメソッドを定義しましょう。block_to_procインスタンスメソッドはブロックを受け取り、
+# そのブロックをProcオブジェクトにしたものを返します
+
+class MyBlock
+end`,
+  "answerCode": `# Q3. 問題の解説
+#
+# Q2と反対に、ブロックからProcオブジェクトの変換をする練習です。仮引数で&を使うとブロックからProcオブジェクトへの変換ができます。
+class MyBlock
+  def block_to_proc(&block)
+    block
+  end
+end`,
+  "testCode": `require 'minitest'
+
+class AcceptBlock
+  class << self
+    attr_accessor :result
+  end
+
+  def self.call(&block)
+    @result = block == MY_LAMBDA
+  end
+end
+
+class TestBlockFirstStep < Minitest::Test
+def test_my_block
+    assert_equal(MY_LAMBDA, MyBlock.new.block_to_proc(&MY_LAMBDA))
+  end
+end
+
+def run_tests
+  parallel_executor = Object.new
+  def parallel_executor.shutdown
+    # nothing
+  end
+  Minitest.parallel_executor = parallel_executor
+  Minitest.run
+end`
 };

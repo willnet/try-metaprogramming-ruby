@@ -4,7 +4,148 @@ export const problem = {
   "id": "03_simple_bot",
   "title": "Simple Bot",
   "description": "ブロックを使ったDSLの作成問題。ボット作成のためのDSLを実装して、respond、setting、settingsメソッドを学びます。",
-  "problemCode": "# 次の仕様を満たすSimpleBotクラスとDSLを作成してください\n#\n# # これは、作成するSimpleBotクラスの利用イメージです\n# class Bot < SimpleBot\n#   setting :name, 'bot'\n#   respond 'keyword' do\n#     \"response #{settings.name}\"\n#   end\n# end\n#\n# Bot.new.ask('keyword') #=> 'respond bot'\n#\n# 1. SimpleBotクラスを継承したクラスは、クラスメソッドrespond, setting, settingsを持ちます\n#     1. settingsメソッドは、任意のオブジェクトを返します\n#     2. settingsメソッドは、後述するクラスメソッドsettingによって渡された第一引数と同名のメソッド呼び出しに応答します\n# 2. SimpleBotクラスのサブクラスのインスタンスは、インスタンスメソッドaskを持ちます\n#     1. askは、一つの引数をとります\n#     2. askに渡されたオブジェクトが、後述するrespondメソッドで設定したオブジェクトと一致する場合、インスタンスは任意の返り値を持ちます\n#     3. 2のケースに当てはまらない場合、askメソッドの戻り値はnilです\n# 3. クラスメソッドrespondは、keywordとブロックを引数に取ります\n#     1. respondメソッドの第1引数keywordと同じ文字列が、インスタンスメソッドaskに渡された時、第2引数に渡したブロックが実行され、その結果が返されます\n# 4. クラスメソッドsettingは、引数を2つ取り、1つ目がキー名、2つ目が設定する値です\n#     1. settingメソッドに渡された値は、クラスメソッド `settings` から返されるオブジェクトに、メソッド名としてアクセスすることで取り出すことができます\n#     2. e.g. クラス内で `setting :name, 'bot'` と実行した場合は、respondメソッドに渡されるブロックのスコープ内で `settings.name` の戻り値は `bot` の文字列になります",
-  "answerCode": "# 問題の解説\n#\n# respondクラスメソッドで定義したブロックを、askインスタンスメソッドからどうやって参照するか、というのが\n# この問題の難所です。クラスメソッドで定義したインスタンス変数はクラスインスタンス変数としてクラスそのものに\n# 紐づくインスタンス変数になるので、インスタンスメソッドから参照するには、回答例のように\n# `self.class.instance_variable_get(インスタンス変数名)`のようにします。\n# クラス変数を利用するとクラスメソッド、インスタンスメソッドどちらからでも`@@respond`のようにアクセスできるので\n# 一見便利ですが、意図せず別のクラスとクラス変数が共有される可能性があるため、推奨しません。\n#\n# SimpleBotとそのサブクラスで利用イメージのように定義されたブロックは、settingsクラスメソッドにアクセスできます。\n# settingsクラスメソッドは、settingクラスメソッドで登録したキーと値をそれぞれメソッド名とその返り値に持つオブジェクトを返すと\n# 仕様を満たせます。メソッドが定義できればどんなオブジェクトを返しても仕様を満たせるため、この回答例では\n# 特異メソッドを定義したObjectインスタンスを返しています。必ずしもObjectインスタンスである必要はありません。\n#\nclass SimpleBot\n  class << self\n    def respond(keyword, &block)\n      @respond ||= {}\n      @respond[keyword] = block\n    end\n\n    def setting(key, value)\n      @settings ||= {}\n      @settings[key] = value\n    end\n\n    def settings\n      obj = Object.new\n\n      @settings&.each do |key, value|\n        obj.define_singleton_method(key) do\n          value\n        end\n      end\n      obj\n    end\n  end\n\n  def ask(keyword)\n    block = self.class.instance_variable_get(:@respond)[keyword]\n    block.call if block\n  end\nend",
-  "testCode": "require 'minitest'\n\nclass TestSimpleBot < Minitest::Test\n  def bot_for_test(&block)\n    Class.new(SimpleBot, &block)\n  end\n\n  def test_response\n    klass = bot_for_test do\n      respond 'hello' do\n        'Yo'\n      end\n    end\n\n    assert_equal 'Yo', klass.new.ask('hello')\n  end\n\n  def test_no_response\n    klass = bot_for_test do\n      respond 'yo' do\n        'yo'\n      end\n    end\n\n    assert_nil klass.new.ask(\"hello\")\n  end\n\n  def test_global_setting\n    klass = bot_for_test do\n      setting :name, 'bot'\n      respond 'what is your name?' do\n        \"i'm #{settings.name}\"\n      end\n    end\n\n    assert_equal \"i'm bot\", klass.new.ask(\"what is your name?\")\n  end\n\n  def test_global_setting_random\n    code = SecureRandom.hex\n\n    klass = bot_for_test do\n      setting :code, code\n      respond 'tell me your code' do\n        \"code is #{settings.code}\"\n      end\n    end\n\n    assert_equal \"code is #{code}\", klass.new.ask('tell me your code')\n  end\n\n  def test_global_setting_multiple_call\n    klass = bot_for_test do\n      setting :name, 'bot'\n      setting :age, 10\n      respond 'what is your name?' do\n        \"i'm #{settings.name}\"\n      end\n      respond 'how old are you?' do\n        \"i'm #{settings.age} years old\"\n      end\n    end\n\n    assert_equal \"i'm bot\", klass.new.ask(\"what is your name?\")\n    assert_equal \"i'm 10 years old\", klass.new.ask(\"how old are you?\")\n  end\nend\n\n# 明示的にテストを実行するためのコード\ndef run_tests\n  parallel_executor = Object.new\n  def parallel_executor.shutdown\n    # nothing\n  end\n  Minitest.parallel_executor = parallel_executor\n  Minitest.run\nend"
+  "problemCode": `# 次の仕様を満たすSimpleBotクラスとDSLを作成してください
+#
+# # これは、作成するSimpleBotクラスの利用イメージです
+# class Bot < SimpleBot
+#   setting :name, 'bot'
+#   respond 'keyword' do
+#     "response #{settings.name}"
+#   end
+# end
+#
+# Bot.new.ask('keyword') #=> 'respond bot'
+#
+# 1. SimpleBotクラスを継承したクラスは、クラスメソッドrespond, setting, settingsを持ちます
+#     1. settingsメソッドは、任意のオブジェクトを返します
+#     2. settingsメソッドは、後述するクラスメソッドsettingによって渡された第一引数と同名のメソッド呼び出しに応答します
+# 2. SimpleBotクラスのサブクラスのインスタンスは、インスタンスメソッドaskを持ちます
+#     1. askは、一つの引数をとります
+#     2. askに渡されたオブジェクトが、後述するrespondメソッドで設定したオブジェクトと一致する場合、インスタンスは任意の返り値を持ちます
+#     3. 2のケースに当てはまらない場合、askメソッドの戻り値はnilです
+# 3. クラスメソッドrespondは、keywordとブロックを引数に取ります
+#     1. respondメソッドの第1引数keywordと同じ文字列が、インスタンスメソッドaskに渡された時、第2引数に渡したブロックが実行され、その結果が返されます
+# 4. クラスメソッドsettingは、引数を2つ取り、1つ目がキー名、2つ目が設定する値です
+#     1. settingメソッドに渡された値は、クラスメソッド \`settings\` から返されるオブジェクトに、メソッド名としてアクセスすることで取り出すことができます
+#     2. e.g. クラス内で \`setting :name, 'bot'\` と実行した場合は、respondメソッドに渡されるブロックのスコープ内で \`settings.name\` の戻り値は \`bot\` の文字列になります`,
+  "answerCode": `# 問題の解説
+#
+# respondクラスメソッドで定義したブロックを、askインスタンスメソッドからどうやって参照するか、というのが
+# この問題の難所です。クラスメソッドで定義したインスタンス変数はクラスインスタンス変数としてクラスそのものに
+# 紐づくインスタンス変数になるので、インスタンスメソッドから参照するには、回答例のように
+# \`self.class.instance_variable_get(インスタンス変数名)\`のようにします。
+# クラス変数を利用するとクラスメソッド、インスタンスメソッドどちらからでも\`@@respond\`のようにアクセスできるので
+# 一見便利ですが、意図せず別のクラスとクラス変数が共有される可能性があるため、推奨しません。
+#
+# SimpleBotとそのサブクラスで利用イメージのように定義されたブロックは、settingsクラスメソッドにアクセスできます。
+# settingsクラスメソッドは、settingクラスメソッドで登録したキーと値をそれぞれメソッド名とその返り値に持つオブジェクトを返すと
+# 仕様を満たせます。メソッドが定義できればどんなオブジェクトを返しても仕様を満たせるため、この回答例では
+# 特異メソッドを定義したObjectインスタンスを返しています。必ずしもObjectインスタンスである必要はありません。
+#
+class SimpleBot
+  class << self
+    def respond(keyword, &block)
+      @respond ||= {}
+      @respond[keyword] = block
+    end
+
+    def setting(key, value)
+      @settings ||= {}
+      @settings[key] = value
+    end
+
+    def settings
+      obj = Object.new
+
+      @settings&.each do |key, value|
+        obj.define_singleton_method(key) do
+          value
+        end
+      end
+      obj
+    end
+  end
+
+  def ask(keyword)
+    block = self.class.instance_variable_get(:@respond)[keyword]
+    block.call if block
+  end
+end`,
+  "testCode": `require 'minitest'
+
+class TestSimpleBot < Minitest::Test
+  def bot_for_test(&block)
+    Class.new(SimpleBot, &block)
+  end
+
+  def test_response
+    klass = bot_for_test do
+      respond 'hello' do
+        'Yo'
+      end
+    end
+
+    assert_equal 'Yo', klass.new.ask('hello')
+  end
+
+  def test_no_response
+    klass = bot_for_test do
+      respond 'yo' do
+        'yo'
+      end
+    end
+
+    assert_nil klass.new.ask("hello")
+  end
+
+  def test_global_setting
+    klass = bot_for_test do
+      setting :name, 'bot'
+      respond 'what is your name?' do
+        "i'm #{settings.name}"
+      end
+    end
+
+    assert_equal "i'm bot", klass.new.ask("what is your name?")
+  end
+
+  def test_global_setting_random
+    code = SecureRandom.hex
+
+    klass = bot_for_test do
+      setting :code, code
+      respond 'tell me your code' do
+        "code is #{settings.code}"
+      end
+    end
+
+    assert_equal "code is #{code}", klass.new.ask('tell me your code')
+  end
+
+  def test_global_setting_multiple_call
+    klass = bot_for_test do
+      setting :name, 'bot'
+      setting :age, 10
+      respond 'what is your name?' do
+        "i'm #{settings.name}"
+      end
+      respond 'how old are you?' do
+        "i'm #{settings.age} years old"
+      end
+    end
+
+    assert_equal "i'm bot", klass.new.ask("what is your name?")
+    assert_equal "i'm 10 years old", klass.new.ask("how old are you?")
+  end
+end
+
+# 明示的にテストを実行するためのコード
+def run_tests
+  parallel_executor = Object.new
+  def parallel_executor.shutdown
+    # nothing
+  end
+  Minitest.parallel_executor = parallel_executor
+  Minitest.run
+end`
 };
