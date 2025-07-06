@@ -4,3 +4,4 @@ node_modules/**/*
 
 # Test results
 test/test_results*.json
+test/problems.json

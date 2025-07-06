@@ -15,16 +15,17 @@ class ComprehensiveAnswerTester
   def load_problems
     # スクリプトの場所に関係なく、プロジェクトルートから相対パスを解決
     script_dir = File.dirname(__FILE__)
-    problems_path = File.join(script_dir, '../src/problems.js')
-    problems_content = File.read(problems_path)
-    match = problems_content.match(/export const problems = (\[.*\]);/m)
-    raise "Could not find problems array in problems.js" unless match
-
-    json_str = match[1]
-    problems_data = JSON.parse(json_str)
-
-    puts "Loaded #{problems_data.length} problems"
-    problems_data
+    
+    # JSONファイルから問題データを読み込み
+    problems_json_path = File.join(script_dir, 'problems.json')
+    if File.exist?(problems_json_path)
+      problems_data = JSON.parse(File.read(problems_json_path))
+      puts "Loaded #{problems_data.length} problems from test/problems.json"
+      return problems_data
+    end
+    
+    # JSONファイルが存在しない場合は生成を促す
+    raise "Please run 'node extract_problems_json.js' to generate test/problems.json before running tests"
   end
 
 
