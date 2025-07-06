@@ -1,7 +1,7 @@
 // Simple Mock
 export const problem = {
   "section": "05_class_definition",
-  "id": "02_simple_mock",
+  "id": "07_simple_mock",
   "title": "Simple Mock",
   "title_en": "Simple Mock",
   "description": "シンプルなモックフレームワークの作成問題。モックオブジェクトの作成、メソッド呼び出し回数の追跡などを学びます。",

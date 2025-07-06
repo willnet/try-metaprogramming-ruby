@@ -38,6 +38,9 @@ class ComprehensiveAnswerTester
       '01_block_first_step_q3',
       '01_block_first_step_q4',
       '01_class_definition_first_step_q1',
+      '01_singleton_methods', # Judgement クラスの定義が必要
+      '02_anonymous_classes', # Judgement2 クラスの定義が必要
+      '05_method_wrapping', # ExOver クラスの定義が必要
       '02_hierarchy_q6', # M1Refinementsの定義が必要
       '01_method_first_step_q2', # F1定数の定義が必要
       '03_try_over3_3_q2' # alpha_rand等の定義が必要
