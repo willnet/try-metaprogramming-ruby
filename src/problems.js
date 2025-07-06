@@ -20,7 +20,6 @@ import { problem as problem_04_block_01_block_first_step_q3 } from './problems/0
 import { problem as problem_04_block_01_block_first_step_q4 } from './problems/04_block_01_block_first_step_q4.js';
 import { problem as problem_04_block_02_evil_mailbox } from './problems/04_block_02_evil_mailbox.js';
 import { problem as problem_04_block_03_simple_bot } from './problems/04_block_03_simple_bot.js';
-import { problem as problem_05_class_definition_01_class_definition_first_step_q1 } from './problems/05_class_definition_01_class_definition_first_step_q1.js';
 import { problem as problem_05_class_definition_01_singleton_methods } from './problems/05_class_definition_01_singleton_methods.js';
 import { problem as problem_05_class_definition_02_anonymous_classes } from './problems/05_class_definition_02_anonymous_classes.js';
 import { problem as problem_05_class_definition_03_meta_attr_accessor } from './problems/05_class_definition_03_meta_attr_accessor.js';
@@ -52,7 +51,6 @@ export const problems = [
   problem_04_block_01_block_first_step_q4,
   problem_04_block_02_evil_mailbox,
   problem_04_block_03_simple_bot,
-  problem_05_class_definition_01_class_definition_first_step_q1,
   problem_05_class_definition_01_singleton_methods,
   problem_05_class_definition_02_anonymous_classes,
   problem_05_class_definition_03_meta_attr_accessor,

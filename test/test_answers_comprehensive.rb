@@ -37,7 +37,6 @@ class ComprehensiveAnswerTester
       '01_block_first_step_q2', 
       '01_block_first_step_q3',
       '01_block_first_step_q4',
-      '01_class_definition_first_step_q1',
       '01_singleton_methods', # Judgement クラスの定義が必要
       '02_anonymous_classes', # Judgement2 クラスの定義が必要
       '05_method_wrapping', # ExOver クラスの定義が必要
