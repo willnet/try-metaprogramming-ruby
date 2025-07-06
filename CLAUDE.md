@@ -7,9 +7,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Development
 - `bin/setup` - Install dependencies and build the project
 - `bin/dev` - Start development server on port 8000
+- `bin/test` - Run complete Ruby-first test workflow (sync + test all problems)
 
 ### Building
 - `node esbuild.config.js` - Build the project using esbuild
+
+### Testing
+- `bin/test` - **Recommended**: Complete test workflow (Ruby sync + comprehensive tests)
+- `ruby test/test_answers_comprehensive.rb` - Direct test execution (requires manual sync)
+- `ruby test/test_answers_comprehensive.rb SECTION ID` - Test specific problem
 
 ### Problem Data Management
 - `node scripts/extract-problems.js` - Extract problem data from external Ruby repository
@@ -17,12 +23,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `node scripts/sync-ruby-to-js.js` - Sync Ruby file changes back to JavaScript problem files
 
 ### Ruby-First Development Workflow
-When editing Ruby code for problems and answers:
-1. Edit Ruby files directly in `src/ruby/problems/` and `src/ruby/answers/`
-2. Run `node scripts/sync-ruby-to-js.js` to sync changes back to JavaScript files
-3. Rebuild the application with `node esbuild.config.js` to see changes in the web interface
+All code (problems, answers, tests) is managed as Ruby files and automatically synced to JavaScript:
 
-The Ruby files serve as the source of truth for problem and answer code, making manual editing and verification much easier.
+1. **Edit Ruby files directly:**
+   - `src/ruby/problems/` - Problem starter code
+   - `src/ruby/answers/` - Solution code  
+   - `src/ruby/tests/` - Test code
+
+2. **Run tests:** `bin/test` (handles sync automatically)
+
+3. **For web app:** Rebuild with `node esbuild.config.js` after changes
+
+**Directory structure:**
+```
+src/ruby/
+├── problems/    # Problem starter code (19 files)
+├── answers/     # Solution code (24 files)
+└── tests/       # Test code (24 files)
+```
+
+The Ruby files serve as the source of truth. JavaScript files are automatically generated.
 
 ## Project Architecture
 

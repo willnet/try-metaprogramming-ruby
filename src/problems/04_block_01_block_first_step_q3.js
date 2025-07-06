@@ -26,6 +26,8 @@ Opposite to Q2, this is practice for converting from block to Proc object. By us
 end`,
   "testCode": `require 'minitest'
 
+MY_LAMBDA = -> { 3 }
+
 class AcceptBlock
   class << self
     attr_accessor :result

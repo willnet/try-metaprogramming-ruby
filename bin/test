@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Ruby-first テスト実行スクリプト
+# Ruby ファイルの変更を JavaScript に同期してからテストを実行します
+
+set -e
+
+# スクリプトのディレクトリを取得
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+# プロジェクトルートに移動
+cd "$PROJECT_ROOT"
+
+echo "🔄 Syncing Ruby files to JavaScript..."
+node scripts/sync-ruby-to-js.js
+
+echo ""
+echo "📊 Generating test problems JSON..."
+node scripts/extract-problems-json.js
+
+echo ""
+echo "🧪 Running comprehensive answer tests..."
+ruby test/test_answers_comprehensive.rb
+
+# 引数が渡された場合、特定の問題をテスト
+if [ $# -eq 2 ]; then
+    echo ""
+    echo "🎯 Testing specific problem: $1/$2"
+    ruby test/test_answers_comprehensive.rb "$1" "$2"
+fi
+
+echo ""
+echo "✅ All tests completed!"

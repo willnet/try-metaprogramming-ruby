@@ -79,6 +79,10 @@ end`,
   "testCode": `require 'minitest'
 require 'minitest/mock'
 
+def alpha_rand
+  (0...8).map { ('a'..'z').to_a[rand(26)] }.join
+end
+
 class TestTryOver03Q1 < Minitest::Test
 def test_q2_proxy_foo
     source = TryOver3::A2.new("foo", "foofoo")

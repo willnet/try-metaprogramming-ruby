@@ -86,6 +86,22 @@ class C6
 end`,
   "testCode": `require 'minitest'
 
+# M1 module definition (needed for refinements)
+module M1
+  def name
+    'M1'
+  end
+end
+
+# M1Refinements definition (needed for Q6)
+module M1Refinements
+  refine M1 do
+    def name
+      'Refined M1'
+    end
+  end
+end
+
 class TestHierarchy < Minitest::Test
 def test_c6_name
     assert_equal "Refined M1", C6.new.name
@@ -95,9 +111,6 @@ def test_c6_name
     end)
     assert_equal "other", C6.new.name
   end
-end
-
-# 明示的にテストを実行するためのコード
 end
 
 def run_tests

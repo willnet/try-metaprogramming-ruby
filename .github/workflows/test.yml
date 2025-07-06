@@ -28,17 +28,9 @@ jobs:
       run: |
         gem install minitest
     
-    - name: Sync Ruby files to JavaScript
+    - name: Run Ruby-first test workflow
       run: |
-        node scripts/sync-ruby-to-js.js
-    
-    - name: Generate problems JSON
-      run: |
-        node scripts/extract-problems-json.js
-    
-    - name: Run tests
-      run: |
-        ruby test/test_answers_comprehensive.rb
+        ./bin/test
     
     - name: Upload test results
       if: always()

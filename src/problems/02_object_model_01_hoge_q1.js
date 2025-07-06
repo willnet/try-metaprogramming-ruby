@@ -11,6 +11,6 @@ export const problem = {
   "problemCode": "class Hoge\nend",
   "answerExplanation": "Q1. 問題の解説\n\nほぼ特筆するべきところがないですが、hoge?メソッドの実装は少し悩むかもしれません。\n自身を参照するにはselfを使います。",
   "answerExplanation_en": "Q1. Problem Explanation\n\nThere's nothing particularly noteworthy, but you might find the implementation of the hoge? method a bit puzzling.\nUse self to reference the instance itself.",
-  "answerCode": "class Hoge < String\n  Hoge = 'hoge'\n\n  def hogehoge\n    'hoge'\n  end\n\n  def hoge?\n    self == 'hoge'\n  end\nend",
+  "answerCode": "class Hoge < String\n  Hoge = 'hoge'\n\n  def hogehoge\n    'hoge'\n  end\n\n  def hoge?\n    self == 'hoge'\n  end\nend\n\nclass String\n  def hoge\n    Hoge.new(self)\n  end\nend\n",
   "testCode": "require 'minitest'\n\nclass TestHoge < Minitest::Test\ndef test_hoge_in_string\n    assert_equal \"hoge\",\"hoge\".hoge\n  end\nend\n\ndef run_tests\n  parallel_executor = Object.new\n  def parallel_executor.shutdown\n    # nothing\n  end\n  Minitest.parallel_executor = parallel_executor\n  Minitest.run\nend"
 };

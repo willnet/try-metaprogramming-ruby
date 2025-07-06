@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename);
 const problemsDir = path.join(__dirname, '../src/problems');
 const rubyProblemsDir = path.join(__dirname, '../src/ruby/problems');
 const rubyAnswersDir = path.join(__dirname, '../src/ruby/answers');
+const rubyTestsDir = path.join(__dirname, '../src/ruby/tests');
 
 // 統計情報
 let updatedFiles = 0;
@@ -27,6 +28,7 @@ for (const jsFilename of jsFiles) {
   const jsFilePath = path.join(problemsDir, jsFilename);
   const rubyProblemPath = path.join(rubyProblemsDir, `${baseName}.rb`);
   const rubyAnswerPath = path.join(rubyAnswersDir, `${baseName}.rb`);
+  const rubyTestPath = path.join(rubyTestsDir, `${baseName}.rb`);
   
   try {
     console.log(`\nProcessing: ${jsFilename}`);
@@ -34,8 +36,9 @@ for (const jsFilename of jsFiles) {
     // 対応するRubyファイルの存在確認
     const hasProblemFile = fs.existsSync(rubyProblemPath);
     const hasAnswerFile = fs.existsSync(rubyAnswerPath);
+    const hasTestFile = fs.existsSync(rubyTestPath);
     
-    if (!hasProblemFile && !hasAnswerFile) {
+    if (!hasProblemFile && !hasAnswerFile && !hasTestFile) {
       console.log(`  - No corresponding Ruby files found, skipping`);
       skippedFiles++;
       continue;
@@ -47,6 +50,7 @@ for (const jsFilename of jsFiles) {
     // Rubyファイルの内容を読み込み
     let newProblemCode = problem.problemCode || '';
     let newAnswerCode = problem.answerCode || '';
+    let newTestCode = problem.testCode || '';
     
     if (hasProblemFile) {
       newProblemCode = fs.readFileSync(rubyProblemPath, 'utf-8');
@@ -58,11 +62,17 @@ for (const jsFilename of jsFiles) {
       console.log(`  ✓ Read answerCode from ${baseName}.rb`);
     }
     
+    if (hasTestFile) {
+      newTestCode = fs.readFileSync(rubyTestPath, 'utf-8');
+      console.log(`  ✓ Read testCode from ${baseName}.rb`);
+    }
+    
     // 変更があったかチェック
     const problemChanged = newProblemCode !== problem.problemCode;
     const answerChanged = newAnswerCode !== problem.answerCode;
+    const testChanged = newTestCode !== problem.testCode;
     
-    if (!problemChanged && !answerChanged) {
+    if (!problemChanged && !answerChanged && !testChanged) {
       console.log(`  - No changes detected, skipping`);
       skippedFiles++;
       continue;
@@ -72,7 +82,8 @@ for (const jsFilename of jsFiles) {
     const updatedProblem = {
       ...problem,
       problemCode: newProblemCode,
-      answerCode: newAnswerCode
+      answerCode: newAnswerCode,
+      testCode: newTestCode
     };
     
     // JavaScriptファイルの新しい内容を生成
@@ -86,6 +97,7 @@ export const problem = ${JSON.stringify(updatedProblem, null, 2)};
     console.log(`  ✓ Updated JavaScript file:`);
     if (problemChanged) console.log(`    - problemCode updated`);
     if (answerChanged) console.log(`    - answerCode updated`);
+    if (testChanged) console.log(`    - testCode updated`);
     
     updatedFiles++;
     

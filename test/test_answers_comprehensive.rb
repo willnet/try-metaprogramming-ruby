@@ -30,8 +30,20 @@ class ComprehensiveAnswerTester
 
 
   def get_test_content(answer_code, test_code)
-    case @current_problem_id
-    when '01_block_first_step', '01_class_definition_first_step'
+    # テストコードが先に実行される必要がある問題
+    # これらの問題では、テストコードで定義されるクラス/定数を回答コードで使用する
+    test_first_problems = [
+      '01_block_first_step_q1',
+      '01_block_first_step_q2', 
+      '01_block_first_step_q3',
+      '01_block_first_step_q4',
+      '01_class_definition_first_step_q1',
+      '02_hierarchy_q6', # M1Refinementsの定義が必要
+      '01_method_first_step_q2', # F1定数の定義が必要
+      '03_try_over3_3_q2' # alpha_rand等の定義が必要
+    ]
+    
+    if test_first_problems.include?(@current_problem_id)
       "#{test_code}\n\n#{answer_code}"
     else
       "#{answer_code}\n\n#{test_code}"
