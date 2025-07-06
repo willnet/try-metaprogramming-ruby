@@ -13,6 +13,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Problem Data Management
 - `node scripts/extract-problems.js` - Extract problem data from external Ruby repository
+- `node scripts/extract-ruby-code.js` - Extract problemCode and answerCode to standalone Ruby files
+- `node scripts/sync-ruby-to-js.js` - Sync Ruby file changes back to JavaScript problem files
+
+### Ruby-First Development Workflow
+When editing Ruby code for problems and answers:
+1. Edit Ruby files directly in `src/ruby/problems/` and `src/ruby/answers/`
+2. Run `node scripts/sync-ruby-to-js.js` to sync changes back to JavaScript files
+3. Rebuild the application with `node esbuild.config.js` to see changes in the web interface
+
+The Ruby files serve as the source of truth for problem and answer code, making manual editing and verification much easier.
 
 ## Project Architecture
 

@@ -13,6 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -22,6 +27,10 @@ jobs:
     - name: Install dependencies
       run: |
         gem install minitest
+    
+    - name: Sync Ruby files to JavaScript
+      run: |
+        node scripts/sync-ruby-to-js.js
     
     - name: Generate problems JSON
       run: |

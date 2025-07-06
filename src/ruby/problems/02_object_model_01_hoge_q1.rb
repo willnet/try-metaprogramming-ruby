@@ -1,0 +1,2 @@
+class Hoge
+end

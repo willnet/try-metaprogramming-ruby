@@ -1,0 +1,2 @@
+module SimpleModel
+end

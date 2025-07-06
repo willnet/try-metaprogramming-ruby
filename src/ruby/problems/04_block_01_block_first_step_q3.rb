@@ -1,0 +1,2 @@
+class MyBlock
+end
