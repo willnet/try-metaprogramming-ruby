@@ -184,6 +184,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const codeEditor = document.getElementById('code-editor');
   const runButton = document.getElementById('run-button');
   const resetButton = document.getElementById('reset-button');
+  const showAnswerButton = document.getElementById('show-answer-button');
+  const answerContainer = document.getElementById('answer-container');
+  const answerExplanationText = document.getElementById('answer-explanation-text');
+  const answerCodeText = document.getElementById('answer-code-text');
   const testResult = document.getElementById('test-result');
   const loading = document.getElementById('loading');
 
@@ -230,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
       detailedDescriptionText.textContent = problem.detailedDescription || '';
       codeEditor.value = problem.problemCode;
       rubyRunner.setTestCode(problem.testCode);
+      hideAnswer(); // 問題変更時は回答を非表示にする
     }
   }
 
@@ -239,7 +244,51 @@ document.addEventListener('DOMContentLoaded', () => {
       codeEditor.value = problemManager.currentProblem.problemCode;
       testResult.textContent = '';
       testResult.className = '';
+      hideAnswer();
     }
+  }
+
+  // 回答の表示/非表示切り替え
+  function toggleAnswer() {
+    if (answerContainer.classList.contains('hidden')) {
+      showAnswer();
+    } else {
+      hideAnswer();
+    }
+  }
+
+  // 回答を表示
+  function showAnswer() {
+    if (!problemManager.currentProblem) return;
+
+    // 確認ダイアログ
+    const confirmed = confirm('回答例を表示しますか？\n\n先に自分で考えてみることをお勧めします。');
+    if (!confirmed) return;
+
+    const problem = problemManager.currentProblem;
+    
+    // 解説を表示（answerExplanationがある場合）
+    if (problem.answerExplanation) {
+      answerExplanationText.textContent = problem.answerExplanation;
+    } else {
+      answerExplanationText.textContent = '解説はありません。';
+    }
+
+    // 回答コードを表示
+    if (problem.answerCode) {
+      answerCodeText.textContent = problem.answerCode;
+    } else {
+      answerCodeText.textContent = '回答例はありません。';
+    }
+
+    answerContainer.classList.remove('hidden');
+    showAnswerButton.textContent = '回答を非表示';
+  }
+
+  // 回答を非表示
+  function hideAnswer() {
+    answerContainer.classList.add('hidden');
+    showAnswerButton.textContent = '回答を表示';
   }
 
   // 初期化を開始
@@ -256,6 +305,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // リセットボタンのクリックイベント
   resetButton.addEventListener('click', resetProblem);
+
+  // 回答表示ボタンのクリックイベント
+  showAnswerButton.addEventListener('click', toggleAnswer);
 
   // 実行ボタンのクリックイベント
   runButton.addEventListener('click', async () => {

@@ -44,7 +44,20 @@
     <div class="button-container">
       <button id="run-button">テスト実行</button>
       <button id="reset-button">リセット</button>
+      <button id="show-answer-button">回答を表示</button>
       <div id="loading" class="loading hidden">実行中...</div>
+    </div>
+
+    <div class="answer-container hidden" id="answer-container">
+      <h2>回答例と解説</h2>
+      <div class="answer-explanation">
+        <h3>解説</h3>
+        <pre id="answer-explanation-text"></pre>
+      </div>
+      <div class="answer-code">
+        <h3>回答例</h3>
+        <pre id="answer-code-text"></pre>
+      </div>
     </div>
 
     <div class="result-container">
