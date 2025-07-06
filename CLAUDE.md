@@ -20,15 +20,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Problem Data Management
 - `node scripts/extract-problems.js` - Extract problem data from external Ruby repository
 - `node scripts/extract-ruby-code.js` - Extract problemCode and answerCode to standalone Ruby files
+- `node scripts/extract-descriptions-explanations.js` - Extract detailedDescription and answerExplanation to separate markdown files
 - `node scripts/sync-ruby-to-js.js` - Sync Ruby file changes back to JavaScript problem files
 
 ### Ruby-First Development Workflow
-All code (problems, answers, tests) is managed as Ruby files and automatically synced to JavaScript:
+All content (code, descriptions, explanations) is managed as separate files and automatically synced to JavaScript:
 
-1. **Edit Ruby files directly:**
-   - `src/ruby/problems/` - Problem starter code
-   - `src/ruby/answers/` - Solution code  
-   - `src/ruby/tests/` - Test code
+1. **Edit content files directly:**
+   - `src/ruby/problems/` - Problem starter code (.rb files)
+   - `src/ruby/answers/` - Solution code (.rb files)
+   - `src/ruby/tests/` - Test code (.rb files)
+   - `src/ruby/descriptions/` - Problem descriptions (.md files with Japanese/English sections)
+   - `src/ruby/explanations/` - Answer explanations (.md files with Japanese/English sections)
 
 2. **Run tests:** `bin/test` (handles sync automatically)
 
@@ -37,12 +40,14 @@ All code (problems, answers, tests) is managed as Ruby files and automatically s
 **Directory structure:**
 ```
 src/ruby/
-├── problems/    # Problem starter code (19 files)
-├── answers/     # Solution code (24 files)
-└── tests/       # Test code (24 files)
+├── problems/      # Problem starter code (19 files)
+├── answers/       # Solution code (24 files)
+├── tests/         # Test code (24 files)
+├── descriptions/  # Problem descriptions (24 files)
+└── explanations/  # Answer explanations (15 files)
 ```
 
-The Ruby files serve as the source of truth. JavaScript files are automatically generated.
+The separated files serve as the source of truth. JavaScript files are automatically generated.
 
 ## Project Architecture
 
