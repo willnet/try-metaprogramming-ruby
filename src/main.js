@@ -191,7 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const answerCodeText = document.getElementById('answer-code-text');
   const testResult = document.getElementById('test-result');
   const loading = document.getElementById('loading');
-  const languageToggleBtn = document.getElementById('language-toggle-btn');
+  const languageJaBtn = document.getElementById('language-ja-btn');
+  const languageEnBtn = document.getElementById('language-en-btn');
 
   const rubyRunner = new RubyRunner();
   const problemManager = new ProblemManager(problems);
@@ -209,10 +210,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // ページタイトルも更新
     document.title = languageManager.t('pageTitle');
 
-    // 言語切り替えボタンのテキストを更新
+    // 言語切り替えボタンの状態を更新
     const currentLang = languageManager.getCurrentLanguage();
-    const buttonText = currentLang === 'ja' ? languageManager.t('english') : languageManager.t('japanese');
-    languageToggleBtn.querySelector('span').textContent = buttonText;
+    languageJaBtn.classList.toggle('active', currentLang === 'ja');
+    languageEnBtn.classList.toggle('active', currentLang === 'en');
 
     // 現在選択中の問題内容を再表示
     if (problemManager.currentProblem) {
@@ -245,10 +246,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 言語切り替え
-  function toggleLanguage() {
-    const currentLang = languageManager.getCurrentLanguage();
-    const newLang = currentLang === 'ja' ? 'en' : 'ja';
-    languageManager.setLanguage(newLang);
+  function setLanguage(lang) {
+    languageManager.setLanguage(lang);
   }
 
   // セクション選択肢の初期化
@@ -374,7 +373,8 @@ document.addEventListener('DOMContentLoaded', () => {
   showAnswerButton.addEventListener('click', toggleAnswer);
 
   // 言語切り替えボタンのクリックイベント
-  languageToggleBtn.addEventListener('click', toggleLanguage);
+  languageJaBtn.addEventListener('click', () => setLanguage('ja'));
+  languageEnBtn.addEventListener('click', () => setLanguage('en'));
 
   // 言語変更時のコールバック登録
   languageManager.onLanguageChange(updateUI);

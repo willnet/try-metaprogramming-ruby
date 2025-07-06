@@ -39,27 +39,43 @@ h1 {
   align-items: center;
 }
 
+.language-segment-control {
+  display: flex;
+  background-color: #2c3e50;
+  border-radius: 25px;
+  padding: 4px;
+  gap: 2px;
+}
+
 .language-btn {
   padding: 8px 16px;
-  background-color: #34495e;
-  color: white;
+  background-color: transparent;
+  color: #bdc3c7;
   border: none;
   border-radius: 20px;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 5px;
+  min-width: 80px;
+  justify-content: center;
 }
 
-.language-btn:hover {
-  background-color: #2c3e50;
-  transform: translateY(-1px);
+.language-btn.active {
+  background-color: #3498db;
+  color: white;
+  transform: none;
+}
+
+.language-btn:hover:not(.active) {
+  background-color: #34495e;
+  color: white;
 }
 
 .language-btn:active {
-  transform: translateY(0);
+  transform: scale(0.95);
 }
 
 h2 {
