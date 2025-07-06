@@ -25,7 +25,7 @@ class ComprehensiveAnswerTester
     end
     
     # JSONファイルが存在しない場合は生成を促す
-    raise "Please run 'node extract_problems_json.js' to generate test/problems.json before running tests"
+    raise "Please run 'node scripts/generate-test-json.js' to generate test/problems.json before running tests"
   end
 
 
