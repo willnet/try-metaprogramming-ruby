@@ -180,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sectionSelect = document.getElementById('section-select');
   const problemSelect = document.getElementById('problem-select');
   const descriptionText = document.getElementById('description-text');
+  const detailedDescriptionText = document.getElementById('detailed-description-text');
   const codeEditor = document.getElementById('code-editor');
   const runButton = document.getElementById('run-button');
   const resetButton = document.getElementById('reset-button');
@@ -226,6 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (problem) {
       descriptionText.textContent = problem.description;
+      detailedDescriptionText.textContent = problem.detailedDescription || '';
       codeEditor.value = problem.problemCode;
       rubyRunner.setTestCode(problem.testCode);
     }

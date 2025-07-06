@@ -4,11 +4,10 @@ export const problem = {
   "id": "01_block_first_step_q3",
   "title": "Block First Step Q3",
   "description": "Rubyのブロックについての基本的な問題。ブロックの受け渡しや実行、クロージャについて学びます。 (Q3)",
-  "problemCode": `# Q3.
-# MyBlockクラスにblock_to_procインスタンスメソッドを定義しましょう。block_to_procインスタンスメソッドはブロックを受け取り、
-# そのブロックをProcオブジェクトにしたものを返します
-
-class MyBlock
+  "detailedDescription": `Q3.
+MyBlockクラスにblock_to_procインスタンスメソッドを定義しましょう。block_to_procインスタンスメソッドはブロックを受け取り、
+そのブロックをProcオブジェクトにしたものを返します`,
+  "problemCode": `class MyBlock
 end`,
   "answerCode": `# Q3. 問題の解説
 #

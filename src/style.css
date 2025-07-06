@@ -32,6 +32,11 @@ h2 {
   color: #3498db;
 }
 
+h3 {
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+
 /* 問題選択部分のスタイル */
 .problem-selector {
   display: flex;
@@ -76,6 +81,23 @@ h2 {
   font-size: 14px;
   line-height: 1.6;
   white-space: pre-wrap;
+}
+
+/* 詳細説明部分のスタイル */
+.detailed-description {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+}
+
+#detailed-description-text {
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  font-family: monospace;
+  color: #495057;
 }
 
 .code-container, .result-container {

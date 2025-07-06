@@ -4,14 +4,13 @@ export const problem = {
   "id": "03_try_over3_3_q1",
   "title": "Try Over3 3 Q1",
   "description": "高度なメタプログラミング技術の問題。method_missing、プロキシオブジェクト、const_missing、DSLの実装などを学びます。 (Q1)",
-  "problemCode": `TryOver3 = Module.new
-
-# Q1
-# 以下要件を満たすクラス TryOver3::A1 を作成してください。
-# - run_test というインスタンスメソッドを持ち、それはnilを返す
-# - \`test_\` から始まるインスタンスメソッドが実行された場合、このクラスは \`run_test\` メソッドを実行する
+  "detailedDescription": `Q1
+以下要件を満たすクラス TryOver3::A1 を作成してください。
+- run_test というインスタンスメソッドを持ち、それはnilを返す
+- \`test_\` から始まるインスタンスメソッドが実行された場合、このクラスは \`run_test\` メソッドを実行する
 # - \`test_\` メソッドがこのクラスに実装されていなくても \`test_\` から始まるメッセージに応答することができる
 # - TryOver3::A1 には \`test_\` から始まるインスタンスメソッドが定義されていない`,
+  "problemCode": `TryOver3 = Module.new`,
   "answerCode": `TryOver3 = Module.new
 
 # Q1. 問題の解説

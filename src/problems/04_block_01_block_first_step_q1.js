@@ -4,11 +4,10 @@ export const problem = {
   "id": "01_block_first_step_q1",
   "title": "Block First Step Q1",
   "description": "Rubyのブロックについての基本的な問題。ブロックの受け渡しや実行、クロージャについて学びます。 (Q1)",
-  "problemCode": `# Q1.
-# MyMathクラスに、ブロックを実行した結果(数値)を2倍にして返すtwo_timesインスタンスメソッドを定義しましょう
-#    実行例: MyMath.new.two_times { 2 } #=> 4
-
-class MyMath
+  "detailedDescription": `Q1.
+MyMathクラスに、ブロックを実行した結果(数値)を2倍にして返すtwo_timesインスタンスメソッドを定義しましょう
+   実行例: MyMath.new.two_times { 2 } #=> 4`,
+  "problemCode": `class MyMath
 end`,
   "answerCode": `# Q1. 問題の解説
 #

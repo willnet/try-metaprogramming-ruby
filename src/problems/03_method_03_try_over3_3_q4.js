@@ -4,19 +4,44 @@ export const problem = {
   "id": "03_try_over3_3_q4",
   "title": "Try Over3 3 Q4",
   "description": "高度なメタプログラミング技術の問題。method_missing、プロキシオブジェクト、const_missing、DSLの実装などを学びます。 (Q4)",
+  "detailedDescription": `Q4
+以下のように実行できる TryOver3::A4 クラスを作成してください。
+TryOver3::A4.runners = [:Hoge]
+TryOver3::A4::Hoge.run
+=> "run Hoge"
+このとき、TryOver3::A4::Hogeという定数は定義されません。
+
+TryOver3::TaskHelper という include すると task というクラスマクロが与えられる以下のようなモジュールがあります。
+TryOver3::TaskHelper は include することで以下のような使い方ができます
+irb(main):001:0> TryOver3::A3Task::Foo.run
+start 2020-01-07 18:03:10 +0900
+finish 2020-01-07 18:03:10 +0900
+=> "foo"
+今回 TryOver3::TaskHelper では TryOver3::A5Task::Foo のように Foo クラスを作らず
+TryOver3::A5Task.foo のようにクラスメソッドとして task で定義された名前のクラスメソッドでブロックを実行するように変更したいです。
+現在 TryOver3::TaskHelper のユーザには TryOver3::A5Task::Foo.run のように生成されたクラスを使って実行しているユーザが存在します。
+今回変更を加えても、その人たちにはこれまで通り生成されたクラスのrunメソッドでタスクを実行できるようにしておいて、
+warning だけだしておくようにしたいです。
+TryOver3::TaskHelper を修正してそれを実現してください。 なお、その際、クラスは実行されない限り生成されないものとします。
+
+変更後想定する使い方
+メソッドを使ったケース
+irb(main):001:0> TryOver3::A5Task.foo
+start 2020-01-07 18:03:10 +0900
+finish 2020-01-07 18:03:10 +0900
+=> "foo"
+
+クラスのrunメソッドを使ったケース
+irb(main):001:0> TryOver3::A5Task::Foo.run
+Warning: TryOver3::A5Task::Foo.run is deprecated
+start 2020-01-07 18:03:10 +0900
+finish 2020-01-07 18:03:10 +0900
+=> "foo"`,
   "problemCode": `TryOver3 = Module.new
 
-# Q4
-# 以下のように実行できる TryOver3::A4 クラスを作成してください。
-# TryOver3::A4.runners = [:Hoge]
-# TryOver3::A4::Hoge.run
-# # => "run Hoge"
-# このとき、TryOver3::A4::Hogeという定数は定義されません。
 
 
 # Q5. チャレンジ問題！ 挑戦する方はテストの skip を外して挑戦してみてください。
-#
-# TryOver3::TaskHelper という include すると task というクラスマクロが与えられる以下のようなモジュールがあります。
 module TryOver3::TaskHelper
   def self.included(klass)
     klass.define_singleton_method :task do |name, &task_block|
@@ -34,39 +59,13 @@ module TryOver3::TaskHelper
   end
 end
 
-# TryOver3::TaskHelper は include することで以下のような使い方ができます
 class TryOver3::A5Task
   include TryOver3::TaskHelper
 
   task :foo do
     "foo"
   end
-end
-# irb(main):001:0> TryOver3::A3Task::Foo.run
-# start 2020-01-07 18:03:10 +0900
-# finish 2020-01-07 18:03:10 +0900
-# => "foo"
-
-# 今回 TryOver3::TaskHelper では TryOver3::A5Task::Foo のように Foo クラスを作らず
-# TryOver3::A5Task.foo のようにクラスメソッドとして task で定義された名前のクラスメソッドでブロックを実行するように変更したいです。
-# 現在 TryOver3::TaskHelper のユーザには TryOver3::A5Task::Foo.run のように生成されたクラスを使って実行しているユーザが存在します。
-# 今回変更を加えても、その人たちにはこれまで通り生成されたクラスのrunメソッドでタスクを実行できるようにしておいて、
-# warning だけだしておくようにしたいです。
-# TryOver3::TaskHelper を修正してそれを実現してください。 なお、その際、クラスは実行されない限り生成されないものとします。
-#
-# 変更後想定する使い方
-# メソッドを使ったケース
-# irb(main):001:0> TryOver3::A5Task.foo
-# start 2020-01-07 18:03:10 +0900
-# finish 2020-01-07 18:03:10 +0900
-# => "foo"
-#
-# クラスのrunメソッドを使ったケース
-# irb(main):001:0> TryOver3::A5Task::Foo.run
-# Warning: TryOver3::A5Task::Foo.run is deprecated
-# start 2020-01-07 18:03:10 +0900
-# finish 2020-01-07 18:03:10 +0900
-# => "foo"`,
+end`,
   "answerCode": `TryOver3 = Module.new
 
 # Q4. 問題の解説

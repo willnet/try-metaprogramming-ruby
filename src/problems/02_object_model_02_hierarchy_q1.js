@@ -4,6 +4,10 @@ export const problem = {
   "id": "02_hierarchy_q1",
   "title": "Hierarchy Q1",
   "description": "Rubyのクラス階層とモジュールの仕組みについての問題。祖先チェーン、メソッド探索、refinementなどを学びます。 (Q1)",
+  "detailedDescription": `Q1.
+次の動作をする C1 class を実装する
+- C1.ancestors.first(2) が [C1, M1] となる
+- C1.new.name が 'C1' を返す`,
   "problemCode": `module M1
   def name
     'M1'
@@ -30,10 +34,6 @@ end
 
 # NOTE: これより上の行は変更しないこと
 
-# Q1.
-# 次の動作をする C1 class を実装する
-# - C1.ancestors.first(2) が [C1, M1] となる
-# - C1.new.name が 'C1' を返す
 class C1
   def name
     'C1'

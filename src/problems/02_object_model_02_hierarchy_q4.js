@@ -4,6 +4,16 @@ export const problem = {
   "id": "02_hierarchy_q4",
   "title": "Hierarchy Q4",
   "description": "Rubyのクラス階層とモジュールの仕組みについての問題。祖先チェーン、メソッド探索、refinementなどを学びます。 (Q4)",
+  "detailedDescription": `Q4.
+次の動作をする C4 class のメソッド increment を実装する
+- increment メソッドを呼ぶと value が +1 される
+- また、increment メソッドは value を文字列にしたものを返す
+  c4 = C4.new
+  c4.increment # => "1"
+  c4.increment # => "2"
+  c4.increment # => "3"
+- 定義済みのメソッド (value, value=) は private のままとなっている
+- incrementメソッド内で value, value=を利用する`,
   "problemCode": `module M1
   def name
     'M1'
@@ -30,16 +40,6 @@ end
 
 # NOTE: これより上の行は変更しないこと
 
-# Q4.
-# 次の動作をする C4 class のメソッド increment を実装する
-# - increment メソッドを呼ぶと value が +1 される
-# - また、increment メソッドは value を文字列にしたものを返す
-#   c4 = C4.new
-#   c4.increment # => "1"
-#   c4.increment # => "2"
-#   c4.increment # => "3"
-# - 定義済みのメソッド (value, value=) は private のままとなっている
-# - incrementメソッド内で value, value=を利用する
 class C4
   private
 

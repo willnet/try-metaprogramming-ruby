@@ -4,14 +4,14 @@ export const problem = {
   "id": "02_simple_mock",
   "title": "Simple Mock",
   "description": "シンプルなモックフレームワークの作成問題。モックオブジェクトの作成、メソッド呼び出し回数の追跡などを学びます。",
-  "problemCode": `# 次の仕様を満たすモジュール SimpleMock を作成してください
-#
-# SimpleMockは、次の2つの方法でモックオブジェクトを作成できます
-# 特に、2の方法では、他のオブジェクトにモック機能を付与します
-# この時、もとのオブジェクトの能力が失われてはいけません
-# また、これの方法で作成したオブジェクトを、以後モック化されたオブジェクトと呼びます
-# 1.
-# \`\`\`
+  "detailedDescription": `次の仕様を満たすモジュール SimpleMock を作成してください
+
+SimpleMockは、次の2つの方法でモックオブジェクトを作成できます
+特に、2の方法では、他のオブジェクトにモック機能を付与します
+この時、もとのオブジェクトの能力が失われてはいけません
+また、これの方法で作成したオブジェクトを、以後モック化されたオブジェクトと呼びます
+1.
+\`\`\`
 # SimpleMock.new
 # \`\`\`
 #
@@ -43,6 +43,7 @@ export const problem = {
 # obj.imitated_method #=> true
 # obj.called_times(:imitated_method) #=> 2
 # \`\`\``,
+  "problemCode": ``,
   "answerCode": `# 問題の解説
 # まずmockメソッドの実装から考えます。「もとのオブジェクトの能力が失われてはいけない」という仕様から、引数として受け付けたオブジェクトに
 # SimpleMockをextendすることでモック化に必要なメソッドであるexpects, watch, called_timesを追加するようにします。

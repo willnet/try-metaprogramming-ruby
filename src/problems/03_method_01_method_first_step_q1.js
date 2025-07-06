@@ -4,16 +4,15 @@ export const problem = {
   "id": "01_method_first_step_q1",
   "title": "Method First Step Q1",
   "description": "Rubyのメソッド定義についての基本的な問題。defキーワードを使わない動的なメソッド定義を学びます。 (Q1)",
-  "problemCode": `# Q1.
-# 次の動作をする F1 class を実装する
-# - 1. "def"キーワードを使わずにF1クラスにhelloインスタンスメソッドを定義すること
-#      戻り値は "hello" であること
-# - 2. "def"キーワードを使わずにF1クラスにworldクラスメソッドを定義すること
-#      戻り値は "world" であること
-# - 3. 定義していないメソッドを実行したときにエラーを発生させず、"NoMethodError"という文字列を返すこと
-# - 4. \`F1.new.respond_to?(定義していないメソッド名)\` を実行したときにtrueを返すこと
-
-class F1
+  "detailedDescription": `Q1.
+次の動作をする F1 class を実装する
+- 1. "def"キーワードを使わずにF1クラスにhelloインスタンスメソッドを定義すること
+     戻り値は "hello" であること
+- 2. "def"キーワードを使わずにF1クラスにworldクラスメソッドを定義すること
+     戻り値は "world" であること
+- 3. 定義していないメソッドを実行したときにエラーを発生させず、"NoMethodError"という文字列を返すこと
+- 4. \`F1.new.respond_to?(定義していないメソッド名)\` を実行したときにtrueを返すこと`,
+  "problemCode": `class F1
 end`,
   "answerCode": `# Q1. 問題の解説
 #

@@ -4,6 +4,12 @@ export const problem = {
   "id": "02_hierarchy_q5",
   "title": "Hierarchy Q5",
   "description": "Rubyのクラス階層とモジュールの仕組みについての問題。祖先チェーン、メソッド探索、refinementなどを学びます。 (Q5)",
+  "detailedDescription": `Q5.
+次の動作をする M1Refinements module を実装する
+- M1Refinements は M1 の name インスタンスメソッドをリファインし,
+  リファインされた name メソッドは "Refined M1" を返す
+- C5.new.another_name が文字列 "M1" を返す
+- C5.new.other_name が文字列 "Refined M1" を返す`,
   "problemCode": `module M1
   def name
     'M1'
@@ -30,12 +36,6 @@ end
 
 # NOTE: これより上の行は変更しないこと
 
-# Q5.
-# 次の動作をする M1Refinements module を実装する
-# - M1Refinements は M1 の name インスタンスメソッドをリファインし,
-#   リファインされた name メソッドは "Refined M1" を返す
-# - C5.new.another_name が文字列 "M1" を返す
-# - C5.new.other_name が文字列 "Refined M1" を返す
 module M1Refinements
 end
 

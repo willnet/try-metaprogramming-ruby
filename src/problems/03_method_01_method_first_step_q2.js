@@ -4,11 +4,10 @@ export const problem = {
   "id": "01_method_first_step_q2",
   "title": "Method First Step Q2",
   "description": "Rubyのメソッド定義についての基本的な問題。defキーワードを使わない動的なメソッド定義を学びます。 (Q2)",
-  "problemCode": `# Q2.
-# 次の動作をする F2 classを実装する
-# - 1. 実行するとhiインスタンスメソッドを定義するadd_hiメソッドを定義すること
-
-class F2
+  "detailedDescription": `Q2.
+次の動作をする F2 classを実装する
+- 1. 実行するとhiインスタンスメソッドを定義するadd_hiメソッドを定義すること`,
+  "problemCode": `class F2
 end`,
   "answerCode": `# Q2. 問題の解説
 #

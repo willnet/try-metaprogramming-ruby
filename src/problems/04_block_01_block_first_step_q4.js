@@ -4,19 +4,19 @@ export const problem = {
   "id": "01_block_first_step_q4",
   "title": "Block First Step Q4",
   "description": "Rubyのブロックについての基本的な問題。ブロックの受け渡しや実行、クロージャについて学びます。 (Q4)",
-  "problemCode": `# Q4.
-# MyClosureクラスにincrementインスタンスメソッドを定義しましょう。このincrementメソッドは次のように数値を1ずつインクリメントして返します
-# my = MyClosure.new
-# my.increment #=> 1
-# my.increment #=> 2
-# my.increment #=> 3
-# それに加えて、複数のインスタンスでカウンターを共有しているという特性があります。
-# my1 = MyClosure.new
-# my2 = MyClosure.new
-# my1.increment #=> 1
-# my2.increment #=> 2
-# my1.increment #=> 3
-# さらなる制限として、カウンターとして利用する変数はローカル変数を利用してください(これはテストにはないですが頑張ってローカル変数でテストを通るようにしてみてください)
+  "detailedDescription": `Q4.
+MyClosureクラスにincrementインスタンスメソッドを定義しましょう。このincrementメソッドは次のように数値を1ずつインクリメントして返します
+my = MyClosure.new
+my.increment #=> 1
+my.increment #=> 2
+my.increment #=> 3
+それに加えて、複数のインスタンスでカウンターを共有しているという特性があります。
+my1 = MyClosure.new
+my2 = MyClosure.new
+my1.increment #=> 1
+my2.increment #=> 2
+my1.increment #=> 3`,
+  "problemCode": `# さらなる制限として、カウンターとして利用する変数はローカル変数を利用してください(これはテストにはないですが頑張ってローカル変数でテストを通るようにしてみてください)
 
 class MyClosure
 end`,

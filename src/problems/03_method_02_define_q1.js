@@ -4,9 +4,10 @@ export const problem = {
   "id": "02_define_q1",
   "title": "Define Q1",
   "description": "Rubyのメソッド定義と呼び出しについての問題。動的なメソッド定義やオリジナルアクセサの実装を学びます。 (Q1)",
-  "problemCode": `# Q1.
-# 次の動作をする A1 class を実装する
-# - "//" を返す "//"メソッドが存在すること`,
+  "detailedDescription": `Q1.
+次の動作をする A1 class を実装する
+- "//" を返す "//"メソッドが存在すること`,
+  "problemCode": ``,
   "answerCode": `# Q1.
 #
 # 問題の解説

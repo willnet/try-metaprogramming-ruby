@@ -4,6 +4,10 @@ export const problem = {
   "id": "02_hierarchy_q6",
   "title": "Hierarchy Q6",
   "description": "Rubyのクラス階層とモジュールの仕組みについての問題。祖先チェーン、メソッド探索、refinementなどを学びます。 (Q6)",
+  "detailedDescription": `Q6.
+次の動作をする C6 class を実装する
+- M1Refinements は Q5 で実装したものをそのまま使う
+- C6.new.name が 'Refined M1' を返すように C6 に name メソッドを実装する`,
   "problemCode": `module M1
   def name
     'M1'
@@ -30,10 +34,6 @@ end
 
 # NOTE: これより上の行は変更しないこと
 
-# Q6.
-# 次の動作をする C6 class を実装する
-# - M1Refinements は Q5 で実装したものをそのまま使う
-# - C6.new.name が 'Refined M1' を返すように C6 に name メソッドを実装する
 class C6
   include M1
   using M1Refinements

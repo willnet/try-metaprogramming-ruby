@@ -4,12 +4,12 @@ export const problem = {
   "id": "03_try_over3_3_q2",
   "title": "Try Over3 3 Q2",
   "description": "高度なメタプログラミング技術の問題。method_missing、プロキシオブジェクト、const_missing、DSLの実装などを学びます。 (Q2)",
+  "detailedDescription": `Q2
+以下要件を満たす TryOver3::A2Proxy クラスを作成してください。
+- TryOver3::A2Proxy は initialize に TryOver3::A2 のインスタンスを受け取り、それを @source に代入する
+- TryOver3::A2Proxy は、@sourceに定義されているメソッドが自分自身に定義されているように振る舞う`,
   "problemCode": `TryOver3 = Module.new
 
-# Q2
-# 以下要件を満たす TryOver3::A2Proxy クラスを作成してください。
-# - TryOver3::A2Proxy は initialize に TryOver3::A2 のインスタンスを受け取り、それを @source に代入する
-# - TryOver3::A2Proxy は、@sourceに定義されているメソッドが自分自身に定義されているように振る舞う
 class TryOver3::A2
   def initialize(name, value)
     instance_variable_set("@#{name}", value)
