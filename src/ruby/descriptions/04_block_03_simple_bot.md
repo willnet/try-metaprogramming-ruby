@@ -3,6 +3,8 @@
 次の仕様を満たすSimpleBotクラスとDSLを作成してください
 
 これは、作成するSimpleBotクラスの利用イメージです
+
+```
 class Bot < SimpleBot
   setting :name, 'bot'
   respond 'keyword' do
@@ -11,6 +13,7 @@ class Bot < SimpleBot
 end
 
 Bot.new.ask('keyword') #=> 'respond bot'
+```
 
 1. SimpleBotクラスを継承したクラスは、クラスメソッドrespond, setting, settingsを持ちます
     1. settingsメソッドは、任意のオブジェクトを返します
@@ -23,13 +26,15 @@ Bot.new.ask('keyword') #=> 'respond bot'
     1. respondメソッドの第1引数keywordと同じ文字列が、インスタンスメソッドaskに渡された時、第2引数に渡したブロックが実行され、その結果が返されます
 4. クラスメソッドsettingは、引数を2つ取り、1つ目がキー名、2つ目が設定する値です
     1. settingメソッドに渡された値は、クラスメソッド `settings` から返されるオブジェクトに、メソッド名としてアクセスすることで取り出すことができます
-#     2. e.g. クラス内で `setting :name, 'bot'` と実行した場合は、respondメソッドに渡されるブロックのスコープ内で `settings.name` の戻り値は `bot` の文字列になります
+    2. e.g. クラス内で `setting :name, 'bot'` と実行した場合は、respondメソッドに渡されるブロックのスコープ内で `settings.name` の戻り値は `bot` の文字列になります
 
 # English
 
 Create a SimpleBot class and DSL that meet the following specifications
 
 This is how the SimpleBot class you create will be used:
+
+```
 class Bot < SimpleBot
   setting :name, 'bot'
   respond 'keyword' do
@@ -38,6 +43,7 @@ class Bot < SimpleBot
 end
 
 Bot.new.ask('keyword') #=> 'respond bot'
+```
 
 1. Classes that inherit from SimpleBot have class methods respond, setting, and settings
     1. The settings method returns an arbitrary object
@@ -50,4 +56,4 @@ Bot.new.ask('keyword') #=> 'respond bot'
     1. When the same string as the first argument keyword of the respond method is passed to the instance method ask, the block passed as the second argument is executed and its result is returned
 4. The class method setting takes two arguments, the first being the key name and the second being the value to set
     1. Values passed to the setting method can be retrieved by accessing them as method names from the object returned by the `settings` class method
-#     2. e.g. If `setting :name, 'bot'` is executed in the class, the return value of `settings.name` within the scope of the block passed to the respond method will be the string `bot`
+    2. e.g. If `setting :name, 'bot'` is executed in the class, the return value of `settings.name` within the scope of the block passed to the respond method will be the string `bot`

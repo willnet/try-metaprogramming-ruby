@@ -11,8 +11,9 @@ upcase_full_name! メソッドを持つ。これは、upcase_full_nameの副作�
 # English
 
 Class Specifications
-  The constructor accepts 2 or 3 arguments. The arguments are first name, middle name, and last name in that order, with middle name being optional.
-  It has a full_name method. This returns a string that combines first name, middle name, and last name with a single space. However, when middle name is omitted, only one space is placed between first name and last name.
-  It has a first_name= method. This replaces the first name with the content of the argument.
-  It has an upcase_full_name method. This returns the result of full_name method in all uppercase. This method has no side effects.
-  It has an upcase_full_name! method. This is a version of upcase_full_name with side effects, changing first name, middle name, and last name to all uppercase, and the object remembers this state
+
+The constructor accepts 2 or 3 arguments. The arguments are first name, middle name, and last name in that order, with middle name being optional.
+It has a full_name method. This returns a string that combines first name, middle name, and last name with a single space. However, when middle name is omitted, only one space is placed between first name and last name.
+It has a first_name= method. This replaces the first name with the content of the argument.
+It has an upcase_full_name method. This returns the result of full_name method in all uppercase. This method has no side effects.
+It has an upcase_full_name! method. This is a version of upcase_full_name with side effects, changing first name, middle name, and last name to all uppercase, and the object remembers this state

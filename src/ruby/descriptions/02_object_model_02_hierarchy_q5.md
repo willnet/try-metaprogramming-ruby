@@ -1,6 +1,5 @@
 # 日本語
 
-Q5.
 次の動作をする M1Refinements module を実装する
 - M1Refinements は M1 の name インスタンスメソッドをリファインし,
   リファインされた name メソッドは "Refined M1" を返す
@@ -9,7 +8,6 @@ Q5.
 
 # English
 
-Q5.
 Implement M1Refinements module that behaves as follows
 - M1Refinements refines the name instance method of M1,
   and the refined name method returns "Refined M1"

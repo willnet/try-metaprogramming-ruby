@@ -1,4 +1,5 @@
 #!/bin/sh
 set -e
 npm install
+node scripts/sync-ruby-to-js.js
 node esbuild.config.js
