@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "@bjorn3/browser_wasi_shim": "^0.4.1",
     "@ruby/wasm-wasi": "^2.7.1"

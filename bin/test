@@ -17,7 +17,7 @@ node scripts/sync-ruby-to-js.js
 
 echo ""
 echo "📊 Generating test problems JSON..."
-node scripts/extract-problems-json.js
+node scripts/generate-test-json.js
 
 echo ""
 echo "🧪 Running comprehensive answer tests..."
