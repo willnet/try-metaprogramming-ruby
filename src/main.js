@@ -1,6 +1,7 @@
 import { RubyVM } from "@ruby/wasm-wasi";
 import { File, WASI, OpenFile, ConsoleStdout } from "@bjorn3/browser_wasi_shim";
 import { problems } from "./problems.js";
+import { LanguageManager } from "./i18n.js";
 
 class RubyRunner {
   constructor() {
@@ -190,9 +191,65 @@ document.addEventListener('DOMContentLoaded', () => {
   const answerCodeText = document.getElementById('answer-code-text');
   const testResult = document.getElementById('test-result');
   const loading = document.getElementById('loading');
+  const languageToggleBtn = document.getElementById('language-toggle-btn');
 
   const rubyRunner = new RubyRunner();
   const problemManager = new ProblemManager(problems);
+  const languageManager = new LanguageManager();
+
+  // 多言語対応のUI更新
+  function updateUI() {
+    // data-i18n属性を持つ全ての要素を更新
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(element => {
+      const key = element.getAttribute('data-i18n');
+      element.textContent = languageManager.t(key);
+    });
+
+    // ページタイトルも更新
+    document.title = languageManager.t('pageTitle');
+
+    // 言語切り替えボタンのテキストを更新
+    const currentLang = languageManager.getCurrentLanguage();
+    const buttonText = currentLang === 'ja' ? languageManager.t('english') : languageManager.t('japanese');
+    languageToggleBtn.querySelector('span').textContent = buttonText;
+
+    // 現在選択中の問題内容を再表示
+    if (problemManager.currentProblem) {
+      updateProblemContent();
+    }
+  }
+
+  // 問題内容のみを更新（言語切り替え時用）
+  function updateProblemContent() {
+    const problem = problemManager.currentProblem;
+    if (!problem) return;
+
+    // 現在の言語に応じてフィールドを取得
+    const descriptionField = languageManager.getProblemField('description');
+    const detailedDescriptionField = languageManager.getProblemField('detailedDescription');
+    
+    descriptionText.textContent = problem[descriptionField] || problem.description;
+    detailedDescriptionText.textContent = problem[detailedDescriptionField] || problem.detailedDescription || '';
+    
+    // 回答が表示されている場合は回答内容も更新
+    if (!answerContainer.classList.contains('hidden')) {
+      const answerExplanationField = languageManager.getProblemField('answerExplanation');
+      
+      if (problem[answerExplanationField] || problem.answerExplanation) {
+        answerExplanationText.textContent = problem[answerExplanationField] || problem.answerExplanation;
+      } else {
+        answerExplanationText.textContent = languageManager.t('noExplanation');
+      }
+    }
+  }
+
+  // 言語切り替え
+  function toggleLanguage() {
+    const currentLang = languageManager.getCurrentLanguage();
+    const newLang = currentLang === 'ja' ? 'en' : 'ja';
+    languageManager.setLanguage(newLang);
+  }
 
   // セクション選択肢の初期化
   function initSectionSelect() {
@@ -230,8 +287,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const problem = problemManager.setCurrentProblem(selectedSection, selectedProblemId);
 
     if (problem) {
-      descriptionText.textContent = problem.description;
-      detailedDescriptionText.textContent = problem.detailedDescription || '';
+      // 現在の言語に応じてフィールドを取得
+      const descriptionField = languageManager.getProblemField('description');
+      const detailedDescriptionField = languageManager.getProblemField('detailedDescription');
+      
+      descriptionText.textContent = problem[descriptionField] || problem.description;
+      detailedDescriptionText.textContent = problem[detailedDescriptionField] || problem.detailedDescription || '';
       codeEditor.value = problem.problemCode;
       rubyRunner.setTestCode(problem.testCode);
       hideAnswer(); // 問題変更時は回答を非表示にする
@@ -262,38 +323,41 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!problemManager.currentProblem) return;
 
     // 確認ダイアログ
-    const confirmed = confirm('回答例を表示しますか？\n\n先に自分で考えてみることをお勧めします。');
+    const confirmed = confirm(languageManager.t('showAnswerConfirm'));
     if (!confirmed) return;
 
     const problem = problemManager.currentProblem;
     
+    // 現在の言語に応じてフィールドを取得
+    const answerExplanationField = languageManager.getProblemField('answerExplanation');
+    
     // 解説を表示（answerExplanationがある場合）
-    if (problem.answerExplanation) {
-      answerExplanationText.textContent = problem.answerExplanation;
+    if (problem[answerExplanationField] || problem.answerExplanation) {
+      answerExplanationText.textContent = problem[answerExplanationField] || problem.answerExplanation;
     } else {
-      answerExplanationText.textContent = '解説はありません。';
+      answerExplanationText.textContent = languageManager.t('noExplanation');
     }
 
     // 回答コードを表示
     if (problem.answerCode) {
       answerCodeText.textContent = problem.answerCode;
     } else {
-      answerCodeText.textContent = '回答例はありません。';
+      answerCodeText.textContent = languageManager.t('noAnswer');
     }
 
     answerContainer.classList.remove('hidden');
-    showAnswerButton.textContent = '回答を非表示';
+    showAnswerButton.textContent = languageManager.t('hideAnswer');
   }
 
   // 回答を非表示
   function hideAnswer() {
     answerContainer.classList.add('hidden');
-    showAnswerButton.textContent = '回答を表示';
+    showAnswerButton.textContent = languageManager.t('showAnswer');
   }
 
   // 初期化を開始
   rubyRunner.initialize().catch(error => {
-    testResult.textContent = `初期化エラー: ${error.message}`;
+    testResult.textContent = `${languageManager.t('initError')} ${error.message}`;
     testResult.classList.add('failure');
   });
 
@@ -308,6 +372,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 回答表示ボタンのクリックイベント
   showAnswerButton.addEventListener('click', toggleAnswer);
+
+  // 言語切り替えボタンのクリックイベント
+  languageToggleBtn.addEventListener('click', toggleLanguage);
+
+  // 言語変更時のコールバック登録
+  languageManager.onLanguageChange(updateUI);
 
   // 実行ボタンのクリックイベント
   runButton.addEventListener('click', async () => {
@@ -336,7 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
         testResult.classList.add('failure');
       }
     } catch (error) {
-      testResult.textContent = `実行エラー: ${error.message}`;
+      testResult.textContent = `${languageManager.t('executionError')} ${error.message}`;
       testResult.classList.add('failure');
     } finally {
       // UIの復元
@@ -348,4 +418,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 初期化
   initSectionSelect();
+  updateUI(); // 初期表示時に言語設定を適用
 });
