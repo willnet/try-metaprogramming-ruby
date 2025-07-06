@@ -101,7 +101,7 @@ export class LanguageManager {
   // ローカルストレージから言語設定を読み込み
   loadLanguage() {
     const saved = localStorage.getItem('app-language');
-    return saved && ['ja', 'en'].includes(saved) ? saved : 'ja';
+    return saved && ['ja', 'en'].includes(saved) ? saved : 'en';
   }
   
   // 言語設定をローカルストレージに保存
