@@ -9,11 +9,11 @@ MyMathクラスに、ブロックを実行した結果(数値)を2倍にして�
    実行例: MyMath.new.two_times { 2 } #=> 4`,
   "problemCode": `class MyMath
 end`,
-  "answerCode": `# Q1. 問題の解説
-#
-# yieldもしくはcallメソッドを使うメソッド実装の練習です。Railsでアプリケーションを書いているとそれほどブロックを取る
-# メソッドを書く機会はないのですが、素振りをしておいていざというときに使えるようにしておくと役に立つ時が来るかもしれません
-class MyMath
+  "answerExplanation": `Q1. 問題の解説
+
+yieldもしくはcallメソッドを使うメソッド実装の練習です。Railsでアプリケーションを書いているとそれほどブロックを取る
+メソッドを書く機会はないのですが、素振りをしておいていざというときに使えるようにしておくと役に立つ時が来るかもしれません`,
+  "answerCode": `class MyMath
   def two_times
     yield * 2
   end

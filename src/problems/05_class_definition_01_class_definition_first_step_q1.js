@@ -67,10 +67,9 @@ class MyGreeting
 end
 
 toplevellocal = 'hi'`,
-  "answerCode": `# Q1. 問題の解説
-# e2オブジェクトの特異メソッドとしてhelloを定義する練習です。特異メソッドは対象のオブジェクトだけが利用可能なメソッドです。
-#
-class ExClass
+  "answerExplanation": `Q1. 問題の解説
+e2オブジェクトの特異メソッドとしてhelloを定義する練習です。特異メソッドは対象のオブジェクトだけが利用可能なメソッドです。`,
+  "answerCode": `class ExClass
 end
 
 e1 = ExClass.new

@@ -8,12 +8,11 @@ export const problem = {
 次の動作をする A1 class を実装する
 - "//" を返す "//"メソッドが存在すること`,
   "problemCode": ``,
-  "answerCode": `# Q1.
-#
-# 問題の解説
-# defだとSyntaxErrorになってしまうようなメソッド名でも、define_methodを使うことでメソッドとして定義することができます。
-#
-class A1
+  "answerExplanation": `Q1.
+
+問題の解説
+defだとSyntaxErrorになってしまうようなメソッド名でも、define_methodを使うことでメソッドとして定義することができます。`,
+  "answerCode": `class A1
   define_method '//' do
     '//'
   end

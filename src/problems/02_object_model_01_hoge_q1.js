@@ -12,12 +12,11 @@ HogeクラスのスーパークラスはStringである
 自身が"hoge"という文字列である時（HogeクラスはStringがスーパークラスなので、当然自身は文字列である）、trueを返すhoge?メソッドが定義されている`,
   "problemCode": `class Hoge
 end`,
-  "answerCode": `# Q1. 問題の解説
-#
-# ほぼ特筆するべきところがないですが、hoge?メソッドの実装は少し悩むかもしれません。
-# 自身を参照するにはselfを使います。
-#
-class Hoge < String
+  "answerExplanation": `Q1. 問題の解説
+
+ほぼ特筆するべきところがないですが、hoge?メソッドの実装は少し悩むかもしれません。
+自身を参照するにはselfを使います。`,
+  "answerCode": `class Hoge < String
   Hoge = 'hoge'
 
   def hogehoge

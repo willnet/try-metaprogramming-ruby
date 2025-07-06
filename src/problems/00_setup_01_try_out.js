@@ -12,14 +12,14 @@ export const problem = {
   upcase_full_name! メソッドを持つ。これは、upcase_full_nameの副作用を持つバージョンで、ファーストネーム、ミドルネーム、ラストネームをすべて大文字に変え、オブジェクトはその状態を記憶する`,
   "problemCode": `class TryOut
 end`,
-  "answerCode": `# 問題の解説
-#
-# ミドルネームが渡されないことがある、というのをどう扱うかがこの問題のポイントです。
-# \`def initialize(first_name, middle_name = nil, last_name)\`のようにメソッドを定義することで
-# 簡潔に仕様を満たすことができます。
-# あとはスペースで各要素を区切るやり方としてArray#joinを使っているのもポイントです。
-# これ以外にも複数の解法があります。この回答通りになっていなくても問題ありません。
-class TryOut
+  "answerExplanation": `問題の解説
+
+ミドルネームが渡されないことがある、というのをどう扱うかがこの問題のポイントです。
+\`def initialize(first_name, middle_name = nil, last_name)\`のようにメソッドを定義することで
+簡潔に仕様を満たすことができます。
+あとはスペースで各要素を区切るやり方としてArray#joinを使っているのもポイントです。
+これ以外にも複数の解法があります。この回答通りになっていなくても問題ありません。`,
+  "answerCode": `class TryOut
   attr_writer :first_name
 
   def initialize(first_name, middle_name = nil, last_name)

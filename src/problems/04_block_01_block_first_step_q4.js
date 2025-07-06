@@ -20,11 +20,11 @@ my1.increment #=> 3`,
 
 class MyClosure
 end`,
-  "answerCode": `# Q4. 問題の解説
-#
-# クロージャを実装してみる練習です。ブロックを利用するとスコープゲートなしで束縛を利用できるのでしたね。メソッド定義をdefではなく
-# define_method にすることで外側のローカル変数への参照を持ち続けることができます。
-class MyClosure
+  "answerExplanation": `Q4. 問題の解説
+
+クロージャを実装してみる練習です。ブロックを利用するとスコープゲートなしで束縛を利用できるのでしたね。メソッド定義をdefではなく
+define_method にすることで外側のローカル変数への参照を持ち続けることができます。`,
+  "answerCode": `class MyClosure
   count = 0
 
   define_method :increment do

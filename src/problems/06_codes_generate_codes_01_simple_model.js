@@ -20,24 +20,23 @@ export const problem = {
 # 3. 履歴がある場合、すべての操作履歴を放棄し、値も初期状態に戻す \`restore!\` メソッドを作成する`,
   "problemCode": `module SimpleModel
 end`,
-  "answerCode": `# 問題の解説
-#
-# includeされたクラスのattr_accessorメソッドの挙動を変更するために、まずincludedフックメソッドを利用します。
-#
-# 初期値を管理する\`_histories\`と\`_initial\`属性をattr_accessorで用意しておきます。
-# historiesやinitialといった名前はクラスのメソッド定義などと衝突する可能性が高いので、\`_\`を先頭につけて回避するようにしています。
-# \`_histories\`は、writerメソッドを呼び出した時に、その値を記憶するためのハッシュです。キーは属性名、値はその属性に対する書き込み履歴の配列です。
-# \`_initial\`は、初期値を記憶するためのハッシュです。キーは属性名、値はその属性の初期値です。
-#
-# includedの中で対象のクラスをextendして、クラスメソッドであるattr_accessorメソッドを再定義します。
-# readerメソッドは通常通りの動作を行う、と仕様にあるのでattr_readerを呼び出しています。
-# writerメソッドは、通常に加え以下の動作を行うと仕様にあるので、独自に定義します。writerメソッドの中で、\`_histories\`に書き込み履歴を追記させています。
-# そのうえで、instance_variable_setで属性の値を書き換えています。
-#
-# initializeメソッドを定義し、\`_initial\`と\`_histories\`の初期化と\`_initial\`への初期値の記憶を行っています。
-# 残りの\`restore\`, \`changed?\`, \`ATTR_changed?\`メソッドは、\`_initial\`と\`_histories\`を活用することで問題なく実装できるはずです。
-#
-module SimpleModel
+  "answerExplanation": `問題の解説
+
+includeされたクラスのattr_accessorメソッドの挙動を変更するために、まずincludedフックメソッドを利用します。
+
+初期値を管理する\`_histories\`と\`_initial\`属性をattr_accessorで用意しておきます。
+historiesやinitialといった名前はクラスのメソッド定義などと衝突する可能性が高いので、\`_\`を先頭につけて回避するようにしています。
+\`_histories\`は、writerメソッドを呼び出した時に、その値を記憶するためのハッシュです。キーは属性名、値はその属性に対する書き込み履歴の配列です。
+\`_initial\`は、初期値を記憶するためのハッシュです。キーは属性名、値はその属性の初期値です。
+
+includedの中で対象のクラスをextendして、クラスメソッドであるattr_accessorメソッドを再定義します。
+readerメソッドは通常通りの動作を行う、と仕様にあるのでattr_readerを呼び出しています。
+writerメソッドは、通常に加え以下の動作を行うと仕様にあるので、独自に定義します。writerメソッドの中で、\`_histories\`に書き込み履歴を追記させています。
+そのうえで、instance_variable_setで属性の値を書き換えています。
+
+initializeメソッドを定義し、\`_initial\`と\`_histories\`の初期化と\`_initial\`への初期値の記憶を行っています。
+残りの\`restore\`, \`changed?\`, \`ATTR_changed?\`メソッドは、\`_initial\`と\`_histories\`を活用することで問題なく実装できるはずです。`,
+  "answerCode": `module SimpleModel
   def self.included(klass)
     klass.attr_accessor :_histories, :_initial
     klass.extend(ClassMethods)

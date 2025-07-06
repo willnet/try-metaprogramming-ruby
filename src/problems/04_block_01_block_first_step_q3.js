@@ -9,10 +9,10 @@ MyBlockクラスにblock_to_procインスタンスメソッドを定義しまし
 そのブロックをProcオブジェクトにしたものを返します`,
   "problemCode": `class MyBlock
 end`,
-  "answerCode": `# Q3. 問題の解説
-#
-# Q2と反対に、ブロックからProcオブジェクトの変換をする練習です。仮引数で&を使うとブロックからProcオブジェクトへの変換ができます。
-class MyBlock
+  "answerExplanation": `Q3. 問題の解説
+
+Q2と反対に、ブロックからProcオブジェクトの変換をする練習です。仮引数で&を使うとブロックからProcオブジェクトへの変換ができます。`,
+  "answerCode": `class MyBlock
   def block_to_proc(&block)
     block
   end

@@ -24,14 +24,13 @@ export const problem = {
 # 1. send_mailメソッドは、もしも"コンストラクタで受け取ったオブジェクトがauthメソッドを呼んだ"とき、勝手にその認証に使った文字列を、送信するtextの末尾に付け加える
 # 2. つまり、コンストラクタが第2引数に文字列を受け取った時、その文字列はオブジェクト内に保存されないが、send_mailを呼び出したときにこっそりと勝手に送信される`,
   "problemCode": ``,
-  "answerCode": `# 問題の解説
-#
-# 仕様の「邪悪な機能」をクロージャを使って実装することに気付けるかどうかを問う問題です。
-# initializeメソッドの中でdefine_singleton_methodを利用してsend_mailメソッドを定義することで、
-# initializeメソッドのローカル変数として第2引数を扱います。こうすることで、
-# send_mailメソッドの中でしか参照できない変数ができあがります。
+  "answerExplanation": `問題の解説
 
-class EvilMailbox
+仕様の「邪悪な機能」をクロージャを使って実装することに気付けるかどうかを問う問題です。
+initializeメソッドの中でdefine_singleton_methodを利用してsend_mailメソッドを定義することで、
+initializeメソッドのローカル変数として第2引数を扱います。こうすることで、
+send_mailメソッドの中でしか参照できない変数ができあがります。`,
+  "answerCode": `class EvilMailbox
   def initialize(obj, str = nil)
     @obj = obj
     @obj.auth(str) if str
