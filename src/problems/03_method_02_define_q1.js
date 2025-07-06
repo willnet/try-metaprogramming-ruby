@@ -3,15 +3,24 @@ export const problem = {
   "section": "03_method",
   "id": "02_define_q1",
   "title": "Define Q1",
+  "title_en": "Define Q1",
   "description": "Rubyのメソッド定義と呼び出しについての問題。動的なメソッド定義やオリジナルアクセサの実装を学びます。 (Q1)",
+  "description_en": "A problem about Ruby method definition and calling. Learn dynamic method definition and original accessor implementation. (Q1)",
   "detailedDescription": `Q1.
 次の動作をする A1 class を実装する
 - "//" を返す "//"メソッドが存在すること`,
+  "detailedDescription_en": `Q1.
+Implement A1 class that behaves as follows
+- A "//" method that returns "//" exists`,
   "problemCode": ``,
   "answerExplanation": `Q1.
 
 問題の解説
 defだとSyntaxErrorになってしまうようなメソッド名でも、define_methodを使うことでメソッドとして定義することができます。`,
+  "answerExplanation_en": `Q1.
+
+Problem Explanation
+Even method names that would cause a SyntaxError with def can be defined as methods using define_method.`,
   "answerCode": `class A1
   define_method '//' do
     '//'

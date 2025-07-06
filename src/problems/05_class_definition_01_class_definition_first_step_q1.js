@@ -3,7 +3,9 @@ export const problem = {
   "section": "05_class_definition",
   "id": "01_class_definition_first_step_q1",
   "title": "Class Definition First Step Q1",
+  "title_en": "Class Definition First Step Q1",
   "description": "Rubyのクラス定義についての基本的な問題。無名クラス、メタプログラミング、スコープゲートなどを学びます。 (Q1)",
+  "description_en": "Basic problems about Ruby class definition. Learn about anonymous classes, metaprogramming, scope gates, etc. (Q1)",
   "detailedDescription": `1. ExClassクラスのオブジェクトが2つあります。これらをJudgement.callに渡しています。
    使えるようにしてください。helloメソッドの中身は何でも良いです。
 2. ExClassを継承したクラスを作成してください。ただし、そのクラスは定数がない無名のクラスだとします。
@@ -67,8 +69,38 @@ class MyGreeting
 end
 
 toplevellocal = 'hi'`,
+  "detailedDescription_en": `1. There are two ExClass objects. These are passed to Judgement.call.
+   Make them usable. The content of the hello method can be anything.
+2. Create a class that inherits from ExClass. However, assume that the class is an anonymous class without constants.
+3. For the MetaClass below, create a meta_attr_accessor method that automatically adds the prefix \`meta_\` to attribute names and 'meta ' to getter return value strings
+   like attr_accessor. Assume that setter arguments other than strings will not be considered.
+
+   Usage example:
+
+   class MetaClass
+     # Definition of meta_attr_accessor itself is omitted
+     meta_attr_accessor :hello
+   end
+   meta = MetaClass.new
+   meta.meta_hello = 'world'
+   meta.meta_hello #=> 'meta world'
+4. Create an ExConfig class as follows. However, do not use global variables or class variables.
+   Usage example:
+   ExConfig.config = 'hello'
+   ExConfig.config #=> 'hello'
+   ex = ExConfig.new
+   ex.config #=> 'hello'
+   ex.config = 'world'
+   ExConfig.config #=> 'world'
+5. Assume that a method called ExOver#hello is defined as a library. When executing the ExOver#hello method,
+   modify ExOver to execute ExOver#before before the hello method and ExOver#after after the hello method.
+
+6. Implement MyGreeting#say that returns the contents of the toplevellocal local variable below.
+   However, do not edit the MyGreeting below. Edit from the line below the definition of the toplevellocal local variable.`,
   "answerExplanation": `Q1. 問題の解説
 e2オブジェクトの特異メソッドとしてhelloを定義する練習です。特異メソッドは対象のオブジェクトだけが利用可能なメソッドです。`,
+  "answerExplanation_en": `Q1. Problem Explanation
+This is practice for defining hello as a singleton method of the e2 object. Singleton methods are methods that can only be used by the target object.`,
   "answerCode": `class ExClass
 end
 

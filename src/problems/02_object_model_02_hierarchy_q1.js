@@ -3,11 +3,17 @@ export const problem = {
   "section": "02_object_model",
   "id": "02_hierarchy_q1",
   "title": "Hierarchy Q1",
+  "title_en": "Hierarchy Q1",
   "description": "Rubyのクラス階層とモジュールの仕組みについての問題。祖先チェーン、メソッド探索、refinementなどを学びます。 (Q1)",
+  "description_en": "A problem about Ruby's class hierarchy and module mechanisms. Learn about ancestor chains, method lookup, refinements, etc. (Q1)",
   "detailedDescription": `Q1.
 次の動作をする C1 class を実装する
 - C1.ancestors.first(2) が [C1, M1] となる
 - C1.new.name が 'C1' を返す`,
+  "detailedDescription_en": `Q1.
+Implement a C1 class that behaves as follows
+- C1.ancestors.first(2) returns [C1, M1]
+- C1.new.name returns 'C1'`,
   "problemCode": `module M1
   def name
     'M1'

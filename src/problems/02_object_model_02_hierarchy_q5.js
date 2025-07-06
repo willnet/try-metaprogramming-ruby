@@ -3,13 +3,21 @@ export const problem = {
   "section": "02_object_model",
   "id": "02_hierarchy_q5",
   "title": "Hierarchy Q5",
+  "title_en": "Hierarchy Q5",
   "description": "Rubyのクラス階層とモジュールの仕組みについての問題。祖先チェーン、メソッド探索、refinementなどを学びます。 (Q5)",
+  "description_en": "A problem about Ruby's class hierarchy and module mechanisms. Learn about ancestor chains, method lookup, refinements, etc. (Q5)",
   "detailedDescription": `Q5.
 次の動作をする M1Refinements module を実装する
 - M1Refinements は M1 の name インスタンスメソッドをリファインし,
   リファインされた name メソッドは "Refined M1" を返す
 - C5.new.another_name が文字列 "M1" を返す
 - C5.new.other_name が文字列 "Refined M1" を返す`,
+  "detailedDescription_en": `Q5.
+Implement M1Refinements module that behaves as follows
+- M1Refinements refines the name instance method of M1,
+  and the refined name method returns "Refined M1"
+- C5.new.another_name returns the string "M1"
+- C5.new.other_name returns the string "Refined M1"`,
   "problemCode": `module M1
   def name
     'M1'

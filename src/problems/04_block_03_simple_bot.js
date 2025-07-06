@@ -3,7 +3,9 @@ export const problem = {
   "section": "04_block",
   "id": "03_simple_bot",
   "title": "Simple Bot",
+  "title_en": "Simple Bot",
   "description": "ブロックを使ったDSLの作成問題。ボット作成のためのDSLを実装して、respond、setting、settingsメソッドを学びます。",
+  "description_en": "A DSL creation problem using blocks. Implement a DSL for bot creation and learn about respond, setting, and settings methods.",
   "detailedDescription": `次の仕様を満たすSimpleBotクラスとDSLを作成してください
 
 これは、作成するSimpleBotクラスの利用イメージです
@@ -28,6 +30,30 @@ Bot.new.ask('keyword') #=> 'respond bot'
 4. クラスメソッドsettingは、引数を2つ取り、1つ目がキー名、2つ目が設定する値です
     1. settingメソッドに渡された値は、クラスメソッド \`settings\` から返されるオブジェクトに、メソッド名としてアクセスすることで取り出すことができます
 #     2. e.g. クラス内で \`setting :name, 'bot'\` と実行した場合は、respondメソッドに渡されるブロックのスコープ内で \`settings.name\` の戻り値は \`bot\` の文字列になります`,
+  "detailedDescription_en": `Create a SimpleBot class and DSL that meet the following specifications
+
+This is how the SimpleBot class you create will be used:
+class Bot < SimpleBot
+  setting :name, 'bot'
+  respond 'keyword' do
+    "response #{settings.name}"
+  end
+end
+
+Bot.new.ask('keyword') #=> 'respond bot'
+
+1. Classes that inherit from SimpleBot have class methods respond, setting, and settings
+    1. The settings method returns an arbitrary object
+    2. The settings method responds to method calls with the same name as the first argument passed by the setting class method described later
+2. Instances of SimpleBot subclasses have an instance method ask
+    1. ask takes one argument
+    2. When the object passed to ask matches the object set by the respond method described later, the instance has an arbitrary return value
+    3. If case 2 does not apply, the return value of the ask method is nil
+3. The class method respond takes a keyword and a block as arguments
+    1. When the same string as the first argument keyword of the respond method is passed to the instance method ask, the block passed as the second argument is executed and its result is returned
+4. The class method setting takes two arguments, the first being the key name and the second being the value to set
+    1. Values passed to the setting method can be retrieved by accessing them as method names from the object returned by the \`settings\` class method
+#     2. e.g. If \`setting :name, 'bot'\` is executed in the class, the return value of \`settings.name\` within the scope of the block passed to the respond method will be the string \`bot\``,
   "problemCode": ``,
   "answerExplanation": `問題の解説
 
@@ -42,6 +68,18 @@ SimpleBotとそのサブクラスで利用イメージのように定義され�
 settingsクラスメソッドは、settingクラスメソッドで登録したキーと値をそれぞれメソッド名とその返り値に持つオブジェクトを返すと
 仕様を満たせます。メソッドが定義できればどんなオブジェクトを返しても仕様を満たせるため、この回答例では
 特異メソッドを定義したObjectインスタンスを返しています。必ずしもObjectインスタンスである必要はありません。`,
+  "answerExplanation_en": `Problem Explanation
+
+The difficult part of this problem is how to reference the block defined by the respond class method from the ask instance method.
+Instance variables defined in class methods become class instance variables tied to the class itself,
+so to reference them from instance methods, you need to use \`self.class.instance_variable_get(instance_variable_name)\` as in the answer example.
+Using class variables might seem convenient because you can access them as \`@@respond\` from both class methods and instance methods,
+but this is not recommended because class variables might be unintentionally shared with other classes.
+
+Blocks defined as in the usage example in SimpleBot and its subclasses can access the settings class method.
+The settings class method satisfies the specification by returning an object that has keys and values registered by the setting class method
+as method names and their return values respectively. Since the specification can be satisfied as long as methods can be defined,
+this answer example returns an Object instance with singleton methods defined. It doesn't necessarily have to be an Object instance.`,
   "answerCode": `class SimpleBot
   class << self
     def respond(keyword, &block)

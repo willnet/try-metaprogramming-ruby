@@ -3,7 +3,9 @@ export const problem = {
   "section": "03_method",
   "id": "03_try_over3_3_q4",
   "title": "Try Over3 3 Q4",
+  "title_en": "Try Over3 3 Q4",
   "description": "高度なメタプログラミング技術の問題。method_missing、プロキシオブジェクト、const_missing、DSLの実装などを学びます。 (Q4)",
+  "description_en": "Advanced metaprogramming techniques problems. Learn about method_missing, proxy objects, const_missing, DSL implementation, etc. (Q4)",
   "detailedDescription": `Q4
 以下のように実行できる TryOver3::A4 クラスを作成してください。
 TryOver3::A4.runners = [:Hoge]
@@ -32,6 +34,39 @@ finish 2020-01-07 18:03:10 +0900
 => "foo"
 
 クラスのrunメソッドを使ったケース
+irb(main):001:0> TryOver3::A5Task::Foo.run
+Warning: TryOver3::A5Task::Foo.run is deprecated
+start 2020-01-07 18:03:10 +0900
+finish 2020-01-07 18:03:10 +0900
+=> "foo"`,
+  "detailedDescription_en": `Q4
+Please create a TryOver3::A4 class that can be executed as follows.
+TryOver3::A4.runners = [:Hoge]
+TryOver3::A4::Hoge.run
+=> "run Hoge"
+At this time, the constant TryOver3::A4::Hoge is not defined.
+
+There is a module called TryOver3::TaskHelper that provides a class macro called task when included.
+TryOver3::TaskHelper can be used as follows when included:
+irb(main):001:0> TryOver3::A3Task::Foo.run
+start 2020-01-07 18:03:10 +0900
+finish 2020-01-07 18:03:10 +0900
+=> "foo"
+This time, with TryOver3::TaskHelper, instead of creating a Foo class like TryOver3::A5Task::Foo,
+we want to change it to execute the block with a class method of the name defined by task, like TryOver3::A5Task.foo.
+Currently, some users of TryOver3::TaskHelper are executing using the generated class like TryOver3::A5Task::Foo.run.
+Even with this change, we want to allow them to continue executing tasks with the run method of the generated class as before,
+and just output a warning.
+Please modify TryOver3::TaskHelper to achieve this. Note that classes should not be generated unless they are executed.
+
+Expected usage after change
+Case using method
+irb(main):001:0> TryOver3::A5Task.foo
+start 2020-01-07 18:03:10 +0900
+finish 2020-01-07 18:03:10 +0900
+=> "foo"
+
+Case using class run method
 irb(main):001:0> TryOver3::A5Task::Foo.run
 Warning: TryOver3::A5Task::Foo.run is deprecated
 start 2020-01-07 18:03:10 +0900

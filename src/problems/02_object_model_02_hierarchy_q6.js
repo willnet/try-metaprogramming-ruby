@@ -3,11 +3,17 @@ export const problem = {
   "section": "02_object_model",
   "id": "02_hierarchy_q6",
   "title": "Hierarchy Q6",
+  "title_en": "Hierarchy Q6",
   "description": "Rubyのクラス階層とモジュールの仕組みについての問題。祖先チェーン、メソッド探索、refinementなどを学びます。 (Q6)",
+  "description_en": "A problem about Ruby's class hierarchy and module mechanisms. Learn about ancestor chains, method lookup, refinements, etc. (Q6)",
   "detailedDescription": `Q6.
 次の動作をする C6 class を実装する
 - M1Refinements は Q5 で実装したものをそのまま使う
 - C6.new.name が 'Refined M1' を返すように C6 に name メソッドを実装する`,
+  "detailedDescription_en": `Q6.
+Implement C6 class that behaves as follows
+- M1Refinements uses the same implementation from Q5
+- Implement a name method in C6 so that C6.new.name returns 'Refined M1'`,
   "problemCode": `module M1
   def name
     'M1'

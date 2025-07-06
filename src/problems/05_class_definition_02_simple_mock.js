@@ -3,7 +3,9 @@ export const problem = {
   "section": "05_class_definition",
   "id": "02_simple_mock",
   "title": "Simple Mock",
+  "title_en": "Simple Mock",
   "description": "シンプルなモックフレームワークの作成問題。モックオブジェクトの作成、メソッド呼び出し回数の追跡などを学びます。",
+  "description_en": "A problem for creating a simple mock framework. Learn about creating mock objects, tracking method call counts, etc.",
   "detailedDescription": `次の仕様を満たすモジュール SimpleMock を作成してください
 
 SimpleMockは、次の2つの方法でモックオブジェクトを作成できます
@@ -43,6 +45,45 @@ SimpleMockは、次の2つの方法でモックオブジェクトを作成でき
 # obj.imitated_method #=> true
 # obj.called_times(:imitated_method) #=> 2
 # \`\`\``,
+  "detailedDescription_en": `Create a SimpleMock module that meets the following specifications
+
+SimpleMock can create mock objects in the following two ways
+In particular, method 2 adds mock functionality to other objects
+At this time, the original object's capabilities must not be lost
+Also, objects created this way will be called mocked objects hereafter
+1.
+\`\`\`
+# SimpleMock.new
+# \`\`\`
+#
+# 2.
+# \`\`\`
+# obj = SomeClass.new
+# SimpleMock.mock(obj)
+# \`\`\`
+#
+# Mocked objects respond to the expects method
+# The expects method has two arguments: the method name expected to respond and the return value when that method is called
+# \`\`\`
+# obj = SimpleMock.new
+# obj.expects(:imitated_method, true)
+# obj.imitated_method #=> true
+# \`\`\`
+# Mocked objects will respond to method calls with the name passed as the first argument to expects
+# And returns the object passed as the second argument
+#
+# Mocked objects respond to the watch method and called_times method
+# Each of these methods receives one argument
+# Every time a method with the name passed to the watch method is called, the mocked object internally counts the number of times
+# And that count can be referenced when the same name argument is passed to the called_times method at that point
+# \`\`\`
+# obj = SimpleMock.new
+# obj.expects(:imitated_method, true)
+# obj.watch(:imitated_method)
+# obj.imitated_method #=> true
+# obj.imitated_method #=> true
+# obj.called_times(:imitated_method) #=> 2
+# \`\`\``,
   "problemCode": ``,
   "answerExplanation": `問題の解説
 まずmockメソッドの実装から考えます。「もとのオブジェクトの能力が失われてはいけない」という仕様から、引数として受け付けたオブジェクトに
@@ -70,6 +111,29 @@ watchでは\`@expects\`を見て、すでにexpectsで定義済みであれば�
 これを、クラスメソッドのnewを明示的に定義することで満たします。このとき何らかのオブジェクトをmockメソッドの引数にして、
 戻り値を返すようにすれば要件は満たせますが、モック用のオブジェクトとしては余計なメソッドをなるべく持たない方が扱いやすいので、
 Object.newをmockメソッドの引数にしています。`,
+  "answerExplanation_en": `Problem Explanation
+First, let's consider the implementation of the mock method. From the specification that "the original object's capabilities must not be lost", we add the methods necessary for mocking (expects, watch, called_times) by extending SimpleMock to the object received as an argument.
+
+When the expects method is executed, we want to add a method only to the receiver object, so we use define_singleton_method to dynamically add methods.
+The method content prepares an instance variable \`@counter\` for the counter (a hash where the key is the method name specified by expects and the value is the execution count) in preparation for when the watch method is executed following the expects method,
+and increments it if watch has been executed (i.e., if there is a corresponding \`@counter\` value).
+
+\`\`\`ruby
+obj = Object.new
+obj = SimpleMock(obj)
+obj.expects(:hoge, true)
+obj.watch(:hoge)
+obj.hoge #=> true
+\`\`\`
+
+Also, to avoid overwriting methods defined via expects when watch is executed, we save the method names from expects as an array in \`@expects\`.
+In watch, we look at \`@expects\` and avoid overwriting methods if they are already defined by expects.
+Otherwise, the return value information of the mock method would be lost when the watch method is executed.
+
+Next, let's consider the implementation of the new method. From the specification, SimpleMock is required to be a module,
+but at the same time it is also required to have a new method that doesn't exist in modules.
+We satisfy this by explicitly defining the class method new. At this point, we can satisfy the requirements by passing some object as an argument to the mock method and returning the return value, but since it's easier to handle mock objects with as few extra methods as possible,
+we use Object.new as the argument to the mock method.`,
   "answerCode": `module SimpleMock
   def self.mock(obj)
     obj.extend(SimpleMock)

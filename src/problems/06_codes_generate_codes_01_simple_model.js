@@ -3,7 +3,9 @@ export const problem = {
   "section": "06_codes_generate_codes",
   "id": "01_simple_model",
   "title": "Simple Model",
+  "title_en": "Simple Model",
   "description": "ActiveRecordライクなモデルの実装問題。変更追跡機能付きのattr_accessorとrestoreメソッドを学びます。",
+  "description_en": "An ActiveRecord-like model implementation problem. Learn about attr_accessor with change tracking functionality and restore method.",
   "detailedDescription": `次の仕様を満たす、SimpleModelモジュールを作成してください
 
 1. include されたクラスがattr_accessorを使用すると、以下の追加動作を行う
@@ -18,6 +20,20 @@ export const problem = {
 # 2. initializeメソッドはハッシュを受け取り、attr_accessorで作成したアトリビュートと同名のキーがあれば、自動でインスタンス変数に記録する
 #   1. ただし、この動作をwriterメソッドの履歴に残してはいけない
 # 3. 履歴がある場合、すべての操作履歴を放棄し、値も初期状態に戻す \`restore!\` メソッドを作成する`,
+  "detailedDescription_en": `Create a SimpleModel module that meets the following specifications
+
+1. When an included class uses attr_accessor, it performs the following additional actions
+  1. The created accessor's reader method performs normal operations
+  2. The created accessor's writer method performs the following in addition to normal operations
+    1. By some method, remember the history of value writes using the writer method
+    2. If there is a history of updates via any writer method, create a method \`changed?\` that returns \`true\`
+#     3. Create a method \`ATTR_changed?\` that can retrieve the history of updates via individual writer methods
+#       1. As an example, when \`attr_accessor :name, :desc\` is used, suppose the operation \`obj.name = 'hoge'\` is performed on this object
+#       2. \`obj.name_changed?\` returns \`true\`, but \`obj.desc_changed?\` returns \`false\`
+#       3. For reference, \`obj.changed?\` returns \`true\` at this time
+# 2. The initialize method receives a hash and automatically records it in instance variables if there are keys with the same name as attributes created by attr_accessor
+#   1. However, this action must not be recorded in the writer method history
+# 3. If there is history, create a \`restore!\` method that discards all operation history and returns values to their initial state`,
   "problemCode": `module SimpleModel
 end`,
   "answerExplanation": `問題の解説
@@ -36,6 +52,22 @@ writerメソッドは、通常に加え以下の動作を行うと仕様にあ�
 
 initializeメソッドを定義し、\`_initial\`と\`_histories\`の初期化と\`_initial\`への初期値の記憶を行っています。
 残りの\`restore\`, \`changed?\`, \`ATTR_changed?\`メソッドは、\`_initial\`と\`_histories\`を活用することで問題なく実装できるはずです。`,
+  "answerExplanation_en": `Problem Explanation
+
+To change the behavior of the attr_accessor method of the included class, we first use the included hook method.
+
+We prepare \`_histories\` and \`_initial\` attributes with attr_accessor to manage initial values.
+Names like histories and initial are likely to conflict with class method definitions, so we avoid this by prefixing with \`_\`.
+\`_histories\` is a hash to remember values when the writer method is called. The key is the attribute name, and the value is an array of write history for that attribute.
+\`_initial\` is a hash to remember initial values. The key is the attribute name, and the value is the initial value of that attribute.
+
+Inside included, we extend the target class and redefine the attr_accessor class method.
+The reader method performs normal operations as specified, so we call attr_reader.
+The writer method performs additional operations as specified, so we define it independently. Inside the writer method, we append the write history to \`_histories\`.
+Then we rewrite the attribute value with instance_variable_set.
+
+We define the initialize method to initialize \`_initial\` and \`_histories\` and remember initial values in \`_initial\`.
+The remaining \`restore\`, \`changed?\`, and \`ATTR_changed?\` methods should be implementable without problems by utilizing \`_initial\` and \`_histories\`.`,
   "answerCode": `module SimpleModel
   def self.included(klass)
     klass.attr_accessor :_histories, :_initial
