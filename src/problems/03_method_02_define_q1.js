@@ -6,100 +6,11 @@ export const problem = {
   "title_en": "Define Q1",
   "description": "Rubyのメソッド定義と呼び出しについての問題。動的なメソッド定義やオリジナルアクセサの実装を学びます。 (Q1)",
   "description_en": "A problem about Ruby method definition and calling. Learn dynamic method definition and original accessor implementation. (Q1)",
-  "detailedDescription": `Q1.
-次の動作をする A1 class を実装する
-- "//" を返す "//"メソッドが存在すること`,
-  "detailedDescription_en": `Q1.
-Implement A1 class that behaves as follows
-- A "//" method that returns "//" exists`,
-  "problemCode": ``,
-  "answerExplanation": `Q1.
-
-問題の解説
-defだとSyntaxErrorになってしまうようなメソッド名でも、define_methodを使うことでメソッドとして定義することができます。`,
-  "answerExplanation_en": `Q1.
-
-Problem Explanation
-Even method names that would cause a SyntaxError with def can be defined as methods using define_method.`,
-  "answerCode": `class A1
-  define_method '//' do
-    '//'
-  end
-end
-
-# Q2
-#
-# 問題の解説
-# defind_singleton_methodを利用して動的に特異メソッドを定義することで、条件2を満たしています。
-# define_methodはModuleのインスタンスメソッドなので、initializeメソッド中では使えません。
-# A2.define_methodのようにすれば使えますが、それだとA2クラスのインスタンスメソッドになるので
-# すべてのA2インスタンスで利用できてしまい、
-# 「メソッドが定義されるのは同時に生成されるオブジェクトのみで、別のA2インスタンスには（同じ値を含む配列を生成時に渡さない限り）定義されない」
-# という仕様を満たすことができません。
-#
-class A2
-  def initialize(ary)
-    ary.each do |name|
-      method_name = "hoge_#{name}"
-
-      define_singleton_method method_name do |times|
-        if times.nil?
-          dev_team
-        else
-          method_name * times
-        end
-      end
-    end
-  end
-
-  def dev_team
-    'SmartHR Dev Team'
-  end
-end
-
-# Q3.
-#
-# 問題の解説
-# 3章にはまだ登場していない概念ですが、includedフックを利用してモジュールがincludeされたときの振る舞いを記述しています。
-# my_attr_accessorメソッドはクラスメソッドに相当するため、includedメソッドの引数として渡されてきたクラスに直接define_singleton_methodでメソッドを追加しています。
-# さらにmy_attr_accessorメソッド実行時にインスタンスメソッドを追加するためにdefine_methodを利用しています。
-# セッターで定義した値を格納するために\`@my_attr_accessor\`をハッシュとして定義して利用しています。
-# \`?\`つきのメソッドを定義するために、セッター実行時にdefine_aingleton_methodでメソッドを追加しています。
-#
-module OriginalAccessor
-  def self.included(base)
-    base.define_singleton_method(:my_attr_accessor) do |attr|
-      base.define_method attr do
-        @my_attr_accessor&.fetch(attr) { nil }
-      end
-
-      base.define_method "#{attr}=" do |value|
-        (@my_attr_accessor ||= {})[attr] = value
-
-        if value.is_a?(TrueClass) || value.is_a?(FalseClass)
-          define_singleton_method "#{attr}?" do
-            !!value
-          end
-        end
-      end
-    end
-  end
-end`,
-  "testCode": `require 'minitest'
-require 'securerandom'
-
-class TestDefine < Minitest::Test
-def test_answer_a1
-    assert_equal "//", A1.new.send("//".to_sym)
-  end
-end
-
-def run_tests
-  parallel_executor = Object.new
-  def parallel_executor.shutdown
-    # nothing
-  end
-  Minitest.parallel_executor = parallel_executor
-  Minitest.run
-end`
+  "detailedDescription": "次の動作をする A1 class を実装する\n\n- \"//\" を返す \"//\"メソッドが存在すること",
+  "detailedDescription_en": "Implement A1 class that behaves as follows\n- A \"//\" method that returns \"//\" exists",
+  "problemCode": "",
+  "answerExplanation": "Q1.\n\n問題の解説\ndefだとSyntaxErrorになってしまうようなメソッド名でも、define_methodを使うことでメソッドとして定義することができます。",
+  "answerExplanation_en": "Q1.\n\nProblem Explanation\nEven method names that would cause a SyntaxError with def can be defined as methods using define_method.",
+  "answerCode": "class A1\n  define_method '//' do\n    '//'\n  end\nend\n\n# Q2\n#\n# 問題の解説\n# defind_singleton_methodを利用して動的に特異メソッドを定義することで、条件2を満たしています。\n# define_methodはModuleのインスタンスメソッドなので、initializeメソッド中では使えません。\n# A2.define_methodのようにすれば使えますが、それだとA2クラスのインスタンスメソッドになるので\n# すべてのA2インスタンスで利用できてしまい、\n# 「メソッドが定義されるのは同時に生成されるオブジェクトのみで、別のA2インスタンスには（同じ値を含む配列を生成時に渡さない限り）定義されない」\n# という仕様を満たすことができません。\n#\nclass A2\n  def initialize(ary)\n    ary.each do |name|\n      method_name = \"hoge_#{name}\"\n\n      define_singleton_method method_name do |times|\n        if times.nil?\n          dev_team\n        else\n          method_name * times\n        end\n      end\n    end\n  end\n\n  def dev_team\n    'SmartHR Dev Team'\n  end\nend\n\n# Q3.\n#\n# 問題の解説\n# 3章にはまだ登場していない概念ですが、includedフックを利用してモジュールがincludeされたときの振る舞いを記述しています。\n# my_attr_accessorメソッドはクラスメソッドに相当するため、includedメソッドの引数として渡されてきたクラスに直接define_singleton_methodでメソッドを追加しています。\n# さらにmy_attr_accessorメソッド実行時にインスタンスメソッドを追加するためにdefine_methodを利用しています。\n# セッターで定義した値を格納するために`@my_attr_accessor`をハッシュとして定義して利用しています。\n# `?`つきのメソッドを定義するために、セッター実行時にdefine_aingleton_methodでメソッドを追加しています。\n#\nmodule OriginalAccessor\n  def self.included(base)\n    base.define_singleton_method(:my_attr_accessor) do |attr|\n      base.define_method attr do\n        @my_attr_accessor&.fetch(attr) { nil }\n      end\n\n      base.define_method \"#{attr}=\" do |value|\n        (@my_attr_accessor ||= {})[attr] = value\n\n        if value.is_a?(TrueClass) || value.is_a?(FalseClass)\n          define_singleton_method \"#{attr}?\" do\n            !!value\n          end\n        end\n      end\n    end\n  end\nend",
+  "testCode": "require 'minitest'\nrequire 'securerandom'\n\nclass TestDefine < Minitest::Test\ndef test_answer_a1\n    assert_equal \"//\", A1.new.send(\"//\".to_sym)\n  end\nend\n\ndef run_tests\n  parallel_executor = Object.new\n  def parallel_executor.shutdown\n    # nothing\n  end\n  Minitest.parallel_executor = parallel_executor\n  Minitest.run\nend"
 };
