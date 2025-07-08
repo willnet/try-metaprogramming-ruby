@@ -11,6 +11,8 @@ import { problem as problem_02_object_model_02_hierarchy_q6 } from './problems/0
 import { problem as problem_03_method_01_method_first_step_q1 } from './problems/03_method_01_method_first_step_q1.js';
 import { problem as problem_03_method_01_method_first_step_q2 } from './problems/03_method_01_method_first_step_q2.js';
 import { problem as problem_03_method_02_define_q1 } from './problems/03_method_02_define_q1.js';
+import { problem as problem_03_method_02_define_q2 } from './problems/03_method_02_define_q2.js';
+import { problem as problem_03_method_02_define_q3 } from './problems/03_method_02_define_q3.js';
 import { problem as problem_03_method_03_try_over3_3_q1 } from './problems/03_method_03_try_over3_3_q1.js';
 import { problem as problem_03_method_03_try_over3_3_q2 } from './problems/03_method_03_try_over3_3_q2.js';
 import { problem as problem_03_method_03_try_over3_3_q4 } from './problems/03_method_03_try_over3_3_q4.js';
@@ -42,6 +44,8 @@ export const problems = [
   problem_03_method_01_method_first_step_q1,
   problem_03_method_01_method_first_step_q2,
   problem_03_method_02_define_q1,
+  problem_03_method_02_define_q2,
+  problem_03_method_02_define_q3,
   problem_03_method_03_try_over3_3_q1,
   problem_03_method_03_try_over3_3_q2,
   problem_03_method_03_try_over3_3_q4,
