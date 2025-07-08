@@ -11,7 +11,7 @@ class AcceptBlock
 end
 
 class TestBlockFirstStep < Minitest::Test
-def test_accept_block
+  def test_accept_block
     assert AcceptBlock.result
   end
 end

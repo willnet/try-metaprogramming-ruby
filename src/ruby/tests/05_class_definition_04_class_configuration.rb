@@ -5,28 +5,28 @@ class TestClassConfiguration < Minitest::Test
     ExConfig.config = 'hello'
     assert_equal 'hello', ExConfig.config
   end
-  
+
   def test_instance_can_read_class_config
     ExConfig.config = 'hello'
     ex = ExConfig.new
     assert_equal 'hello', ex.config
   end
-  
+
   def test_instance_can_modify_class_config
     ex = ExConfig.new
     ex.config = 'world'
     assert_equal 'world', ExConfig.config
   end
-  
+
   def test_configuration_shared_across_instances
     ExConfig.config = 'initial'
-    
+
     ex1 = ExConfig.new
     ex2 = ExConfig.new
-    
+
     assert_equal 'initial', ex1.config
     assert_equal 'initial', ex2.config
-    
+
     ex1.config = 'changed'
     assert_equal 'changed', ex2.config
     assert_equal 'changed', ExConfig.config

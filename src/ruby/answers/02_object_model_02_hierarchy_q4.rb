@@ -35,6 +35,7 @@ class C4
     self.value += 1
     value.to_s
   end
+
   private
 
   attr_accessor :value

@@ -4,9 +4,9 @@ class Judgement2
   def self.call(klass)
     @klass = klass
   end
-  
-  def self.klass
-    @klass
+
+  class << self
+    attr_reader :klass
   end
 end
 
@@ -15,7 +15,7 @@ class TestAnonymousClasses < Minitest::Test
     klass = Judgement2.klass
     assert klass.is_a?(Class)
     assert klass < ExClass
-    assert_nil klass.name  # Anonymous classes have no name
+    assert_nil klass.name # Anonymous classes have no name
   end
 end
 

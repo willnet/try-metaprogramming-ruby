@@ -1,16 +1,16 @@
 class ExConfig
-  def self.config=(value)
-    @config = value
+  class << self
+    attr_writer :config
   end
-  
-  def self.config
-    @config
+
+  class << self
+    attr_reader :config
   end
-  
+
   def config
     self.class.config
   end
-  
+
   def config=(value)
     self.class.config = value
   end

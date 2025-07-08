@@ -5,7 +5,7 @@ class TestScopeGates < Minitest::Test
     greeting = MyGreeting.new
     assert_equal 'hi', greeting.say
   end
-  
+
   def test_my_greeting_responds_to_say
     greeting = MyGreeting.new
     assert greeting.respond_to?(:say)

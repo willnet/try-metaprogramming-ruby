@@ -11,7 +11,7 @@ class AcceptBlock
 end
 
 class TestBlockFirstStep < Minitest::Test
-def test_my_closure
+  def test_my_closure
     m1 = MyClosure.new
     m2 = MyClosure.new
     assert_equal(1, m1.increment)

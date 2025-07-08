@@ -5,13 +5,13 @@ class Judgement
     @e1 = e1
     @e2 = e2
   end
-  
-  def self.e1
-    @e1
+
+  class << self
+    attr_reader :e1
   end
-  
-  def self.e2
-    @e2
+
+  class << self
+    attr_reader :e2
   end
 end
 

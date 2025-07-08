@@ -2,7 +2,9 @@ require 'minitest'
 
 class TestSimpleMock < Minitest::Test
   class ClassForMockTest
-    def hoge; "hoge"; end
+    def hoge
+      'hoge'
+    end
   end
 
   def test_mock_initialize

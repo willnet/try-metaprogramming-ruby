@@ -7,8 +7,7 @@ TryOver3 = Module.new
 # 定義しておくのがお作法なので回答例にはrespond_to_missing?も定義しています。
 #
 class TryOver3::A1
-  def run_test
-  end
+  def run_test; end
 
   def method_missing(name, *)
     if name.to_s.start_with?('test_')

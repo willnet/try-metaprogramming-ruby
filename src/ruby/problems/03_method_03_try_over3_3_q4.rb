@@ -1,7 +1,5 @@
 TryOver3 = Module.new
 
-
-
 # Q5. チャレンジ問題！ 挑戦する方はテストの skip を外して挑戦してみてください。
 module TryOver3::TaskHelper
   def self.included(klass)
@@ -14,7 +12,10 @@ module TryOver3::TaskHelper
           block_return
         end
       end
-      new_klass_name = name.to_s.split("_").map{ |w| w[0] = w[0].upcase; w }.join
+      new_klass_name = name.to_s.split('_').map do |w|
+        w[0] = w[0].upcase
+        w
+      end.join
       const_set(new_klass_name, new_klass)
     end
   end
@@ -24,6 +25,6 @@ class TryOver3::A5Task
   include TryOver3::TaskHelper
 
   task :foo do
-    "foo"
+    'foo'
   end
 end

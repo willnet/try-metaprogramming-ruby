@@ -44,8 +44,8 @@ module TryOver3::OriginalAccessor2
           self.class.define_method "#{name}?" do
             @attr == true
           end
-        else
-          mod.remove_method "#{name}?" if respond_to? "#{name}?"
+        elsif respond_to? "#{name}?"
+          mod.remove_method "#{name}?"
         end
         @attr = value
       end

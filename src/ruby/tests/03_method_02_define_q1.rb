@@ -2,8 +2,8 @@ require 'minitest'
 require 'securerandom'
 
 class TestDefine < Minitest::Test
-def test_answer_a1
-    assert_equal "//", A1.new.send("//".to_sym)
+  def test_answer_a1
+    assert_equal '//', A1.new.send('//'.to_sym)
   end
 end
 

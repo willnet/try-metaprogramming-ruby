@@ -22,7 +22,7 @@ class TestSimpleBot < Minitest::Test
       end
     end
 
-    assert_nil klass.new.ask("hello")
+    assert_nil klass.new.ask('hello')
   end
 
   def test_global_setting
@@ -33,7 +33,7 @@ class TestSimpleBot < Minitest::Test
       end
     end
 
-    assert_equal "i'm bot", klass.new.ask("what is your name?")
+    assert_equal "i'm bot", klass.new.ask('what is your name?')
   end
 
   def test_global_setting_random
@@ -61,8 +61,8 @@ class TestSimpleBot < Minitest::Test
       end
     end
 
-    assert_equal "i'm bot", klass.new.ask("what is your name?")
-    assert_equal "i'm 10 years old", klass.new.ask("how old are you?")
+    assert_equal "i'm bot", klass.new.ask('what is your name?')
+    assert_equal "i'm 10 years old", klass.new.ask('how old are you?')
   end
 end
 

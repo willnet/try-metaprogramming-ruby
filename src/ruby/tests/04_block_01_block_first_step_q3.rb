@@ -13,7 +13,7 @@ class AcceptBlock
 end
 
 class TestBlockFirstStep < Minitest::Test
-def test_my_block
+  def test_my_block
     assert_equal(MY_LAMBDA, MyBlock.new.block_to_proc(&MY_LAMBDA))
   end
 end

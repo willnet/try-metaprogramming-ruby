@@ -15,7 +15,7 @@ class ComprehensiveAnswerTester
   def load_problems
     # スクリプトの場所に関係なく、プロジェクトルートから相対パスを解決
     script_dir = File.dirname(__FILE__)
-    
+
     # JSONファイルから問題データを読み込み
     problems_json_path = File.join(script_dir, 'problems.json')
     if File.exist?(problems_json_path)
@@ -23,18 +23,17 @@ class ComprehensiveAnswerTester
       puts "Loaded #{problems_data.length} problems from test/problems.json"
       return problems_data
     end
-    
+
     # JSONファイルが存在しない場合は生成を促す
     raise "Please run 'node scripts/generate-test-json.js' to generate test/problems.json before running tests"
   end
-
 
   def get_test_content(answer_code, test_code)
     # テストコードが先に実行される必要がある問題
     # これらの問題では、テストコードで定義されるクラス/定数を回答コードで使用する
     test_first_problems = [
       '01_block_first_step_q1',
-      '01_block_first_step_q2', 
+      '01_block_first_step_q2',
       '01_block_first_step_q3',
       '01_block_first_step_q4',
       '01_singleton_methods', # Judgement クラスの定義が必要
@@ -44,7 +43,7 @@ class ComprehensiveAnswerTester
       '01_method_first_step_q2', # F1定数の定義が必要
       '03_try_over3_3_q2' # alpha_rand等の定義が必要
     ]
-    
+
     if test_first_problems.include?(@current_problem_id)
       "#{test_code}\n\n#{answer_code}"
     else
@@ -53,7 +52,7 @@ class ComprehensiveAnswerTester
   end
 
   def run_answer_test(problem)
-    return { success: false, error: "No answer code" } unless problem['answerCode']
+    return { success: false, error: 'No answer code' } unless problem['answerCode']
 
     begin
       # 現在の問題IDを設定（実行順序決定のため）
@@ -70,9 +69,9 @@ class ComprehensiveAnswerTester
       {
         success: success,
         output: test_result[:output],
-        exit_status: test_result[:exit_status],
+        exit_status: test_result[:exit_status]
       }
-    rescue => e
+    rescue StandardError => e
       { success: false, error: e.message, backtrace: e.backtrace&.first(5) }
     end
   end
@@ -121,11 +120,11 @@ class ComprehensiveAnswerTester
       result = run_answer_test(problem)
 
       if result[:success]
-        status = "✅ PASS"
+        status = '✅ PASS'
         puts status
         passed_count += 1
       else
-        puts "❌ FAIL"
+        puts '❌ FAIL'
         failed_count += 1
       end
 
@@ -136,13 +135,13 @@ class ComprehensiveAnswerTester
         success: result[:success],
         error: result[:error],
         output: result[:output],
-        exit_status: result[:exit_status],
+        exit_status: result[:exit_status]
       }
     end
 
-    puts "\n" + "=" * 60
+    puts "\n" + '=' * 60
     puts "Test Results: #{passed_count} passed, #{failed_count} failed, #{skipped_count} skipped"
-    puts "=" * 60
+    puts '=' * 60
 
     # 失敗したテストの詳細を表示
     failed_tests = @results.select { |r| !r[:success] }
@@ -151,14 +150,13 @@ class ComprehensiveAnswerTester
       failed_tests.each do |test|
         puts "\n❌ #{test[:section]}/#{test[:id]}: #{test[:title]}"
         puts "Error: #{test[:error]}" if test[:error]
-        if test[:output] && test[:output].length < 2000
-          puts "Output:"
-          puts test[:output].lines.first(20).map { |line| "  #{line}" }.join
-          puts "  ..." if test[:output].lines.length > 20
-        end
+        next unless test[:output] && test[:output].length < 2000
+
+        puts 'Output:'
+        puts test[:output].lines.first(20).map { |line| "  #{line}" }.join
+        puts '  ...' if test[:output].lines.length > 20
       end
     end
-
 
     {
       total: @problems.count { |p| p['answerCode'] },
@@ -186,13 +184,13 @@ class ComprehensiveAnswerTester
     result = run_answer_test(problem)
 
     if result[:success]
-      status = "✅ PASS"
+      status = '✅ PASS'
       puts status
     else
       puts "❌ FAIL: #{section}/#{id}"
       puts "Error: #{result[:error]}" if result[:error]
       if result[:output]
-        puts "Output:"
+        puts 'Output:'
         puts result[:output].lines.first(30).map { |line| "  #{line}" }.join
       end
     end
@@ -228,6 +226,4 @@ def main
   end
 end
 
-if __FILE__ == $0
-  main
-end
+main if __FILE__ == $0

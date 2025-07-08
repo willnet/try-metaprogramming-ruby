@@ -1,7 +1,7 @@
 require 'minitest'
 
 class TestMethodFirstStep < Minitest::Test
-def test_hello
+  def test_hello
     assert_equal F1.new.hello, 'hello'
   end
 end

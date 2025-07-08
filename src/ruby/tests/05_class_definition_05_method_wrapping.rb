@@ -26,7 +26,7 @@ class TestMethodWrapping < Minitest::Test
     ex.hello
     assert_equal 'beforehelloafter', ex.result
   end
-  
+
   def test_method_wrapping_multiple_calls
     ex = ExOver.new
     ex.hello

@@ -53,10 +53,10 @@ module OriginalAccessor
       base.define_method "#{attr}=" do |value|
         (@my_attr_accessor ||= {})[attr] = value
 
-        if value.is_a?(TrueClass) || value.is_a?(FalseClass)
-          define_singleton_method "#{attr}?" do
-            !!value
-          end
+        return unless value.is_a?(TrueClass) || value.is_a?(FalseClass)
+
+        define_singleton_method "#{attr}?" do
+          !!value
         end
       end
     end

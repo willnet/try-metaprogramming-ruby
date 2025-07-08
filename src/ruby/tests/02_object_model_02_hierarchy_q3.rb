@@ -10,7 +10,7 @@ class TestHierarchy < Minitest::Test
   end
 
   def test_c3_super_class
-    assert MySuperClass.kind_of?(Class)
+    assert MySuperClass.is_a?(Class)
   end
 end
 

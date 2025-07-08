@@ -9,46 +9,46 @@ class TestEvilMailbox < Minitest::Test
 
   def test_send_mail
     mb, mock = evil_mailbox do
-      expect :send_mail, true, ["ppyd", "hello"]
+      expect :send_mail, true, %w[ppyd hello]
     end
-    mb.send_mail("ppyd", "hello")
+    mb.send_mail('ppyd', 'hello')
     mock.verify
   end
 
   def test_send_mail_returns_nil
-    mb, _ = evil_mailbox do
-      expect :send_mail, true, ["ppyd", "hello"]
+    mb, = evil_mailbox do
+      expect :send_mail, true, %w[ppyd hello]
     end
-    assert_nil mb.send_mail("ppyd", "hello")
+    assert_nil mb.send_mail('ppyd', 'hello')
   end
 
   def test_receive_mail
     mb, mock = evil_mailbox do
-      expect :receive_mail, ["kino", "Yo"]
+      expect :receive_mail, %w[kino Yo]
     end
     f, t = mb.receive_mail
     mock.verify
-    assert_equal "kino", f
-    assert_equal "Yo", t
+    assert_equal 'kino', f
+    assert_equal 'Yo', t
   end
 
   def test_send_mail_exec_block_with_result_true
-    mb, _ = evil_mailbox do
-      expect :send_mail, true, ["ppyd", "hello"]
+    mb, = evil_mailbox do
+      expect :send_mail, true, %w[ppyd hello]
     end
     ret = nil
-    mb.send_mail("ppyd", "hello") do |res|
+    mb.send_mail('ppyd', 'hello') do |res|
       ret = res
     end
     assert_equal true, ret
   end
 
   def test_send_mail_exec_block_with_result_false
-    mb, _ = evil_mailbox do
-      expect :send_mail, false, ["ppyd", "hello"]
+    mb, = evil_mailbox do
+      expect :send_mail, false, %w[ppyd hello]
     end
     ret = nil
-    mb.send_mail("ppyd", "hello") do |res|
+    mb.send_mail('ppyd', 'hello') do |res|
       ret = res
     end
     assert_equal false, ret
@@ -66,10 +66,10 @@ class TestEvilMailbox < Minitest::Test
     secret_string = SecureRandom.hex
     mock = Minitest::Mock.new
     mock.expect :auth, true, [String]
-    mock.expect :send_mail, true, ["ppyd", "hello#{secret_string}"]
+    mock.expect :send_mail, true, ['ppyd', "hello#{secret_string}"]
     mb = EvilMailbox.new(mock, secret_string)
 
-    mb.send_mail("ppyd", "hello")
+    mb.send_mail('ppyd', 'hello')
     mock.verify
   end
 
@@ -98,11 +98,11 @@ class TestEvilMailbox < Minitest::Test
     secret_string = SecureRandom.hex
     mb, mock = evil_mailbox_with_secret_string(secret_string) do
       expect :auth, true, [String]
-      expect :send_mail, true, ["ppyd", "hello#{secret_string}"]
+      expect :send_mail, true, ['ppyd', "hello#{secret_string}"]
     end
 
     ret = nil
-    mb.send_mail("ppyd", "hello") do |res|
+    mb.send_mail('ppyd', 'hello') do |res|
       ret = res
     end
     mock.verify

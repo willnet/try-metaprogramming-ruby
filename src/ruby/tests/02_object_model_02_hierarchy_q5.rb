@@ -1,12 +1,12 @@
 require 'minitest'
 
 class TestHierarchy < Minitest::Test
-def test_c5_another_name
-    assert_equal "M1", C5.new.another_name
+  def test_c5_another_name
+    assert_equal 'M1', C5.new.another_name
   end
 
-def test_c5_other_name
-    assert_equal "Refined M1", C5.new.other_name
+  def test_c5_other_name
+    assert_equal 'Refined M1', C5.new.other_name
   end
 end
 

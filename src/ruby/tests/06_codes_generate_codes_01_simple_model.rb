@@ -70,8 +70,7 @@ class TestSimpleModel < Minitest::Test
   class MultipleAccessorsProduct
     include SimpleModel
 
-    attr_accessor :name
-    attr_accessor :description
+    attr_accessor :name, :description
   end
 
   def test_multiple_accessors

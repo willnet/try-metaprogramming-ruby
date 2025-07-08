@@ -2,17 +2,17 @@ require 'minitest'
 require 'minitest/mock'
 
 class TestTryOver03Q1 < Minitest::Test
-def test_q4_call_class
+  def test_q4_call_class
     TryOver3::A4.runners = [:Hoge]
-    assert_equal "run Hoge", TryOver3::A4::Hoge.run
+    assert_equal 'run Hoge', TryOver3::A4::Hoge.run
   end
 
-def test_q4_raise_error_when_called_not_runner_class
+  def test_q4_raise_error_when_called_not_runner_class
     TryOver3::A4.runners = [:Hoge]
     assert_raises(NameError) { TryOver3::A4::Foo }
   end
 
-def test_q4_not_exists_runner_class
+  def test_q4_not_exists_runner_class
     TryOver3::A4.runners = [:Hoge]
     refute_includes(TryOver3::A4.constants, :Hoge)
   end

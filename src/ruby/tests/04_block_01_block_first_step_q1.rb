@@ -11,7 +11,7 @@ class AcceptBlock
 end
 
 class TestBlockFirstStep < Minitest::Test
-def test_my_math
+  def test_my_math
     assert_equal 4, MyMath.new.two_times { 2 }
   end
 end
