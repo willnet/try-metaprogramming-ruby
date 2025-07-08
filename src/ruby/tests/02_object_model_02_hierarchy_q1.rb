@@ -1,11 +1,11 @@
 require 'minitest'
 
 class TestHierarchy < Minitest::Test
-def test_c1_ancestors
+  def test_c1_ancestors
     assert_equal [C1, M1], C1.ancestors.first(2)
   end
 
-def test_c1_name
+  def test_c1_name
     assert_equal 'C1', C1.new.name
   end
 end

@@ -1,10 +1,14 @@
 # 日本語
 
+前提: M1モジュールは変更しないこと
+
 次の動作をする C6 class を実装する
 - M1Refinements は Q5 で実装したものをそのまま使う
 - C6.new.name が 'Refined M1' を返すように C6 に name メソッドを実装する
 
 # English
+
+Premise: Do not modify the M1 module.
 
 Implement C6 class that behaves as follows
 - M1Refinements uses the same implementation from Q5

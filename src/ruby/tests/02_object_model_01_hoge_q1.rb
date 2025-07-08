@@ -1,7 +1,7 @@
 require 'minitest'
 
 class TestHoge < Minitest::Test
-def test_hoge_in_string
+  def test_hoge_in_string
     assert_equal "hoge","hoge".hoge
   end
 end

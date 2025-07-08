@@ -9,7 +9,6 @@ Hogeクラスは次の仕様を持つ
 
 # English
 
-Q1.
 The Hoge class has the following specifications:
 - Has a constant Hoge with the string "hoge"
 - Has a hogehoge method that returns the string "hoge"

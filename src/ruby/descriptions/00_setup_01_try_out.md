@@ -10,7 +10,7 @@ upcase_full_name! メソッドを持つ。これは、upcase_full_nameの副作�
 
 # English
 
-Class Specifications
+TryOut Class Specifications
 
 The constructor accepts 2 or 3 arguments. The arguments are first name, middle name, and last name in that order, with middle name being optional.
 It has a full_name method. This returns a string that combines first name, middle name, and last name with a single space. However, when middle name is omitted, only one space is placed between first name and last name.

@@ -22,8 +22,6 @@ module M4
   end
 end
 
-# NOTE: これより上の行は変更しないこと
-
 class C3
   def name
     'C3'
