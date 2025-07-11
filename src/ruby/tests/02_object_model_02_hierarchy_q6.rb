@@ -17,7 +17,7 @@ module M1Refinements
 end
 
 class TestHierarchy < Minitest::Test
-def test_c6_name
+  def test_c6_name
     assert_equal "Refined M1", C6.new.name
 
     C6.include(Module.new do

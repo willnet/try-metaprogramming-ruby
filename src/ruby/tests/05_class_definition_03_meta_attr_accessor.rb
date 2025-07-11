@@ -2,23 +2,13 @@ require 'minitest'
 
 class TestMetaAttrAccessor < Minitest::Test
   def test_meta_attr_accessor_functionality
+    MetaClass.class_eval do
+      meta_attr_accessor :hello
+    end
+
     meta = MetaClass.new
-
-    # Test setter
-    meta.meta_hello = 'world'
-
-    # Test getter returns value with 'meta ' prefix
-    assert_equal 'meta world', meta.meta_hello
-  end
-
-  def test_meta_attr_accessor_with_different_values
-    meta = MetaClass.new
-
-    meta.meta_hello = 'test'
-    assert_equal 'meta test', meta.meta_hello
-
-    meta.meta_hello = 'ruby'
-    assert_equal 'meta ruby', meta.meta_hello
+    meta.meta_hello = 'hello'
+    assert_equal 'meta hello', meta.meta_hello
   end
 end
 

@@ -4,6 +4,18 @@ class TestMethodFirstStep < Minitest::Test
   def test_hello
     assert_equal F1.new.hello, 'hello'
   end
+
+  def test_world
+    assert_equal F1.world, 'world'
+  end
+
+  def test_method_missing
+    assert_equal F1.new.send(SecureRandom.alphanumeric), 'NoMethodError'
+  end
+
+  def test_respond_to
+    assert F1.new.respond_to?(SecureRandom.alphanumeric)
+  end
 end
 
 def run_tests

@@ -4,18 +4,13 @@ class Judgement2
   def self.call(klass)
     @klass = klass
   end
-
-  class << self
-    attr_reader :klass
-  end
 end
 
 class TestAnonymousClasses < Minitest::Test
   def test_anonymous_class_inheritance
-    klass = Judgement2.klass
-    assert klass.is_a?(Class)
-    assert klass < ExClass
-    assert_nil klass.name # Anonymous classes have no name
+    klass = Judgement2.instance_variable_get(:@klass)
+    assert klass.name.nil?
+    assert klass.superclass == ExClass
   end
 end
 

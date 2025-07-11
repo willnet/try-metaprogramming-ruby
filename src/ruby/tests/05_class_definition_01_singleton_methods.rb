@@ -5,20 +5,12 @@ class Judgement
     @e1 = e1
     @e2 = e2
   end
-
-  class << self
-    attr_reader :e1
-  end
-
-  class << self
-    attr_reader :e2
-  end
 end
 
 class TestSingletonMethods < Minitest::Test
   def test_singleton_method_only_on_e2
-    e1 = Judgement.e1
-    e2 = Judgement.e2
+    e1 = Judgement.instance_variable_get(:@e1)
+    e2 = Judgement.instance_variable_get(:@e2)
     assert e1.is_a?(ExClass)
     assert e2.is_a?(ExClass)
     refute e1.respond_to?(:hello)

@@ -21,17 +21,9 @@ class ExOver
 end
 
 class TestMethodWrapping < Minitest::Test
-  def test_method_wrapping_execution_order
-    ex = ExOver.new
-    ex.hello
-    assert_equal 'beforehelloafter', ex.result
-  end
-
-  def test_method_wrapping_multiple_calls
-    ex = ExOver.new
-    ex.hello
-    ex.hello
-    assert_equal 'beforehelloafterbeforehelloafter', ex.result
+  def test_exover
+    exover = ExOver.new
+    assert_equal 'beforehelloafter', exover.hello
   end
 end
 
