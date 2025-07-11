@@ -1,3 +1,6 @@
+module TryOver3
+end
+
 module TryOver3::TaskHelper
   def self.included(klass)
     klass.define_singleton_method :task do |name, &task_block|
