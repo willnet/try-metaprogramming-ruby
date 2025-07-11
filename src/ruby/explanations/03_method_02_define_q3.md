@@ -1,19 +1,8 @@
-# Answer explanation
-This solution uses the `included` hook to add functionality when the module is included. The key implementation details:
+# 日本語
 
-1. The `included` hook is triggered when the module is included in a class
-2. We define `my_attr_accessor` as a singleton method on the including class
-3. The accessor creates getter and setter methods using `define_method`
-4. Values are stored in an instance variable hash `@my_attr_accessor`
-5. When a boolean value is assigned, we dynamically create a predicate method (ending with ?) using `define_singleton_method`
-6. The predicate method is only created for boolean values, making it conditional
+書籍の3章にはまだ登場していない概念ですが、includedフックを利用してモジュールがincludeされたときの振る舞いを記述しています。`my_attr_accessor`メソッドはクラスメソッドに相当するため、`included`メソッドの引数として渡されてきたクラスに直接`define_singleton_method`でメソッドを追加しています。さらに`my_attr_accessor`メソッド実行時にインスタンスメソッドを追加するために`define_method`を利用しています。セッターで定義した値を格納するために`@my_attr_accessor`をハッシュとして定義して利用しています。`?`つきのメソッドを定義するために、セッター実行時にdefine_singleton_methodでメソッドを追加しています。
 
-# 解答解説
-このソリューションは、モジュールがincludeされたときに機能を追加するために`included`フックを使用しています。主な実装の詳細：
+# English
 
-1. `included`フックは、モジュールがクラスにincludeされたときにトリガーされます
-2. includeしたクラスのシングルトンメソッドとして`my_attr_accessor`を定義します
-3. アクセサは`define_method`を使用してゲッターとセッターメソッドを作成します
-4. 値はインスタンス変数のハッシュ`@my_attr_accessor`に格納されます
-5. boolean値が代入されたとき、`define_singleton_method`を使用して述語メソッド（?で終わる）を動的に作成します
-6. 述語メソッドはboolean値に対してのみ作成され、条件付きになっています
+Though this concept hasn't appeared in Chapter 3 of the book yet, this solution uses the `included` hook to describe behavior when the module is included. Since the `my_attr_accessor` method is equivalent to a class method, we add the method directly to the class passed as an argument to the `included` method using `define_singleton_method`. Furthermore, to add instance methods when `my_attr_accessor` is executed, we use `define_method`. To store values defined by the setter, we define and use `@my_attr_accessor` as a hash. To define methods with `?`, we add methods using `define_singleton_method` when the setter is executed.
+

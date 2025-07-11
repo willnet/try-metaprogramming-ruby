@@ -1,10 +1,5 @@
 TryOver3 = Module.new
 
-# Q2. 問題の解説
-#
-# method_missingとsendを使って動的プロキシを作る問題です。
-# Q1と違い、こちらはrespond_to_missing?がないとテストが失敗します。
-#
 class TryOver3::A2
   def initialize(name, value)
     instance_variable_set("@#{name}", value)

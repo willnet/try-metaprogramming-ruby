@@ -22,13 +22,6 @@ module M4
   end
 end
 
-# NOTE: これより上の行は変更しないこと
-
-# Q3. 問題の解説
-#
-# モジュールを複数includeしたり、スーパークラスを明示的に定義したときの
-# 継承ツリーがどうなるかの理解を問う問題です
-#
 class MySuperClass
   include M4
 end

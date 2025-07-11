@@ -8,9 +8,9 @@ export const problem = {
   "description_en": "A problem about Ruby method definition and calling. Learn dynamic method definition and original accessor implementation. (Q1)",
   "detailedDescription": "次の動作をする A1 class を実装する\n\n- \"//\" を返す \"//\"メソッドが存在すること",
   "detailedDescription_en": "Implement A1 class that behaves as follows\n- A \"//\" method that returns \"//\" exists",
-  "problemCode": "# This problem is answer-only (no starter code provided)\n",
-  "answerExplanation": "Q1.\n\n問題の解説\ndefだとSyntaxErrorになってしまうようなメソッド名でも、define_methodを使うことでメソッドとして定義することができます。",
-  "answerExplanation_en": "Q1.\n\nProblem Explanation\nEven method names that would cause a SyntaxError with def can be defined as methods using define_method.",
+  "problemCode": "",
+  "answerExplanation": "defだとSyntaxErrorになってしまうようなメソッド名でも、define_methodを使うことでメソッドとして定義することができます。",
+  "answerExplanation_en": "Even method names that would cause a SyntaxError with def can be defined as methods using define_method.",
   "answerCode": "class A1\n  define_method '//' do\n    '//'\n  end\nend\n",
   "testCode": "require 'minitest'\nrequire 'securerandom'\n\nclass TestDefine < Minitest::Test\n  def test_answer_a1\n    assert_equal '//', A1.new.send('//'.to_sym)\n  end\nend\n\ndef run_tests\n  parallel_executor = Object.new\n  def parallel_executor.shutdown\n    # nothing\n  end\n  Minitest.parallel_executor = parallel_executor\n  Minitest.run\nend\n"
 };
