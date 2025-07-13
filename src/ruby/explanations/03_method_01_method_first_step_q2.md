@@ -5,4 +5,4 @@
 
 # English
 
-This is a problem to help you understand that "executing a method creates a new method". This kind of implementation with nested def is not usually done, but there are situations in metaprogramming where you "dynamically create methods when executing specific processing".
+This is a quiz to help you understand that "executing a method creates a new method". This kind of implementation with nested def is not usually done, but there are situations in metaprogramming where you "dynamically create methods when executing specific processing".

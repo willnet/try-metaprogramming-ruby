@@ -12,4 +12,4 @@ AcceptBlock class has a predefined call class method that takes a block.
 
 Example: `AcceptBlock.call { 2 }`
 
-Please execute this method by passing MY_LAMBDA prepared below as a block argument. The AcceptBlock class is provided by the problem (implemented in the test), so you don't need to implement it.
+Please execute this method by passing MY_LAMBDA prepared below as a block argument. The AcceptBlock class is provided by the quiz (implemented in the test), so you don't need to implement it.

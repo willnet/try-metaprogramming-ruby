@@ -2,7 +2,7 @@
 export const translations = {
   ja: {
     // ページタイトルとヘッダー
-    pageTitle: 'メタプログラミング問題集',
+    pageTitle: 'メタプログラミングクイズ',
     
     // 問題選択部分
     sectionLabel: 'セクション:',
@@ -47,7 +47,7 @@ export const translations = {
   
   en: {
     // ページタイトルとヘッダー
-    pageTitle: 'Ruby Metaprogramming Problems',
+    pageTitle: 'Ruby Metaprogramming Quiz',
     
     // 問題選択部分
     sectionLabel: 'Section:',

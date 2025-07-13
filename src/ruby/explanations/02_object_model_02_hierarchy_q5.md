@@ -15,14 +15,14 @@ refinementsは、既存のクラスやモジュールを安全に拡張する方
 
 # English
 
-This problem tests understanding of Ruby's refinements feature.
+This quiz tests understanding of Ruby's refinements feature.
 
 Key characteristics of refinements:
 1. `refine` allows local modification of module or class methods
 2. `using` activates the refinement
 3. The scope of a refinement is from where `using` is called to the end of that scope
 
-Key points in this problem:
+Key points in this quiz:
 - The `another_name` method is defined before `using M1Refinements`, so it calls the original M1's `name` method (returns 'M1')
 - The `other_name` method is defined after `using M1Refinements`, so it calls the refined `name` method (returns 'Refined M1')
 

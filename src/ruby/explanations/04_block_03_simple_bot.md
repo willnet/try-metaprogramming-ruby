@@ -8,7 +8,7 @@ settingsクラスメソッドは、settingクラスメソッドで登録した�
 
 # English
 
-The difficult part of this problem is how to reference the block defined by the respond class method from the ask instance method.
+The difficult part of this quiz is how to reference the block defined by the respond class method from the ask instance method.
 Instance variables defined in class methods become class instance variables tied to the class itself,
 so to reference them from instance methods, you need to use `self.class.instance_variable_get(instance_variable_name)` as in the answer example.
 Using class variables might seem convenient because you can access them as `@@respond` from both class methods and instance methods,

@@ -8,7 +8,7 @@
 
 # English
 
-The key point of this problem is how to handle cases where a middle name may not be provided.
+The key point of this quiz is how to handle cases where a middle name may not be provided.
 You can concisely meet the specifications by defining the method like `def initialize(first_name, middle_name = nil, last_name)`.
 Another point is using Array#join to separate each element with spaces.
 There are multiple other solutions besides this. It's fine if your answer doesn't match this solution exactly.
