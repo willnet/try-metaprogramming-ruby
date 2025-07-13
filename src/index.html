@@ -43,16 +43,25 @@
       <pre id="detailed-description-text"></pre>
     </div>
 
-    <div class="code-container">
-      <h2 data-i18n="codeInput">コードを入力してください</h2>
-      <textarea id="code-editor" rows="15" cols="80"></textarea>
-    </div>
+    <div class="code-and-result-wrapper">
+      <div class="code-section">
+        <div class="code-container">
+          <h2 data-i18n="codeInput">コードを入力してください</h2>
+          <textarea id="code-editor" rows="15" cols="80"></textarea>
+        </div>
 
-    <div class="button-container">
-      <button id="run-button" data-i18n="runTest">テスト実行</button>
-      <button id="reset-button" data-i18n="reset">リセット</button>
-      <button id="show-answer-button" data-i18n="showAnswer">回答を表示</button>
-      <div id="loading" class="loading hidden" data-i18n="running">実行中...</div>
+        <div class="button-container">
+          <button id="run-button" data-i18n="runTest">テスト実行</button>
+          <button id="reset-button" data-i18n="reset">リセット</button>
+          <button id="show-answer-button" data-i18n="showAnswer">回答を表示</button>
+          <div id="loading" class="loading hidden" data-i18n="running">実行中...</div>
+        </div>
+      </div>
+
+      <div class="result-container">
+        <h2 data-i18n="testResult">テスト結果</h2>
+        <pre id="test-result"></pre>
+      </div>
     </div>
 
     <div class="answer-container hidden" id="answer-container">
@@ -65,11 +74,6 @@
         <h3 data-i18n="answerExample">回答例</h3>
         <pre id="answer-code-text"></pre>
       </div>
-    </div>
-
-    <div class="result-container">
-      <h2 data-i18n="testResult">テスト結果</h2>
-      <pre id="test-result"></pre>
     </div>
   </div>
 
