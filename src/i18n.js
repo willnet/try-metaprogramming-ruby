@@ -33,6 +33,7 @@ export const translations = {
     
     // 確認ダイアログ
     showAnswerConfirm: '回答例を表示しますか？\n\n先に自分で考えてみることをお勧めします。',
+    resetConfirm: 'コードエディターをリセットしますか？\n\n入力した内容は失われます。',
     
     // 回答がない場合のメッセージ
     noExplanation: '解説はありません。',
@@ -77,6 +78,7 @@ export const translations = {
     
     // 確認ダイアログ
     showAnswerConfirm: 'Do you want to show the answer example?\n\nWe recommend trying to solve it yourself first.',
+    resetConfirm: 'Do you want to reset the code editor?\n\nYour current input will be lost.',
     
     // 回答がない場合のメッセージ
     noExplanation: 'No explanation available.',

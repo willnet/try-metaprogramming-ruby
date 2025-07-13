@@ -362,7 +362,12 @@ document.addEventListener('DOMContentLoaded', () => {
   problemSelect.addEventListener('change', loadSelectedProblem);
 
   // リセットボタンのクリックイベント
-  resetButton.addEventListener('click', resetProblem);
+  resetButton.addEventListener('click', () => {
+    const confirmed = confirm(languageManager.t('resetConfirm'));
+    if (confirmed) {
+      resetProblem();
+    }
+  });
 
   // 回答表示ボタンのクリックイベント
   showAnswerButton.addEventListener('click', toggleAnswer);
