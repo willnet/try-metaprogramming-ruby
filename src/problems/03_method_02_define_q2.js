@@ -4,8 +4,6 @@ export const problem = {
   "id": "02_define_q2",
   "title": "Define Q2",
   "title_en": "Define Q2",
-  "description": "動的にメソッドを定義し、インスタンスごとに異なるメソッドを持つA2クラスを実装します。",
-  "description_en": "Implement A2 class that dynamically defines methods and has different methods per instance.",
   "detailedDescription": "次の動作をする A2 class を実装する\n\n- 1. \"SmartHR Dev Team\"と返すdev_teamメソッドが存在すること\n- 2. initializeに渡した配列に含まれる値に対して、\"hoge_\" をprefixを付与したメソッドが存在すること\n- 2で定義するメソッドは下記とする\n  - 受け取った引数の回数分、メソッド名を繰り返した文字列を返すこと\n  - 引数がnilの場合は、dev_teamメソッドを呼ぶこと\n- また、2で定義するメソッドは以下を満たすものとする\n  - メソッドが定義されるのは同時に生成されるオブジェクトのみで、別のA2インスタンスには（同じ値を含む配列を生成時に渡さない限り）定義されない",
   "detailedDescription_en": "Implement A2 class that behaves as follows\n\n- 1. A dev_team method that returns \"SmartHR Dev Team\" exists\n- 2. Methods with \"hoge_\" prefix are dynamically created for values passed to initialize\n- Methods defined in step 2 should:\n  - Return a string that repeats the method name the number of times specified by the argument\n  - Call the dev_team method when the argument is nil\n- Additionally, methods defined in step 2 should meet the following requirements:\n  - Methods are defined only for the specific instance created, not for other A2 instances (unless the same array is passed during creation)",
   "problemCode": "class A2\n  def initialize(values)\n  end\n\n  def dev_team\n  end\nend\n",

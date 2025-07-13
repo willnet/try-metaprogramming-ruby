@@ -180,7 +180,6 @@ class ProblemManager {
 document.addEventListener('DOMContentLoaded', () => {
   const sectionSelect = document.getElementById('section-select');
   const problemSelect = document.getElementById('problem-select');
-  const descriptionText = document.getElementById('description-text');
   const detailedDescriptionText = document.getElementById('detailed-description-text');
   const codeEditor = document.getElementById('code-editor');
   const runButton = document.getElementById('run-button');
@@ -227,10 +226,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!problem) return;
 
     // 現在の言語に応じてフィールドを取得
-    const descriptionField = languageManager.getProblemField('description');
     const detailedDescriptionField = languageManager.getProblemField('detailedDescription');
     
-    descriptionText.textContent = problem[descriptionField] || problem.description;
     detailedDescriptionText.textContent = problem[detailedDescriptionField] || problem.detailedDescription || '';
     
     // 回答が表示されている場合は回答内容も更新
@@ -287,10 +284,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (problem) {
       // 現在の言語に応じてフィールドを取得
-      const descriptionField = languageManager.getProblemField('description');
       const detailedDescriptionField = languageManager.getProblemField('detailedDescription');
       
-      descriptionText.textContent = problem[descriptionField] || problem.description;
       detailedDescriptionText.textContent = problem[detailedDescriptionField] || problem.detailedDescription || '';
       codeEditor.value = problem.problemCode;
       rubyRunner.setTestCode(problem.testCode);

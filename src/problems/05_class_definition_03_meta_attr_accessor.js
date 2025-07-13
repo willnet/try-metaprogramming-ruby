@@ -4,8 +4,6 @@ export const problem = {
   "id": "03_meta_attr_accessor",
   "title": "Meta Attr Accessor",
   "title_en": "Meta Attr Accessor",
-  "description": "動的なアクセサメソッド作成についての問題。プレフィックス付きアクセサの実装方法を学びます。",
-  "description_en": "A problem about creating dynamic accessor methods. Learn how to implement accessors with prefixes.",
   "detailedDescription": "下のMetaClassに対し、次のように`meta_`というプレフィックスが属性名に自動でつき、ゲッターの戻り値の文字列にも'meta 'が自動でつくattr_accessorのようなメソッドであるmeta_attr_accessorを作ってください。セッターに文字列以外の引数がくることは考えないとします。\n\n使用例:\n\n```\nclass MetaClass\n  # meta_attr_accessor自体の定義は省略\n  meta_attr_accessor :hello\nend\nmeta = MetaClass.new\nmeta.meta_hello = 'world'\nmeta.meta_hello #=> 'meta world'\n```",
   "detailedDescription_en": "For the MetaClass below, create a meta_attr_accessor method that automatically adds the prefix `meta_` to attribute names and 'meta ' to getter return value strings like attr_accessor. Assume that setter arguments other than strings will not be considered.\n\nUsage example:\n\n```\nclass MetaClass\n  # Definition of meta_attr_accessor itself is omitted\n  meta_attr_accessor :hello\nend\nmeta = MetaClass.new\nmeta.meta_hello = 'world'\nmeta.meta_hello #=> 'meta world'\n```",
   "problemCode": "class MetaClass\nend\n",

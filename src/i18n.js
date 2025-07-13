@@ -9,7 +9,6 @@ export const translations = {
     problemLabel: '問題:',
     
     // 問題表示部分
-    problemDescription: '問題説明',
     detailedSpecification: '詳細仕様',
     codeInput: 'コードを入力してください',
     
@@ -54,7 +53,6 @@ export const translations = {
     problemLabel: 'Problem:',
     
     // 問題表示部分
-    problemDescription: 'Problem Description',
     detailedSpecification: 'Detailed Specification',
     codeInput: 'Enter your code here',
     

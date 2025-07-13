@@ -4,8 +4,6 @@ export const problem = {
   "id": "02_hierarchy_q5",
   "title": "Hierarchy Q5",
   "title_en": "Hierarchy Q5",
-  "description": "Rubyのクラス階層とモジュールの仕組みについての問題。祖先チェーン、メソッド探索、refinementなどを学びます。 (Q5)",
-  "description_en": "A problem about Ruby's class hierarchy and module mechanisms. Learn about ancestor chains, method lookup, refinements, etc. (Q5)",
   "detailedDescription": "前提: M1モジュールは変更しないこと\n\n次の動作をする M1Refinements module を実装する\n- M1Refinements は M1 の name インスタンスメソッドをリファインし,\n  リファインされた name メソッドは \"Refined M1\" を返す\n- C5.new.another_name が文字列 \"M1\" を返す\n- C5.new.other_name が文字列 \"Refined M1\" を返す",
   "detailedDescription_en": "Premise: Do not modify the M1 module.\n\nImplement M1Refinements module that behaves as follows\n- M1Refinements refines the name instance method of M1,\n  and the refined name method returns \"Refined M1\"\n- C5.new.another_name returns the string \"M1\"\n- C5.new.other_name returns the string \"Refined M1\"",
   "problemCode": "module M1\n  def name\n    'M1'\n  end\nend\n\nmodule M1Refinements\nend\n\nclass C5\n  include M1\n\n  def another_name\n    name\n  end\n\n  using M1Refinements\n\n  def other_name\n    name\n  end\nend\n",

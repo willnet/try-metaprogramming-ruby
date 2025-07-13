@@ -4,8 +4,6 @@ export const problem = {
   "id": "02_define_q3",
   "title": "Define Q3",
   "title_en": "Define Q3",
-  "description": "includeされたときにカスタムアクセサメソッドを定義するOriginalAccessorモジュールを実装します。",
-  "description_en": "Implement OriginalAccessor module that defines custom accessor methods when included.",
   "detailedDescription": "次の動作をする OriginalAccessor モジュール を実装する\n\n- OriginalAccessorモジュールはincludeされたときのみ、my_attr_accessorメソッドを定義すること\n- my_attr_accessorはgetter/setterに加えて、boolean値を代入した際のみ真偽値判定を行うaccessorと同名の?メソッドができること",
   "detailedDescription_en": "Implement OriginalAccessor module that behaves as follows\n\n- The OriginalAccessor module should define the my_attr_accessor method only when included\n- my_attr_accessor should create getter/setter methods, and additionally create predicate methods (with ? suffix) only when boolean values are assigned",
   "problemCode": "module OriginalAccessor\nend\n",

@@ -4,8 +4,6 @@ export const problem = {
   "id": "04_class_configuration",
   "title": "Class Configuration",
   "title_en": "Class Configuration",
-  "description": "クラスレベル設定の共有についての問題。グローバル変数やクラス変数を使わない状態管理を学びます。",
-  "description_en": "A problem about sharing class-level configuration. Learn state management without global or class variables.",
   "detailedDescription": "次のようなExConfigクラスを作成してください。ただし、グローバル変数、クラス変数は使わないものとします。\n\n使用例:\n\n```\nExConfig.config = 'hello'\nExConfig.config #=> 'hello'\nex = ExConfig.new\nex.config #=> 'hello'\nex.config = 'world'\nExConfig.config #=> 'world'\n```",
   "detailedDescription_en": "Create an ExConfig class as follows. However, do not use global variables or class variables.\n\nUsage example:\n\n```\nExConfig.config = 'hello'\nExConfig.config #=> 'hello'\nex = ExConfig.new\nex.config #=> 'hello'\nex.config = 'world'\nExConfig.config #=> 'world'\n```",
   "problemCode": "class ExConfig\nend\n",

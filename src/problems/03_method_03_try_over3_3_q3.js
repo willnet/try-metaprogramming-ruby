@@ -4,8 +4,6 @@ export const problem = {
   "id": "03_try_over3_3_q3",
   "title": "Try Over3 3 Q3",
   "title_en": "Try Over3 3 Q3",
-  "description": "動的にメソッドを削除してboolean以外の値に対してpredicate methodを存在させないOriginalAccessor2を実装します。",
-  "description_en": "Implement OriginalAccessor2 that dynamically removes methods so predicate methods don't exist for non-boolean values.",
   "detailedDescription": "DefineのQ3ではOriginalAccessor の my_attr_accessor で定義した getter/setter に boolean の値が入っている場合には #{name}? が定義されるようなモジュールを実装しました。今回は、そのモジュールに boolean 以外が入っている場合には #{name}? メソッドが存在しないようにする変更を加えてください。",
   "detailedDescription_en": "In Q3 of Define, we implemented a module where #{name}? methods are defined when boolean values are assigned to getter/setter defined by OriginalAccessor's my_attr_accessor. This time, modify the module so that the #{name}? method does not exist when non-boolean values are assigned.",
   "problemCode": "TryOver3 = Module.new\n\nmodule TryOver3::OriginalAccessor2\n  def self.included(mod)\n    mod.define_singleton_method :my_attr_accessor do |name|\n      define_method name do\n        @attr\n      end\n\n      define_method \"#{name}=\" do |value|\n        if [true, false].include?(value) && !respond_to?(\"#{name}?\")\n          self.class.define_method \"#{name}?\" do\n            @attr == true\n          end\n        end\n        @attr = value\n      end\n    end\n  end\nend\n",

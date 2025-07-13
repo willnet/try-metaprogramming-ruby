@@ -4,8 +4,6 @@ export const problem = {
   "id": "02_hierarchy_q2",
   "title": "Hierarchy Q2",
   "title_en": "Hierarchy Q2",
-  "description": "Rubyのクラス階層とモジュールの仕組みについての問題。祖先チェーン、メソッド探索、refinementなどを学びます。 (Q2)",
-  "description_en": "A problem about Ruby's class hierarchy and module mechanisms. Learn about ancestor chains, method lookup, refinements, etc. (Q2)",
   "detailedDescription": "前提: M1モジュールは変更しないこと\n\n次の動作をする C2 class を実装する\n- C2.ancestors.first(2) が [M1, C2] となる\n- C2.new.name が 'M1' を返す",
   "detailedDescription_en": "Premise: Do not modify the M1 module.\n\nImplement a C2 class that behaves as follows\n- C2.ancestors.first(2) returns [M1, C2]\n- C2.new.name returns 'M1'",
   "problemCode": "module M1\n  def name\n    'M1'\n  end\nend\n\nclass C2\n  def name\n    'C2'\n  end\nend\n",

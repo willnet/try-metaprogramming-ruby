@@ -4,8 +4,6 @@ export const problem = {
   "id": "03_try_over3_3_q2",
   "title": "Try Over3 3 Q2",
   "title_en": "Try Over3 3 Q2",
-  "description": "高度なメタプログラミング技術の問題。method_missing、プロキシオブジェクト、const_missing、DSLの実装などを学びます。 (Q2)",
-  "description_en": "Advanced metaprogramming techniques quiz. Learn about method_missing, proxy objects, const_missing, DSL implementation, etc. (Q2)",
   "detailedDescription": "以下要件を満たす TryOver3::A2Proxy クラスを作成してください。\n\n- TryOver3::A2Proxy は initialize に TryOver3::A2 のインスタンスを受け取り、それを @source に代入する\n- TryOver3::A2Proxy は、@sourceに定義されているメソッドが自分自身に定義されているように振る舞う",
   "detailedDescription_en": "Please create a TryOver3::A2Proxy class that meets the following requirements.\n\n- TryOver3::A2Proxy receives an instance of TryOver3::A2 in initialize and assigns it to @source\n- TryOver3::A2Proxy behaves as if methods defined in @source are defined in itself",
   "problemCode": "TryOver3 = Module.new\n\nclass TryOver3::A2\n  def initialize(name, value)\n    instance_variable_set(\"@#{name}\", value)\n    self.class.attr_accessor name.to_sym unless respond_to? name.to_sym\n  end\nend\n",

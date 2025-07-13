@@ -4,8 +4,6 @@ export const problem = {
   "id": "02_hierarchy_q3",
   "title": "Hierarchy Q3",
   "title_en": "Hierarchy Q3",
-  "description": "Rubyのクラス階層とモジュールの仕組みについての問題。祖先チェーン、メソッド探索、refinementなどを学びます。 (Q3)",
-  "description_en": "A problem about Ruby's class hierarchy and module mechanisms. Learn about ancestor chains, method lookup, refinements, etc. (Q3)",
   "detailedDescription": "前提: M1, M2, M3, M4モジュールは変更しないこと\n\n次の動作をする C3 class, MySuperClass class を実装する\n- C3.ancestors.first(6) が [M1, C3, M2, M3, MySuperClass, M4] となる\n- C3.new.name が 'M1' を返す",
   "detailedDescription_en": "Premise: Do not modify the M1, M2, M3, and M4 module.\n\nImplement C3 class and MySuperClass class that behave as follows\n- C3.ancestors.first(6) returns [M1, C3, M2, M3, MySuperClass, M4]\n- C3.new.name returns 'M1'",
   "problemCode": "module M1\n  def name\n    'M1'\n  end\nend\n\nmodule M2\n  def name\n    'M2'\n  end\nend\n\nmodule M3\n  def name\n    'M3'\n  end\nend\n\nmodule M4\n  def name\n    'M4'\n  end\nend\n\nclass C3\n  def name\n    'C3'\n  end\nend\n",

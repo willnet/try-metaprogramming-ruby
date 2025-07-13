@@ -4,8 +4,6 @@ export const problem = {
   "id": "05_method_wrapping",
   "title": "Method Wrapping",
   "title_en": "Method Wrapping",
-  "description": "メソッドラッピングについての問題。既存メソッドの前後に処理を追加する方法を学びます。",
-  "description_en": "A problem about method wrapping. Learn how to add processing before and after existing methods.",
   "detailedDescription": "ExOver#helloというメソッドがライブラリとして定義されているとします。ExOver#helloメソッドを実行したとき、helloメソッドの前にExOver#before、helloメソッドの後にExOver#afterを実行させるようにExOverを変更しましょう。ただしExOver#hello, ExOver#before, ExOver#afterの実装はそれぞれテスト側で定義しているので実装不要(変更不可)です。",
   "detailedDescription_en": "Assume that a method called ExOver#hello is defined as a library. When executing the ExOver#hello method, modify ExOver to execute ExOver#before before the hello method and ExOver#after after the hello method. However, the implementations of ExOver#hello, ExOver#before, and ExOver#after are each defined on the test side, so implementation is not required (cannot be changed).",
   "problemCode": "class ExOver\nend\n",

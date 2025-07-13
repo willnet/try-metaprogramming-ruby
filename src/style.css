@@ -119,21 +119,6 @@ h3 {
   font-size: 14px;
 }
 
-/* 問題説明部分のスタイル */
-.problem-description {
-  margin-bottom: 20px;
-  padding: 15px;
-  background-color: #f0f7ff;
-  border-radius: 6px;
-  border: 1px solid #cce5ff;
-}
-
-#description-text {
-  font-size: 14px;
-  line-height: 1.6;
-  white-space: pre-wrap;
-}
-
 /* 詳細説明部分のスタイル */
 .detailed-description {
   margin-bottom: 20px;

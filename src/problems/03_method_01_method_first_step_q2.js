@@ -4,8 +4,6 @@ export const problem = {
   "id": "01_method_first_step_q2",
   "title": "Method First Step Q2",
   "title_en": "Method First Step Q2",
-  "description": "Rubyのメソッド定義についての基本的な問題。defキーワードを使わない動的なメソッド定義を学びます。 (Q2)",
-  "description_en": "Basic quiz about Ruby method definition. Learn dynamic method definition without using the def keyword. (Q2)",
   "detailedDescription": "次の動作をする F2 classを実装する\n\n1. 実行するとhiインスタンスメソッドを定義するadd_hiメソッドを定義すること",
   "detailedDescription_en": "Implement F2 class that behaves as follows\n\n1. Define an add_hi method that defines a hi instance method when executed",
   "problemCode": "class F2\nend\n",

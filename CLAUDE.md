@@ -32,7 +32,6 @@ All content (code, descriptions, explanations) is managed as separate files and 
    - `src/ruby/problems/` - Quiz starter code (.rb files)
    - `src/ruby/answers/` - Solution code (.rb files)
    - `src/ruby/tests/` - Test code (.rb files)
-   - `src/ruby/descriptions/` - Quiz descriptions (.md files with Japanese/English sections)
    - `src/ruby/explanations/` - Answer explanations (.md files with Japanese/English sections)
 
 2. **Run tests:** `bin/test` (handles sync automatically)
@@ -45,7 +44,6 @@ src/ruby/
 ├── problems/      # Quiz starter code (19 files)
 ├── answers/       # Solution code (24 files)
 ├── tests/         # Test code (24 files)
-├── descriptions/  # Quiz descriptions (24 files)
 └── explanations/  # Answer explanations (15 files)
 ```
 
@@ -77,8 +75,6 @@ Each quiz in `problems.js` contains:
 - `section`: Quiz category (e.g., "02_object_model", "03_method")
 - `id`: Unique identifier
 - `title`: Human-readable title
-- `description`: Quiz explanation (Japanese)
-- `description_en`: Quiz explanation (English)
 - `detailedDescription`: Detailed requirements (Japanese)
 - `detailedDescription_en`: Detailed requirements (English)
 - `problemCode`: Ruby starter code

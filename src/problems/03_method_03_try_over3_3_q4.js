@@ -4,8 +4,6 @@ export const problem = {
   "id": "03_try_over3_3_q4",
   "title": "Try Over3 3 Q4",
   "title_en": "Try Over3 3 Q4",
-  "description": "高度なメタプログラミング技術の問題。method_missing、プロキシオブジェクト、const_missing、DSLの実装などを学びます。 (Q4)",
-  "description_en": "Advanced metaprogramming techniques quiz. Learn about method_missing, proxy objects, const_missing, DSL implementation, etc. (Q4)",
   "detailedDescription": "以下のように実行できる TryOver3::A4 クラスを作成してください。\n\n```\nTryOver3::A4.runners = [:Hoge]\nTryOver3::A4::Hoge.run\n=> \"run Hoge\"\n```\n\nこのとき、TryOver3::A4::Hogeという定数は定義されません。",
   "detailedDescription_en": "Please create a TryOver3::A4 class that can be executed as follows.\n\n```\nTryOver3::A4.runners = [:Hoge]\nTryOver3::A4::Hoge.run\n=> \"run Hoge\"\n```\n\nAt this time, the constant TryOver3::A4::Hoge is not defined.",
   "problemCode": "",

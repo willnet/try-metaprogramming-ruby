@@ -4,8 +4,6 @@ export const problem = {
   "id": "01_hoge_q2",
   "title": "Hoge Q2",
   "title_en": "Hoge Q2",
-  "description": "Rubyのオブジェクトモデルについての理解を深める問題。クラスとインスタンスの関係、メソッド探索の仕組みなどを学びます。 (Q2)",
-  "description_en": "A problem to deepen understanding of Ruby's object model. Learn about the relationship between classes and instances, method lookup mechanisms, etc. (Q2)",
   "detailedDescription": "次に挙げるクラスのいかなるインスタンスからも、hogeメソッドが呼び出せるようにする\nそれらのhogeメソッドは、全て\"hoge\"という文字列を返す\n- String\n- Integer\n- Numeric\n- Class\n- Hash\n- TrueClass",
   "detailedDescription_en": "Make the hoge method callable from any instance of the following classes\nAll of these hoge methods should return the string \"hoge\"\n- String\n- Integer\n- Numeric\n- Class\n- Hash\n- TrueClass",
   "problemCode": "",

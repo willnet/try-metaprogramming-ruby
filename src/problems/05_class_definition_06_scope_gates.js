@@ -4,8 +4,6 @@ export const problem = {
   "id": "06_scope_gates",
   "title": "Scope Gates",
   "title_en": "Scope Gates",
-  "description": "スコープゲートについての問題。ローカル変数をクラス定義を越えて使用する方法を学びます。",
-  "description_en": "A problem about scope gates. Learn how to use local variables across class definitions.",
   "detailedDescription": "次の toplevellocal ローカル変数の中身を返す MyGreeting#say を実装してみてください。ただし、下のMyGreetingは編集しないものとします。toplevellocal ローカル変数の定義の下の行から編集してください。ヒント: スコープゲートを乗り越える方法について書籍にありましたね",
   "detailedDescription_en": "Implement MyGreeting#say that returns the contents of the toplevellocal local variable below. However, do not edit the MyGreeting below. Edit from the line below the definition of the toplevellocal local variable. Hint: There was information in the book about how to overcome scope gates.",
   "problemCode": "class MyGreeting\nend\n\ntoplevellocal = 'hi'\n",

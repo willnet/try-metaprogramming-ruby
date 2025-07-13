@@ -4,8 +4,6 @@ export const problem = {
   "id": "01_block_first_step_q1",
   "title": "Block First Step Q1",
   "title_en": "Block First Step Q1",
-  "description": "Rubyのブロックについての基本的な問題。ブロックの受け渡しや実行、クロージャについて学びます。 (Q1)",
-  "description_en": "Basic quiz about Ruby blocks. Learn about passing and executing blocks, and closures. (Q1)",
   "detailedDescription": "MyMathクラスに、ブロックを実行した結果(数値)を2倍にして返すtwo_timesインスタンスメソッドを定義しましょう。\n\n実行例: `MyMath.new.two_times { 2 } #=> 4`",
   "detailedDescription_en": "Define a two_times instance method in the MyMath class that executes a block and returns the result (number) doubled\n\nExample: `MyMath.new.two_times { 2 } #=> 4`",
   "problemCode": "class MyMath\nend\n",

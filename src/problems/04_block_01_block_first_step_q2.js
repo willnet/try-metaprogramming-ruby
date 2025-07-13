@@ -4,8 +4,6 @@ export const problem = {
   "id": "01_block_first_step_q2",
   "title": "Block First Step Q2",
   "title_en": "Block First Step Q2",
-  "description": "Rubyのブロックについての基本的な問題。ブロックの受け渡しや実行、クロージャについて学びます。 (Q2)",
-  "description_en": "Basic quiz about Ruby blocks. Learn about passing and executing blocks, and closures. (Q2)",
   "detailedDescription": "AcceptBlockクラスにcallクラスメソッドが予め定義されており、このメソッドがブロックをとるとします。\n\n実行例: `AcceptBlock.call { 2 }`\n\nこのメソッドを、下で用意されているMY_LAMBDAをブロック引数として渡して実行してみてください。AcceptBlockクラスは問題側で用意している(テスト中に実装している)ため実装の必要はありません。",
   "detailedDescription_en": "AcceptBlock class has a predefined call class method that takes a block.\n\nExample: `AcceptBlock.call { 2 }`\n\nPlease execute this method by passing MY_LAMBDA prepared below as a block argument. The AcceptBlock class is provided by the quiz (implemented in the test), so you don't need to implement it.",
   "problemCode": "MY_LAMBDA = -> { 3 }\n",

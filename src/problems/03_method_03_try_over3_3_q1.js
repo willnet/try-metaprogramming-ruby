@@ -4,8 +4,6 @@ export const problem = {
   "id": "03_try_over3_3_q1",
   "title": "Try Over3 3 Q1",
   "title_en": "Try Over3 3 Q1",
-  "description": "高度なメタプログラミング技術の問題。method_missing、プロキシオブジェクト、const_missing、DSLの実装などを学びます。 (Q1)",
-  "description_en": "Advanced metaprogramming techniques quiz. Learn about method_missing, proxy objects, const_missing, DSL implementation, etc. (Q1)",
   "detailedDescription": "以下要件を満たすクラス TryOver3::A1 を作成してください。\n\n- run_test というインスタンスメソッドを持ち、それはnilを返す\n- `test_` から始まるインスタンスメソッドが実行された場合、このクラスは `run_test` メソッドを実行する\n  - `test_` メソッドがこのクラスに実装されていなくても `test_` から始まるメッセージに応答することができる\n  - TryOver3::A1 には `test_` から始まるインスタンスメソッドが定義されていない",
   "detailedDescription_en": "Please create a class TryOver3::A1 that meets the following requirements.\n- It has an instance method called run_test that returns nil\n- When an instance method starting with `test_` is executed, this class executes the `run_test` method\n  - Even if the `test_` method is not implemented in this class, it can respond to messages starting with `test_`\n  - TryOver3::A1 does not have any instance methods defined that start with `test_`",
   "problemCode": "TryOver3 = Module.new\n",

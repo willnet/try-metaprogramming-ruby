@@ -4,8 +4,6 @@ export const problem = {
   "id": "01_method_first_step_q1",
   "title": "Method First Step Q1",
   "title_en": "Method First Step Q1",
-  "description": "Rubyのメソッド定義についての基本的な問題。defキーワードを使わない動的なメソッド定義を学びます。 (Q1)",
-  "description_en": "Basic quiz about Ruby method definition. Learn dynamic method definition without using the def keyword. (Q1)",
   "detailedDescription": "次の動作をする F1 class を実装する\n\n1. \"def\"キーワードを使わずにF1クラスにhelloインスタンスメソッドを定義すること。戻り値は \"hello\" であること\n2. \"def\"キーワードを使わずにF1クラスにworldクラスメソッドを定義すること。戻り値は \"world\" であること\n3. 定義していないメソッドを実行したときにエラーを発生させず、\"NoMethodError\"という文字列を返すこと\n4. `F1.new.respond_to?(定義していないメソッド名)` を実行したときにtrueを返すこと",
   "detailedDescription_en": "Implement an F1 class that behaves as follows\n\n1. Define a hello instance method in F1 class without using the \"def\" keyword. The return value should be \"hello\"\n2. Define a world class method in F1 class without using the \"def\" keyword. The return value should be \"world\"\n3. When executing an undefined method, do not raise an error but return the string \"NoMethodError\"\n4. When executing `F1.new.respond_to?(undefined_method_name)`, return true",
   "problemCode": "class F1\nend\n",

@@ -4,8 +4,6 @@ export const problem = {
   "id": "01_block_first_step_q4",
   "title": "Block First Step Q4",
   "title_en": "Block First Step Q4",
-  "description": "Rubyのブロックについての基本的な問題。ブロックの受け渡しや実行、クロージャについて学びます。 (Q4)",
-  "description_en": "Basic quiz about Ruby blocks. Learn about passing and executing blocks, and closures. (Q4)",
   "detailedDescription": "MyClosureクラスにincrementインスタンスメソッドを定義しましょう。このincrementメソッドは次のように数値を1ずつインクリメントして返します。\n\n```\nmy = MyClosure.new\nmy.increment #=> 1\nmy.increment #=> 2\nmy.increment #=> 3\n```\n\nそれに加えて、複数のインスタンスでカウンターを共有しているという特性があります。\n\n```\nmy1 = MyClosure.new\nmy2 = MyClosure.new\nmy1.increment #=> 1\nmy2.increment #=> 2\nmy1.increment #=> 3\n```\n\nさらなる制限として、カウンターとして利用する変数はローカル変数を利用してください(これをチェックするテストコードはないですが頑張ってローカル変数でテストを通るようにしてみてください)",
   "detailedDescription_en": "Define an increment instance method in the MyClosure class. This increment method increments a number by 1 and returns it as follows:\n\n```\nmy = MyClosure.new\nmy.increment #=> 1\nmy.increment #=> 2\nmy.increment #=> 3\n```\n\nIn addition, it has the characteristic that the counter is shared among multiple instances.\n\n```\nmy1 = MyClosure.new\nmy2 = MyClosure.new\nmy1.increment #=> 1\nmy2.increment #=> 2\nmy1.increment #=> 3\n```\n\nAs an additional restriction, please use a local variable for the counter variable (there is no test code to check this, but please try to pass the test using a local variable)",
   "problemCode": "class MyClosure\nend\n",
