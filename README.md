@@ -59,4 +59,8 @@ bin/test SECTION_NAME PROBLEM_ID
 
 The Ruby files serve as the source of truth. JavaScript files are automatically generated.
 
+## Credits
+
+The problem content is based on https://github.com/kinoppyd/reading-metaprogramming-ruby
+
 
