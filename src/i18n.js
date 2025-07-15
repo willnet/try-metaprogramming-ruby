@@ -42,7 +42,10 @@ export const translations = {
     // 言語切り替え
     language: '言語',
     japanese: '日本語',
-    english: 'English'
+    english: 'English',
+    
+    // ナビゲーション
+    aboutLink: 'About'
   },
   
   en: {
@@ -87,7 +90,10 @@ export const translations = {
     // 言語切り替え
     language: 'Language',
     japanese: '日本語',
-    english: 'English'
+    english: 'English',
+    
+    // ナビゲーション
+    aboutLink: 'About'
   }
 };
 

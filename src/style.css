@@ -34,6 +34,25 @@ h1 {
   margin: 0;
 }
 
+/* ナビゲーション部分のスタイル */
+.navigation {
+  margin-bottom: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.navigation a {
+  color: #2c3e50;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.navigation a:hover {
+  background-color: #ecf0f1;
+}
+
 .language-toggle {
   display: flex;
   align-items: center;
@@ -302,4 +321,43 @@ h3 {
   white-space: pre-wrap;
   color: #2c3e50;
   overflow-x: auto;
+}
+
+/* About ページのスタイル */
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.about-section {
+  display: none;
+}
+
+.about-section.active {
+  display: block;
+}
+
+.about-section p {
+  margin-bottom: 1.5em;
+  color: #333;
+}
+
+.about-section a {
+  color: #2c3e50;
+  text-decoration: none;
+  border-bottom: 1px solid #2c3e50;
+}
+
+.about-section a:hover {
+  color: #34495e;
+  border-bottom-color: #34495e;
+}
+
+.about-section code {
+  background-color: #f8f9fa;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 0.9em;
 }
