@@ -17,6 +17,7 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20'
+        cache: 'npm'
     
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
@@ -27,6 +28,12 @@ jobs:
     - name: Install dependencies
       run: |
         gem install minitest
+        npm install
+    
+    - name: Install Playwright browsers
+      run: |
+        npx playwright install chromium
+        npx playwright install-deps
     
     - name: Run Ruby-first test workflow
       run: |
@@ -37,4 +44,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: test-results-ruby-3.4
-        path: test/test_results_comprehensive.json
+        path: |
+          test/test_results_comprehensive.json
+          test/screenshots/
+          test-results/
