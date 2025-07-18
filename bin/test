@@ -31,4 +31,60 @@ if [ $# -eq 2 ]; then
 fi
 
 echo ""
+echo "🌐 Running E2E browser tests..."
+
+# プロジェクトをビルド
+echo "📦 Building project..."
+node esbuild.config.js
+
+# テスト用サーバーを開始（ポート8001）
+echo "🚀 Starting test server on port 8001..."
+cd dist
+ruby -run -e httpd . -p 8001 &
+SERVER_PID=$!
+cd ..
+
+# サーバーの起動を待つ
+echo "⏳ Waiting for server to start..."
+for i in {1..30}; do
+    if curl -s http://localhost:8001 > /dev/null 2>&1; then
+        echo "✅ Server is ready!"
+        break
+    fi
+    if [ $i -eq 30 ]; then
+        echo "❌ Server failed to start within 30 seconds"
+        kill $SERVER_PID 2>/dev/null
+        exit 1
+    fi
+    sleep 1
+done
+
+# スクリーンショット用ディレクトリを作成
+mkdir -p test/screenshots
+
+# Playwrightのインストール（初回のみ）
+if [ ! -d "node_modules/@playwright" ]; then
+    echo "📦 Installing Playwright browsers..."
+    npx playwright install chromium
+fi
+
+# E2Eテストを実行（全問題）
+echo "🎭 Running E2E tests..."
+npx playwright test test/test_e2e.js --reporter=line
+
+E2E_EXIT_CODE=$?
+
+# サーバーを停止
+echo "🛑 Stopping test server..."
+kill $SERVER_PID 2>/dev/null
+wait $SERVER_PID 2>/dev/null
+
+if [ $E2E_EXIT_CODE -eq 0 ]; then
+    echo "✅ E2E tests passed!"
+else
+    echo "❌ E2E tests failed!"
+    exit $E2E_EXIT_CODE
+fi
+
+echo ""
 echo "✅ All tests completed!"

@@ -6,7 +6,8 @@
   },
   "devDependencies": {
     "esbuild": "^0.25.3",
-    "glob": "^11.0.2"
+    "glob": "^11.0.2",
+    "@playwright/test": "^1.48.0"
   },
   "scripts": {
     "build": "node esbuild.config.js",

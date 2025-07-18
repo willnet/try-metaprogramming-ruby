@@ -1,4 +1,5 @@
 require 'minitest'
+require 'minitest/mock'
 require 'securerandom'
 
 class TestEvilMailbox < Minitest::Test

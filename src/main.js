@@ -207,6 +207,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const rubyRunner = new RubyRunner();
   const problemManager = new ProblemManager(problems);
   const languageManager = new LanguageManager();
+  
+  // E2Eテスト用にwindowオブジェクトに公開
+  window.rubyRunner = rubyRunner;
 
   // 多言語対応のUI更新
   function updateUI() {

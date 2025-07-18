@@ -18,7 +18,7 @@ const { metafile } = await esbuild.build({
     copyPlugin({
       src: srcDir,
       dest: outdir,
-      patterns: ["*.html", "*.rb", "assets/**/*", "*.css", "problems.js"],
+      patterns: ["*.html", "*.rb", "assets/**/*", "*.css", "problems.js", "problems/**/*.js"],
     }),
   ],
   sourcemap: true,

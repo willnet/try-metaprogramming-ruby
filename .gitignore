@@ -5,3 +5,10 @@ node_modules/**/*
 # Test results
 test/test_results*.json
 test/problems.json
+
+# Playwright test results
+test-results/
+test/screenshots/
+
+# Playwright browser downloads
+playwright-report/
