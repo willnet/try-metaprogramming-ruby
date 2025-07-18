@@ -27,7 +27,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        gem install minitest
+        gem install minitest webrick
         npm install
     
     - name: Install Playwright browsers
