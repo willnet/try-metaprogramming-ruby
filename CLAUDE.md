@@ -7,17 +7,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Development
 - `bin/setup` - Install dependencies and build the project
 - `bin/dev` - Start development server on port 8000
-- `bin/test` - Run complete Ruby-first test workflow (sync + test all quizzes)
+- `bin/test` - Run complete Ruby-first test workflow (sync + Ruby tests + E2E tests)
 
 ### Building
 - `node esbuild.config.js` - Build the project using esbuild
+- `npm run build` - Alternative build command
 
 ### Testing
-- `bin/test` - **Recommended**: Complete test workflow (Ruby sync + comprehensive tests)
+- `bin/test` - **Recommended**: Complete test workflow (Ruby sync + Ruby tests + E2E browser tests)
 - `bin/test SECTION ID` - Test specific quiz with full workflow
-- `ruby test/test_answers_comprehensive.rb` - Direct test execution (requires manual sync)
+- `ruby test/test_answers_comprehensive.rb` - Direct Ruby test execution (requires manual sync)
 - `ruby test/test_answers_comprehensive.rb SECTION ID` - Test specific quiz
 - `npm run test:answers` - Alternative command for testing all answer codes
+- `npx playwright test test/test_e2e.js` - Run E2E tests only (requires server setup)
 
 ### Problem Data Management
 - `node scripts/extract-problems.js` - Extract quiz data from external Ruby repository
@@ -41,10 +43,10 @@ All content (code, descriptions, explanations) is managed as separate files and 
 **Directory structure:**
 ```
 src/ruby/
-├── problems/      # Quiz starter code (19 files)
-├── answers/       # Solution code (24 files)
-├── tests/         # Test code (24 files)
-└── explanations/  # Answer explanations (15 files)
+├── problems/      # Quiz starter code (33 files)
+├── answers/       # Solution code (33 files)
+├── tests/         # Test code (33 files)
+└── explanations/  # Answer explanations (33 files)
 ```
 
 The separated files serve as the source of truth. JavaScript files are automatically generated.
@@ -102,37 +104,72 @@ Each quiz in `problems.js` contains:
 - Quizzes organized by metaprogramming topics
 - Code editor preserves user input until reset
 
-### Testing Answer Codes
+### Testing Architecture
 
-**Answer Verification**
-- `npm run test:answers` - Test all answer codes against their respective test suites
-- `ruby test/test_answers_comprehensive.rb` - Direct execution from project root
-- `ruby test/test_answers_comprehensive.rb SECTION ID` - Test a specific quiz (e.g., `ruby test/test_answers_comprehensive.rb 02_object_model 01_hoge`)
-
-**Test Directory Structure**
-- `test/test_answers_comprehensive.rb` - Comprehensive test script
-- `test/test_results_comprehensive.json` - Detailed test results (generated after execution)
-- `test/README.md` - Detailed testing documentation
-
-The test framework:
+**Ruby Tests (Ruby.wasm Environment)**
+- `ruby test/test_answers_comprehensive.rb` - Tests all answer codes in Ruby environment
+- `ruby test/test_answers_comprehensive.rb SECTION ID` - Test specific quiz
 - Runs each answer code in isolation using temporary Ruby files
 - Verifies that all Minitest assertions pass
-- Applies automatic fixes for common issues (e.g., removing test execution code from answers)
 - Provides detailed failure reports and success metrics
-- Currently achieves 75% success rate (9/12 quizzes passing)
 
-**Known Issues**
-- Some quizzes require `minitest-mock` which may not be available in all environments
-- A few answer codes contain test execution statements that need to be filtered out
-- Complex metaprogramming quizzes may have environment-specific dependencies
+**E2E Tests (Browser Environment)**
+- `test/test_e2e.js` - Playwright-based browser automation tests
+- Tests all 33 quizzes by simulating user interactions in the web interface
+- Automatically pastes answer codes and verifies test results
+- Runs on dedicated test server (port 8001) to avoid conflicts with development
+- Captures screenshots on test failures for debugging
+
+**Test Directory Structure**
+- `test/test_answers_comprehensive.rb` - Ruby test script
+- `test/test_e2e.js` - E2E test script
+- `test/test_results_comprehensive.json` - Ruby test results (generated)
+- `test/screenshots/` - E2E test failure screenshots (generated)
+- `test-results/` - Playwright test results (generated)
+- `playwright.config.js` - Playwright configuration
+
+**Dependencies for Tests**
+- Tests requiring `Minitest::Mock` must include `require 'minitest/mock'`
+- E2E tests require `@playwright/test` and browser installation
+- Ruby tests work in both native Ruby and Ruby.wasm environments
 
 ### Development Notes
 
+- **Ruby-First Workflow**: Always edit `.rb` and `.md` files in `src/ruby/` directories, not generated `.js` files
+- After editing Ruby files, run `node scripts/sync-ruby-to-js.js` to update JavaScript files
 - The project fetches quiz data from an external repository using `scripts/extract-problems.js`
 - Ruby code execution happens entirely in the browser via WebAssembly
 - All quiz starter code and tests are embedded in the JavaScript bundle
 - The development server uses Ruby's built-in HTTP server for simplicity
-- Answer codes are automatically tested for correctness using Ruby's Minitest framework
-- **Important**: When editing content, always modify `.rb` and `.md` files in `src/ruby/` directories, not the generated `.js` files
-- After editing Ruby files, run `node scripts/sync-ruby-to-js.js` to update JavaScript files
 - The application supports bilingual content (Japanese/English) with automatic language switching
+- E2E tests use a dedicated test server on port 8001 to avoid conflicts with development server (port 8000)
+- Problem content is based on https://github.com/kinoppyd/reading-metaprogramming-ruby
+
+### Build System Details
+
+**ESBuild Configuration**
+- `esbuild.config.js` - Main build configuration with custom copy plugin
+- `.esbuild/copyPlugin.js` - Copies static files and problem data during build
+- Outputs to `dist/` directory with code splitting and minification
+- Automatically copies `problems/**/*.js` files to maintain problem data structure
+
+**Key Build Outputs**
+- `dist/main.js` - Main application bundle (~197kb)
+- `dist/problems/` - Individual problem files for dynamic loading
+- `dist/index.html` - Main application interface
+- `dist/about.html` - About page with bilingual support
+
+### CI/CD Pipeline
+
+**GitHub Actions Workflow** (`.github/workflows/test.yml`)
+- Runs on Node.js 20 and Ruby 3.4
+- Installs npm dependencies and Playwright browsers
+- Executes full test suite via `./bin/test`
+- Uploads test artifacts (Ruby test results, screenshots, E2E results)
+- Runs on push to main branch and pull requests
+
+**Required Dependencies for CI**
+- `gem install minitest` - For Ruby tests
+- `npm install` - For Node.js dependencies (esbuild, Playwright)
+- `npx playwright install chromium` - For E2E browser tests
+- `npx playwright install-deps` - For system dependencies
