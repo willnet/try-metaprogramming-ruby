@@ -1,4 +1,5 @@
 require 'minitest'
+require 'securerandom'
 
 class TestSimpleModel < Minitest::Test
   class Product

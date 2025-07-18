@@ -1,4 +1,5 @@
 require 'minitest'
+require 'securerandom'
 
 class TestEvilMailbox < Minitest::Test
   def evil_mailbox(&block)

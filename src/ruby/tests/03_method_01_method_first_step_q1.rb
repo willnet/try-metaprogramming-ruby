@@ -1,4 +1,5 @@
 require 'minitest'
+require 'securerandom'
 
 class TestMethodFirstStep < Minitest::Test
   def test_hello

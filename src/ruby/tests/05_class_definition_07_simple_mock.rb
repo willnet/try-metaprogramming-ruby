@@ -1,4 +1,5 @@
 require 'minitest'
+require 'securerandom'
 
 class TestSimpleMock < Minitest::Test
   class ClassForMockTest

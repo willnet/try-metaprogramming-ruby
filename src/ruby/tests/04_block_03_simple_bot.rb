@@ -1,4 +1,5 @@
 require 'minitest'
+require 'securerandom'
 
 class TestSimpleBot < Minitest::Test
   def bot_for_test(&block)
