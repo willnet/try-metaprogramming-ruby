@@ -300,6 +300,11 @@ document.addEventListener('DOMContentLoaded', () => {
       detailedDescriptionText.textContent = problem[detailedDescriptionField] || problem.detailedDescription || '';
       codeEditor.value = problem.problemCode;
       rubyRunner.setTestCode(problem.testCode);
+      
+      // テスト結果をクリア
+      testResult.textContent = '';
+      testResult.className = '';
+      
       hideAnswer(); // 問題変更時は回答を非表示にする
     }
   }
