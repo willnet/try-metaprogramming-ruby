@@ -92,7 +92,18 @@ class RubyRunner {
   // 問題IDに基づいて実行順序を決定
   getExecutionOrder(problemId) {
     // テストフレームワークと同じロジックを適用
-    const testFirstProblems = ['01_block_first_step', '01_class_definition_first_step'];
+    const testFirstProblems = [
+      '01_block_first_step_q1',
+      '01_block_first_step_q2', 
+      '01_block_first_step_q3',
+      '01_block_first_step_q4',
+      '01_singleton_methods',
+      '02_anonymous_classes',
+      '05_method_wrapping',
+      '02_hierarchy_q6',
+      '01_method_first_step_q2',
+      '03_try_over3_3_q2'
+    ];
     return testFirstProblems.includes(problemId) ? 'test_first' : 'code_first';
   }
 

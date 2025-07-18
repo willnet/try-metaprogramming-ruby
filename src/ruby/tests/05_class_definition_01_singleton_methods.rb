@@ -1,9 +1,12 @@
 require 'minitest'
 
-class Judgement
-  def self.call(e1, e2)
-    @e1 = e1
-    @e2 = e2
+# Judgementクラスが未定義の場合に定義（回答コード実行前に必要）
+unless defined?(Judgement)
+  class Judgement
+    def self.call(e1, e2)
+      @e1 = e1
+      @e2 = e2
+    end
   end
 end
 

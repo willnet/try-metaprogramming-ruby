@@ -1,8 +1,11 @@
 require 'minitest'
 
-class Judgement2
-  def self.call(klass)
-    @klass = klass
+# Judgement2クラスが未定義の場合に定義（回答コード実行前に必要）
+unless defined?(Judgement2)
+  class Judgement2
+    def self.call(klass)
+      @klass = klass
+    end
   end
 end
 
