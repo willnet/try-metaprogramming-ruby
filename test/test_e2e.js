@@ -52,7 +52,7 @@ function parseAnswerFiles() {
 test.describe('E2E Challenge Tests', () => {
   const challenges = parseAnswerFiles();
   
-  console.log('Found challenges:', challenges.map(q => `${q.section}/${q.id}`);
+  console.log('Found challenges:', challenges.map(q => `${q.section}/${q.id}`));
   
   test.beforeEach(async ({ page }) => {
     // ページを開いて初期化を待つ
