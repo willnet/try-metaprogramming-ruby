@@ -1,4 +1,4 @@
-# Try Metaprogramming Ruby
+# Metaprogramming Challenges in Ruby
 
 Web-based Ruby metaprogramming practice environment using Ruby.wasm. Learn Ruby metaprogramming concepts interactively in your browser.
 
@@ -48,7 +48,7 @@ bin/test SECTION_NAME PROBLEM_ID
 
 1. **Edit Ruby files directly:**
    - `src/ruby/problems/` - Problem starter code
-   - `src/ruby/answers/` - Solution code  
+   - `src/ruby/answers/` - Solution code
    - `src/ruby/tests/` - Test code
    - `src/ruby/descriptions/` - Problem descriptions
    - `src/ruby/explanations/` - Answer explanations
