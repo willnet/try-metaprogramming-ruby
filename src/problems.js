@@ -1,4 +1,4 @@
-// メタプログラミングRubyクイズのデータ統合ファイル（個別ファイル版）
+// メタプログラミングRuby問題集のデータ統合ファイル（個別ファイル版）
 import { problem as problem_00_setup_01_try_out } from './problems/00_setup_01_try_out.js';
 import { problem as problem_02_object_model_01_hoge_q1 } from './problems/02_object_model_01_hoge_q1.js';
 import { problem as problem_02_object_model_01_hoge_q2 } from './problems/02_object_model_01_hoge_q2.js';

@@ -8,7 +8,7 @@ C1クラスに`name`メソッドを定義することで、M1モジュールの�
 
 # English
 
-This quiz requires understanding the class inheritance chain (ancestors) and proper use of module inclusion.
+This challenge requires understanding the class inheritance chain (ancestors) and proper use of module inclusion.
 
 By using `include M1`, the M1 module is inserted into C1 class's inheritance chain. The order of the inheritance chain places the class itself first, followed by included modules.
 

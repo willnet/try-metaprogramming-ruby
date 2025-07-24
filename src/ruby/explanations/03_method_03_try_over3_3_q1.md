@@ -18,7 +18,7 @@
 
 # English
 
-This quiz teaches implementing "ghost methods" using Ruby's `method_missing`.
+This challenge teaches implementing "ghost methods" using Ruby's `method_missing`.
 
 What are ghost methods:
 - Methods that aren't actually defined but can be called

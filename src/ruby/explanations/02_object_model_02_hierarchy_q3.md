@@ -17,14 +17,14 @@
 
 # English
 
-This quiz requires understanding the order of the inheritance chain when combining multiple module include/prepend operations with inheritance.
+This challenge requires understanding the order of the inheritance chain when combining multiple module include/prepend operations with inheritance.
 
 Rules for building the inheritance chain:
 1. `prepend`ed modules are placed before the class
 2. `include`d modules are placed after the class (later includes come first)
 3. The superclass and its modules are placed after the current class's modules
 
-In this quiz:
+In this challenge:
 - M1 comes first because it's `prepend`ed
 - Then the C3 class itself
 - M2 and M3 are placed in reverse order of inclusion (M2, then M3)

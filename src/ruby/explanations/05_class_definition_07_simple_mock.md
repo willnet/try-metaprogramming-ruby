@@ -29,7 +29,7 @@ Object.newをmockメソッドの引数にしています。
 
 # English
 
-Quiz Explanation
+Challenge Explanation
 First, let's consider the implementation of the mock method. From the specification that "the original object's capabilities must not be lost", we add the methods necessary for mocking (expects, watch, called_times) by extending SimpleMock to the object received as an argument.
 
 When the expects method is executed, we want to add a method only to the receiver object, so we use define_singleton_method to dynamically add methods.

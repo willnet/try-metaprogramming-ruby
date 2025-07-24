@@ -16,7 +16,7 @@
 
 # English
 
-This quiz requires a deeper understanding of the scope of refinements.
+This challenge requires a deeper understanding of the scope of refinements.
 
 Key points:
 1. Through `include M1`, C6 inherits M1's `name` method

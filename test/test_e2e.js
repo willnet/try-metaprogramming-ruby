@@ -49,10 +49,10 @@ function parseAnswerFiles() {
   }).filter(Boolean);
 }
 
-test.describe('E2E Quiz Tests', () => {
-  const quizzes = parseAnswerFiles();
+test.describe('E2E Challenge Tests', () => {
+  const challenges = parseAnswerFiles();
   
-  console.log('Found quizzes:', quizzes.map(q => `${q.section}/${q.id}`));
+  console.log('Found challenges:', challenges.map(q => `${q.section}/${q.id}`);
   
   test.beforeEach(async ({ page }) => {
     // ページを開いて初期化を待つ
@@ -73,27 +73,27 @@ test.describe('E2E Quiz Tests', () => {
     }, { timeout: 60000 });
   });
 
-  for (const quiz of quizzes) {
-    test(`Quiz: ${quiz.section}/${quiz.id}`, async ({ page }) => {
-      console.log(`Testing quiz: ${quiz.section}/${quiz.id}`);
+  for (const challenge of challenges) {
+    test(`Challenge: ${challenge.section}/${challenge.id}`, async ({ page }) => {
+      console.log(`Testing challenge: ${challenge.section}/${challenge.id}`);
       
       try {
         // セクションを選択
-        await page.selectOption('#section-select', quiz.section);
+        await page.selectOption('#section-select', challenge.section);
         await page.waitForTimeout(500); // セクション変更の反映を待つ
         
         // 問題オプションが読み込まれるまで待つ
         await page.waitForTimeout(500);
         
         // 問題を選択（value属性で直接選択）
-        await page.selectOption('#problem-select', quiz.id);
+        await page.selectOption('#problem-select', challenge.id);
         await page.waitForTimeout(1000); // 問題データの読み込みを待つ
         
         // コードエディタをクリアして回答コードを入力
         const codeEditor = page.locator('#code-editor');
         await codeEditor.click();
         await codeEditor.fill(''); // クリア
-        await codeEditor.fill(quiz.answerCode);
+        await codeEditor.fill(challenge.answerCode);
         
         // テスト実行ボタンをクリック
         await page.click('#run-button');
@@ -117,24 +117,24 @@ test.describe('E2E Quiz Tests', () => {
         const hasSuccess = testOutput.includes('0 failures, 0 errors') && !hasFailure;
         
         if (!hasSuccess) {
-          console.error(`Test failed for ${quiz.section}/${quiz.id}:`);
+          console.error(`Test failed for ${challenge.section}/${challenge.id}:`);
           console.error(testOutput);
           
           // スクリーンショットを保存
           await page.screenshot({ 
-            path: `test/screenshots/failed_${quiz.section}_${quiz.id}.png`,
+            path: `test/screenshots/failed_${challenge.section}_${challenge.id}.png`,
             fullPage: true 
           });
         }
         
-        expect(hasSuccess, `Quiz ${quiz.section}/${quiz.id} should pass. Output: ${testOutput}`).toBe(true);
+        expect(hasSuccess, `Challenge ${challenge.section}/${challenge.id} should pass. Output: ${testOutput}`).toBe(true);
         
       } catch (error) {
-        console.error(`Error testing quiz ${quiz.section}/${quiz.id}:`, error);
+        console.error(`Error testing challenge ${challenge.section}/${challenge.id}:`, error);
         
         // エラー時のスクリーンショット
         await page.screenshot({ 
-          path: `test/screenshots/error_${quiz.section}_${quiz.id}.png`,
+          path: `test/screenshots/error_${challenge.section}_${challenge.id}.png`,
           fullPage: true 
         });
         

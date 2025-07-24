@@ -19,7 +19,7 @@ initializeメソッドを定義し、`_initial`と`_histories`の初期化と`_i
 
 # English
 
-Quiz Explanation
+Challenge Explanation
 
 To change the behavior of the attr_accessor method of the included class, we first use the included hook method.
 

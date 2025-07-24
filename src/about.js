@@ -3,12 +3,12 @@ import { LanguageManager } from './i18n.js';
 // About page specific translations
 const aboutTranslations = {
   ja: {
-    aboutPageTitle: 'About - メタプログラミングクイズ',
-    backToQuiz: 'クイズに戻る'
+    aboutPageTitle: 'About - メタプログラミングRuby問題集',
+    backToQuiz: '問題集に戻る'
   },
   en: {
-    aboutPageTitle: 'About - Ruby Metaprogramming Quiz',
-    backToQuiz: 'Back to Quiz'
+    aboutPageTitle: 'About - Metaprogramming Challenges in Ruby',
+    backToQuiz: 'Back to Challenges'
   }
 };
 

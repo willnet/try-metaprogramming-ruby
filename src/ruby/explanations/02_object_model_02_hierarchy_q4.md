@@ -16,7 +16,7 @@
 
 # English
 
-This quiz tests understanding of Ruby's private method calling rules.
+This challenge tests understanding of Ruby's private method calling rules.
 
 Key points:
 1. Private methods normally cannot be called with an explicit receiver

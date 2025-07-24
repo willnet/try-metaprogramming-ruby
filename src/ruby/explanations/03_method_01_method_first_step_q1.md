@@ -7,6 +7,6 @@ respond_to_missing?は、respond_to?メソッド実行時にメソッドが定�
 
 # English
 
-This is a practice quiz for define_method, define_singleton_method, and method_missing.
-define_singleton_method doesn't appear in Chapter 3 yet, but you need to know this to solve Chapter 3 quizzes, so please remember it.
+This is a practice challenge for define_method, define_singleton_method, and method_missing.
+define_singleton_method doesn't appear in Chapter 3 yet, but you need to know this to solve Chapter 3 challenges, so please remember it.
 respond_to_missing? is a method called when respond_to? method is executed and the method is not defined. Always define this when you define method_missing.

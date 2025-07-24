@@ -8,7 +8,7 @@
 
 # English
 
-Understanding how `prepend` works is crucial for this quiz.
+Understanding how `prepend` works is crucial for this challenge.
 
 Unlike `include`, `prepend` inserts the module **before** the class in the inheritance chain. When using `prepend M1`, the inheritance chain becomes [M1, C2, ...].
 

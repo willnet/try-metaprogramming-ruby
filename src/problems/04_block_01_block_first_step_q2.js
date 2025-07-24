@@ -5,7 +5,7 @@ export const problem = {
   "title": "Block First Step Q2",
   "title_en": "Block First Step Q2",
   "detailedDescription": "AcceptBlockクラスにcallクラスメソッドが予め定義されており、このメソッドがブロックをとるとします。\n\n実行例: `AcceptBlock.call { 2 }`\n\nこのメソッドを、下で用意されているMY_LAMBDAをブロック引数として渡して実行してみてください。AcceptBlockクラスは問題側で用意している(テスト中に実装している)ため実装の必要はありません。",
-  "detailedDescription_en": "AcceptBlock class has a predefined call class method that takes a block.\n\nExample: `AcceptBlock.call { 2 }`\n\nPlease execute this method by passing MY_LAMBDA prepared below as a block argument. The AcceptBlock class is provided by the quiz (implemented in the test), so you don't need to implement it.",
+  "detailedDescription_en": "AcceptBlock class has a predefined call class method that takes a block.\n\nExample: `AcceptBlock.call { 2 }`\n\nPlease execute this method by passing MY_LAMBDA prepared below as a block argument. The AcceptBlock class is provided by the challenge (implemented in the test), so you don't need to implement it.",
   "problemCode": "MY_LAMBDA = -> { 3 }\n",
   "answerExplanation": "Procオブジェクトをブロック引数として渡す練習です。実引数を渡すところで`&`を使うと、Procからブロックへの変換ができます。",
   "answerExplanation_en": "This is practice for passing a Proc object as a block argument. By using `&` when passing the actual argument, you can convert from Proc to block.",

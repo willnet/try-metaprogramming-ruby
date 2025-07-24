@@ -16,7 +16,7 @@
 
 # English
 
-This quiz teaches implementing the dynamic proxy pattern, where a proxy object transparently forwards method calls to another object.
+This challenge teaches implementing the dynamic proxy pattern, where a proxy object transparently forwards method calls to another object.
 
 Key implementation points:
 1. `method_missing` receives all arguments (`...`) and forwards them directly to `@source`
