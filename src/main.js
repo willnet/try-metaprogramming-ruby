@@ -2,6 +2,7 @@ import { RubyVM } from "@ruby/wasm-wasi";
 import { File, WASI, OpenFile, ConsoleStdout } from "@bjorn3/browser_wasi_shim";
 import { problems } from "./problems.js";
 import { LanguageManager } from "./i18n.js";
+import { RubyEditor } from "./ruby-editor.js";
 
 class RubyRunner {
   constructor() {
@@ -193,6 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const problemSelect = document.getElementById('problem-select');
   const detailedDescriptionText = document.getElementById('detailed-description-text');
   const codeEditor = document.getElementById('code-editor');
+  const rubyEditor = new RubyEditor(codeEditor);
   const runButton = document.getElementById('run-button');
   const resetButton = document.getElementById('reset-button');
   const showAnswerButton = document.getElementById('show-answer-button');
@@ -301,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const detailedDescriptionField = languageManager.getProblemField('detailedDescription');
       
       detailedDescriptionText.textContent = problem[detailedDescriptionField] || problem.detailedDescription || '';
-      codeEditor.value = problem.problemCode;
+      rubyEditor.setValue(problem.problemCode);
       rubyRunner.setTestCode(problem.testCode);
       
       // テスト結果をクリア
@@ -315,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 問題のリセット
   function resetProblem() {
     if (problemManager.currentProblem) {
-      codeEditor.value = problemManager.currentProblem.problemCode;
+      rubyEditor.setValue(problemManager.currentProblem.problemCode);
       testResult.textContent = '';
       testResult.className = '';
       hideAnswer();
@@ -412,7 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
       await rubyRunner.resetVM();
       rubyRunner.setTestCode(problemManager.currentProblem.testCode);
       
-      const userCode = codeEditor.value;
+      const userCode = rubyEditor.getValue();
       // テストの実行（問題IDを渡して実行順序を決定）
       const result = await rubyRunner.runTest(userCode, problemManager.currentProblem.id);
       console.log(result);

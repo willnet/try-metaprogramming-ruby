@@ -90,7 +90,7 @@ test.describe('E2E Challenge Tests', () => {
         await page.waitForTimeout(1000); // 問題データの読み込みを待つ
         
         // コードエディタをクリアして回答コードを入力
-        const codeEditor = page.locator('#code-editor');
+        const codeEditor = page.locator('.cm-content[contenteditable="true"]');
         await codeEditor.click();
         await codeEditor.fill(''); // クリア
         await codeEditor.fill(challenge.answerCode);
