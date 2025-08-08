@@ -202,6 +202,30 @@ h3 {
   resize: vertical;
 }
 
+/* CodeMirrorエディタのスタイル */
+.codemirror-container .cm-editor {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+
+/* アクティブ行のハイライトを無効化 */
+.cm-editor .cm-activeLine {
+  background-color: transparent !important;
+}
+
+.cm-editor .cm-activeLineGutter {
+  background-color: transparent !important;
+}
+
+.cm-editor .cm-activeLine {
+  background-color: transparent !important;
+}
+
+.cm-editor .cm-activeLineGutter {
+  background-color: transparent !important;
+}
+
 .button-container {
   display: flex;
   align-items: center;

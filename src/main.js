@@ -2,6 +2,7 @@ import { RubyVM } from "@ruby/wasm-wasi";
 import { File, WASI, OpenFile, ConsoleStdout } from "@bjorn3/browser_wasi_shim";
 import { problems } from "./problems.js";
 import { LanguageManager } from "./i18n.js";
+import { RubyEditor, ReadOnlyRubyEditor } from "./ruby-editor.js";
 
 class RubyRunner {
   constructor() {
@@ -193,12 +194,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const problemSelect = document.getElementById('problem-select');
   const detailedDescriptionText = document.getElementById('detailed-description-text');
   const codeEditor = document.getElementById('code-editor');
+  const rubyEditor = new RubyEditor(codeEditor);
   const runButton = document.getElementById('run-button');
   const resetButton = document.getElementById('reset-button');
   const showAnswerButton = document.getElementById('show-answer-button');
   const answerContainer = document.getElementById('answer-container');
   const answerExplanationText = document.getElementById('answer-explanation-text');
   const answerCodeText = document.getElementById('answer-code-text');
+  let answerCodeEditor = null; // Answer Example用のCodeMirrorインスタンス
   const testResult = document.getElementById('test-result');
   const loading = document.getElementById('loading');
   const languageJaBtn = document.getElementById('language-ja-btn');
@@ -301,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const detailedDescriptionField = languageManager.getProblemField('detailedDescription');
       
       detailedDescriptionText.textContent = problem[detailedDescriptionField] || problem.detailedDescription || '';
-      codeEditor.value = problem.problemCode;
+      rubyEditor.setValue(problem.problemCode);
       rubyRunner.setTestCode(problem.testCode);
       
       // テスト結果をクリア
@@ -315,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 問題のリセット
   function resetProblem() {
     if (problemManager.currentProblem) {
-      codeEditor.value = problemManager.currentProblem.problemCode;
+      rubyEditor.setValue(problemManager.currentProblem.problemCode);
       testResult.textContent = '';
       testResult.className = '';
       hideAnswer();
@@ -351,9 +354,14 @@ document.addEventListener('DOMContentLoaded', () => {
       answerExplanationText.textContent = languageManager.t('noExplanation');
     }
 
-    // 回答コードを表示
+    // 回答コードを表示（CodeMirrorで）
     if (problem.answerCode) {
-      answerCodeText.textContent = problem.answerCode;
+      // 既存のエディタがあれば破棄
+      if (answerCodeEditor) {
+        answerCodeEditor.destroy();
+      }
+      // 新しい読み取り専用エディタを作成
+      answerCodeEditor = new ReadOnlyRubyEditor(answerCodeText, problem.answerCode);
     } else {
       answerCodeText.textContent = languageManager.t('noAnswer');
     }
@@ -364,6 +372,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 回答を非表示
   function hideAnswer() {
+    // CodeMirrorエディタがあれば破棄
+    if (answerCodeEditor) {
+      answerCodeEditor.destroy();
+      answerCodeEditor = null;
+    }
     answerContainer.classList.add('hidden');
     showAnswerButton.textContent = languageManager.t('showAnswer');
   }
@@ -412,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
       await rubyRunner.resetVM();
       rubyRunner.setTestCode(problemManager.currentProblem.testCode);
       
-      const userCode = codeEditor.value;
+      const userCode = rubyEditor.getValue();
       // テストの実行（問題IDを渡して実行順序を決定）
       const result = await rubyRunner.runTest(userCode, problemManager.currentProblem.id);
       console.log(result);
