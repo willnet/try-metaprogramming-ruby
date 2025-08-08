@@ -67,3 +67,56 @@ export class RubyEditor {
     }
   }
 }
+
+export class ReadOnlyRubyEditor {
+  constructor(container, initialValue = '') {
+    this.container = container;
+    this.view = null;
+    this.init(initialValue);
+  }
+
+  init(initialValue) {
+    // コンテナをクリア
+    this.container.innerHTML = '';
+    
+    // エディタビューを作成（読み取り専用）
+    this.view = new EditorView({
+      doc: initialValue,
+      extensions: [
+        basicSetup,
+        StreamLanguage.define(ruby),
+        EditorView.editable.of(false), // 読み取り専用
+        EditorView.theme({
+          "&": {
+            backgroundColor: "#f5f5f5"
+          },
+          ".cm-content": {
+            cursor: "default" // カーソルを通常の矢印にする
+          },
+          ".cm-cursor": {
+            display: "none" // カーソルを非表示
+          }
+        })
+      ],
+      parent: this.container
+    });
+  }
+
+  setValue(value) {
+    if (this.view) {
+      this.view.dispatch({
+        changes: {
+          from: 0,
+          to: this.view.state.doc.length,
+          insert: value
+        }
+      });
+    }
+  }
+
+  destroy() {
+    if (this.view) {
+      this.view.destroy();
+    }
+  }
+}

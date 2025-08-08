@@ -210,11 +210,19 @@ h3 {
 }
 
 /* アクティブ行のハイライトを無効化 */
-.codemirror-container .cm-activeLine {
+.cm-editor .cm-activeLine {
   background-color: transparent !important;
 }
 
-.codemirror-container .cm-activeLineGutter {
+.cm-editor .cm-activeLineGutter {
+  background-color: transparent !important;
+}
+
+.cm-editor .cm-activeLine {
+  background-color: transparent !important;
+}
+
+.cm-editor .cm-activeLineGutter {
   background-color: transparent !important;
 }
 

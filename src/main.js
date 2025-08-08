@@ -2,7 +2,7 @@ import { RubyVM } from "@ruby/wasm-wasi";
 import { File, WASI, OpenFile, ConsoleStdout } from "@bjorn3/browser_wasi_shim";
 import { problems } from "./problems.js";
 import { LanguageManager } from "./i18n.js";
-import { RubyEditor } from "./ruby-editor.js";
+import { RubyEditor, ReadOnlyRubyEditor } from "./ruby-editor.js";
 
 class RubyRunner {
   constructor() {
@@ -201,6 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const answerContainer = document.getElementById('answer-container');
   const answerExplanationText = document.getElementById('answer-explanation-text');
   const answerCodeText = document.getElementById('answer-code-text');
+  let answerCodeEditor = null; // Answer Example用のCodeMirrorインスタンス
   const testResult = document.getElementById('test-result');
   const loading = document.getElementById('loading');
   const languageJaBtn = document.getElementById('language-ja-btn');
@@ -353,9 +354,14 @@ document.addEventListener('DOMContentLoaded', () => {
       answerExplanationText.textContent = languageManager.t('noExplanation');
     }
 
-    // 回答コードを表示
+    // 回答コードを表示（CodeMirrorで）
     if (problem.answerCode) {
-      answerCodeText.textContent = problem.answerCode;
+      // 既存のエディタがあれば破棄
+      if (answerCodeEditor) {
+        answerCodeEditor.destroy();
+      }
+      // 新しい読み取り専用エディタを作成
+      answerCodeEditor = new ReadOnlyRubyEditor(answerCodeText, problem.answerCode);
     } else {
       answerCodeText.textContent = languageManager.t('noAnswer');
     }
@@ -366,6 +372,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 回答を非表示
   function hideAnswer() {
+    // CodeMirrorエディタがあれば破棄
+    if (answerCodeEditor) {
+      answerCodeEditor.destroy();
+      answerCodeEditor = null;
+    }
     answerContainer.classList.add('hidden');
     showAnswerButton.textContent = languageManager.t('showAnswer');
   }
